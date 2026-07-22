@@ -5,8 +5,8 @@ kind: bundle
 environment: home-lab
 deployment:
   mode: copy
-  backup_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows/backups
-  state_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows
+  backup_root: ${XDG_STATE_HOME}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME}/agentic-workflows
   bundle_output: .build/hermes-bundle
 adapters:
   - id: hermes

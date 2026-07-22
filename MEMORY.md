@@ -78,3 +78,16 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
   routes, expected Ollama models, and Qdrant/SearXNG MCP endpoints.
 - Added secret locators for Ansible Vault and tool-native authentication without
   reading or storing any secret value.
+
+### 2026-07-22: Deployment utility
+
+- Implemented `workflowctl` with validation, inventory, rendering, diff,
+  deployment, audit, and diagnostic commands.
+- Added repository-local `bin/workflowctl` and `deploy.sh` entry points.
+- Deployment renders into a marked staging tree, backs up existing files,
+  installs by atomic copy or optional symlink, and records expected hashes in a
+  target-side state manifest.
+- Added isolated-home tests proving dry-run safety, deterministic rendering,
+  backups, deployment state, and drift detection.
+- Added planned adapter manifests so targets and cross-references validate before
+  the content migration activates each adapter.

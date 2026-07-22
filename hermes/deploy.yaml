@@ -1,0 +1,5 @@
+schema_version: 1
+id: hermes
+description: Hermes bundle adapter.
+status: planned
+artifacts: []

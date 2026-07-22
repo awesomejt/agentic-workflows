@@ -1,0 +1,5 @@
+schema_version: 1
+id: copilot
+description: GitHub Copilot and VS Code configuration adapter.
+status: planned
+artifacts: []

@@ -62,17 +62,17 @@ secrets:
     consumers: [codex]
     source:
       type: tool-native
-      locator: ${CODEX_HOME:-${HOME}/.codex}/auth.json
+      locator: ${CODEX_HOME}/auth.json
     owner: codex
     validation:
       type: file-present
-      path: ${CODEX_HOME:-${HOME}/.codex}/auth.json
+      path: ${CODEX_HOME}/auth.json
   - id: claude-auth
     purpose: Claude Code authentication managed by Claude Code.
     consumers: [claude]
     source:
       type: tool-native
-      locator: ${CLAUDE_HOME:-${HOME}/.claude}
+      locator: ${CLAUDE_HOME}
     owner: claude
     validation:
       type: external
@@ -81,7 +81,7 @@ secrets:
     consumers: [grok]
     source:
       type: tool-native
-      locator: ${GROK_HOME:-${HOME}/.grok}
+      locator: ${GROK_HOME}
     owner: grok
     validation:
       type: external

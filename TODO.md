@@ -10,7 +10,7 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   questions.
 - [x] Add schemas, manifests, targets, service registry, and secret-reference
   catalog.
-- [ ] Implement and test `workflowctl` validation, rendering, diff, deployment,
+- [x] Implement and test `workflowctl` validation, rendering, diff, deployment,
   audit, and diagnostics.
 
 ## Content migration

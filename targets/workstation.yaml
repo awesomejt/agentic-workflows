@@ -5,22 +5,22 @@ kind: local
 environment: home-lab
 deployment:
   mode: copy
-  backup_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows/backups
-  state_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows
+  backup_root: ${XDG_STATE_HOME}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME}/agentic-workflows
 adapters:
   - id: opencode
     enabled: true
-    destination: ${XDG_CONFIG_HOME:-${HOME}/.config}/opencode
+    destination: ${XDG_CONFIG_HOME}/opencode
   - id: codex
     enabled: true
-    destination: ${CODEX_HOME:-${HOME}/.codex}
+    destination: ${CODEX_HOME}
   - id: claude
     enabled: true
-    destination: ${CLAUDE_HOME:-${HOME}/.claude}
+    destination: ${CLAUDE_HOME}
   - id: grok
     enabled: true
-    destination: ${GROK_HOME:-${HOME}/.grok}
+    destination: ${GROK_HOME}
   - id: copilot
     enabled: true
-    destination: ${XDG_CONFIG_HOME:-${HOME}/.config}/Code/User
+    destination: ${XDG_CONFIG_HOME}/Code/User
     notes: Authentication and extension runtime state are unmanaged.

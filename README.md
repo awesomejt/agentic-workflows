@@ -11,10 +11,32 @@ runtime state.
 
 ## Project status
 
-The repository is being built incrementally. Each roadmap task is committed
-separately so that architectural and migration decisions remain traceable.
-See [TODO.md](TODO.md) for current work and [MEMORY.md](MEMORY.md) for durable
-decisions.
+The repository has versioned schemas and registries plus a tested deployment
+utility. Tool adapters are currently being populated from reviewed source
+material. Each roadmap task is committed separately so architectural and
+migration decisions remain traceable. See [TODO.md](TODO.md) for current work
+and [MEMORY.md](MEMORY.md) for durable decisions.
+
+## Quick start
+
+```bash
+# Validate schemas and cross-references
+bin/workflowctl validate
+
+# See configured sources, targets, services, MCP servers, and adapters
+bin/workflowctl inventory
+
+# Render and inspect local changes without writing the live home
+bin/workflowctl diff --target workstation --content
+./deploy.sh --dry-run
+
+# Prove deployment behavior against an isolated home
+bin/workflowctl deploy --target workstation --home /tmp/workflows-test-home
+bin/workflowctl audit --target workstation --home /tmp/workflows-test-home
+```
+
+Do not perform a live deployment until the relevant adapter is marked active
+and its dry-run diff has been reviewed.
 
 ## Ownership boundaries
 
@@ -74,6 +96,7 @@ Ansible Hermes role installs it while resolving target-side secrets.
 - [Requirements](docs/REQUIREMENTS.md)
 - [Design](docs/DESIGN.md)
 - [Migration plan](docs/MIGRATION.md)
+- [Deployment guide](docs/DEPLOYMENT.md)
 - [Open questions](docs/OPEN_QUESTIONS.md)
 - [Decision memory](MEMORY.md)
 - [Task roadmap](TODO.md)

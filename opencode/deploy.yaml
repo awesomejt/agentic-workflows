@@ -1,0 +1,5 @@
+schema_version: 1
+id: opencode
+description: OpenCode configuration adapter.
+status: planned
+artifacts: []

@@ -1,0 +1,5 @@
+schema_version: 1
+id: grok
+description: Grok Build configuration adapter.
+status: planned
+artifacts: []
