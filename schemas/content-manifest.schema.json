@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/content-manifest.schema.json",
+  "title": "Migrated content and source disposition manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "artifacts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "source", "source_path", "source_revision", "disposition", "sensitivity"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "kind": {
+            "enum": ["agent", "prompt", "skill", "instruction", "script", "application", "repository-state"]
+          },
+          "source": { "$ref": "#/$defs/id" },
+          "source_path": { "type": "string", "minLength": 1 },
+          "source_revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "disposition": {
+            "enum": [
+              "migrate-common",
+              "migrate-adapter",
+              "reference-upstream",
+              "move-orchestrator",
+              "keep-ansible",
+              "private-overlay",
+              "runtime-excluded",
+              "superseded",
+              "deferred"
+            ]
+          },
+          "destination": { "type": "string", "minLength": 1 },
+          "sensitivity": { "enum": ["public", "private", "review-required"] },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

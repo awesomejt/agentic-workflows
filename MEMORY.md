@@ -91,3 +91,19 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
   backups, deployment state, and drift detection.
 - Added planned adapter manifests so targets and cross-references validate before
   the content migration activates each adapter.
+
+### 2026-07-22: Common content migration
+
+- Added a provenance and disposition manifest covering the reviewed agents,
+  prompts, skills, scripts, workflow docs, repository state, and orchestrator in
+  `opencode-setup` at revision `cc5b212c0dad8e6ff6f9d940044458c36db842fb`.
+- Replaced two byte-identical scheduled prompts with one portable focused-task
+  prompt and separated AWB command details into the AWB skill.
+- Normalized the role names `implementer`, `writer`, and `git-committer` while
+  retaining aliases for `implementor`, `documentor`, `committer`, the misspelled
+  `git-commiter`, and the superseded `task-manager`.
+- Migrated six skills with concise two-field frontmatter and portable guardrails.
+  All six passed the Codex skill `quick_validate.py` validator.
+- Kept OpenCode permissions, model selection, unattended-run behavior, and the
+  primary AWB orchestrator definition out of common content for adapter-specific
+  migration.

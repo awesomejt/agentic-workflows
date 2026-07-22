@@ -95,6 +95,7 @@ Ansible Hermes role installs it while resolving target-side secrets.
 
 - [Requirements](docs/REQUIREMENTS.md)
 - [Design](docs/DESIGN.md)
+- [Common content model](docs/CONTENT.md)
 - [Migration plan](docs/MIGRATION.md)
 - [Deployment guide](docs/DEPLOYMENT.md)
 - [Open questions](docs/OPEN_QUESTIONS.md)

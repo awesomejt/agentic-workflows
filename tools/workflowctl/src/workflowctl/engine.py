@@ -301,6 +301,7 @@ def inventory(root: Path) -> dict[str, list[str]]:
     return {
         "targets": [path.stem for path in sorted((root / "targets").glob("*.yaml"))],
         "sources": [item["id"] for item in load_yaml(root / "manifests/sources.yaml")["sources"]],
+        "content": [item["id"] for item in load_yaml(root / "manifests/content.yaml")["artifacts"]],
         "services": [item["id"] for item in load_yaml(root / "services/registry.yaml")["services"]],
         "mcp_servers": [item["id"] for item in load_yaml(root / "services/mcp/registry.yaml")["servers"]],
         "adapters": [load_yaml(path)["id"] for path in sorted(root.glob("*/deploy.yaml"))],

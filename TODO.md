@@ -16,8 +16,8 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 ## Content migration
 
 - [ ] Inventory reusable assets with provenance and sensitivity classifications.
-- [ ] Normalize common agent roles and prompts from `opencode-setup`.
-- [ ] Import reusable skills after reviewing tool coupling and provenance.
+- [x] Normalize common agent roles and prompts from `opencode-setup`.
+- [x] Import reusable skills after reviewing tool coupling and provenance.
 - [ ] Add project and course template bundles.
 - [ ] Add private-overlay guidance for personal Hermes personas and workflows.
 

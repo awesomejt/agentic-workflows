@@ -116,6 +116,7 @@ def validate_repository(root: Path) -> list[str]:
     schema_dir = root / "schemas"
     bindings: list[tuple[Path, Path]] = [
         (schema_dir / "source-manifest.schema.json", root / "manifests/sources.yaml"),
+        (schema_dir / "content-manifest.schema.json", root / "manifests/content.yaml"),
         (schema_dir / "service-registry.schema.json", root / "services/registry.yaml"),
         (schema_dir / "mcp-registry.schema.json", root / "services/mcp/registry.yaml"),
         (schema_dir / "secret-catalog.schema.json", root / "secret-references/catalog.yaml"),
@@ -147,6 +148,22 @@ def validate_repository(root: Path) -> list[str]:
 
     sources = load_yaml(root / "manifests/sources.yaml")["sources"]
     source_ids = _unique_ids(sources, "source", errors)
+    artifacts = load_yaml(root / "manifests/content.yaml")["artifacts"]
+    _unique_ids(artifacts, "content artifact", errors)
+    for artifact in artifacts:
+        if artifact["source"] not in source_ids:
+            errors.append(
+                f"content artifact {artifact['id']} has unknown source: {artifact['source']}"
+            )
+        destination = artifact.get("destination")
+        if destination and artifact["disposition"] == "migrate-common":
+            destination_path = (root / destination).resolve()
+            if root not in destination_path.parents:
+                errors.append(f"content artifact {artifact['id']} destination escapes repository")
+            elif not destination_path.exists():
+                errors.append(
+                    f"content artifact {artifact['id']} destination does not exist: {destination}"
+                )
     environments = [load_yaml(path) for path in sorted((root / "environments").glob("*.yaml"))]
     environment_ids = _unique_ids(environments, "environment", errors)
     services = load_yaml(root / "services/registry.yaml")["services"]

@@ -1,0 +1,221 @@
+schema_version: 1
+artifacts:
+  - id: focused-task-prompt
+    kind: prompt
+    source: opencode-setup
+    source_path: prompts/Default.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/prompts/focused-task.md
+    sensitivity: public
+    notes: Normalized to remove OpenCode and AWB coupling.
+  - id: duplicate-scheduled-prompt
+    kind: prompt
+    source: opencode-setup
+    source_path: prompts/Prompt.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: superseded
+    destination: common/prompts/focused-task.md
+    sensitivity: public
+    notes: Byte-identical to prompts/Default.md at the recorded revision.
+  - id: planner-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/planner.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/planner.md
+    sensitivity: public
+  - id: debater-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/debater.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/debater.md
+    sensitivity: public
+  - id: implementor-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/implementor.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/implementer.md
+    sensitivity: public
+  - id: validator-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/validator.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/validator.md
+    sensitivity: public
+  - id: tester-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/tester.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/tester.md
+    sensitivity: public
+  - id: reviewer-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/reviewer.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/reviewer.md
+    sensitivity: public
+  - id: documentor-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/documentor.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/writer.md
+    sensitivity: public
+  - id: committer-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/committer.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/git-committer.md
+    sensitivity: public
+  - id: project-manager-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/project-manager.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/roles/project-manager.md
+    sensitivity: public
+    notes: AWB-specific command details live in the AWB skill.
+  - id: task-manager-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/task-manager.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: superseded
+    destination: common/roles/aliases.yaml
+    sensitivity: public
+    notes: Compatibility alias for project-manager.
+  - id: awb-orchestrator-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/awb-orchestrator.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-adapter
+    destination: opencode/agents/awb-orchestrator.md
+    sensitivity: public
+  - id: afk-build-agent
+    kind: agent
+    source: opencode-setup
+    source_path: agents/afk-build.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-adapter
+    destination: opencode/agents/afk-build.md
+    sensitivity: review-required
+    notes: Remove personal paths and retain only the trusted unattended-run policy.
+  - id: validation-evidence-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/validation-and-test-evidence/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/validation-and-test-evidence/SKILL.md
+    sensitivity: public
+  - id: loop-handoff-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/loop-handoff-notes/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/loop-handoff-notes/SKILL.md
+    sensitivity: public
+  - id: awb-management-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/awb-project-task-management/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/awb-project-task-management/SKILL.md
+    sensitivity: public
+  - id: git-commiter-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/git-commiter/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/git-committer/SKILL.md
+    sensitivity: public
+    notes: Corrected the source misspelling in the canonical skill name.
+  - id: codex-cli-driver-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/codex-cli-driver/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/codex-cli-driver/SKILL.md
+    sensitivity: public
+  - id: claude-cli-driver-skill
+    kind: skill
+    source: opencode-setup
+    source_path: skills/claude-code-cli-driver/SKILL.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: migrate-common
+    destination: common/skills/claude-code-cli-driver/SKILL.md
+    sensitivity: public
+  - id: afk-run-script
+    kind: script
+    source: opencode-setup
+    source_path: scripts/afk-run.sh
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: move-orchestrator
+    sensitivity: public
+  - id: automated-run-script
+    kind: script
+    source: opencode-setup
+    source_path: scripts/automated-run.sh
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: move-orchestrator
+    sensitivity: public
+  - id: opencode-orchestrator
+    kind: application
+    source: opencode-setup
+    source_path: orchestrator/
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: move-orchestrator
+    sensitivity: public
+  - id: agent-workflow-instructions
+    kind: instruction
+    source: opencode-setup
+    source_path: AGENT_WORKFLOW.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: deferred
+    sensitivity: public
+    notes: Compare with starter-kit variants before selecting a canonical template.
+  - id: quality-checklist
+    kind: instruction
+    source: opencode-setup
+    source_path: QUALITY_CHECKLIST.md
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: deferred
+    sensitivity: public
+    notes: Compare with starter-kit variants before selecting a canonical template.
+  - id: opencode-deploy-script
+    kind: script
+    source: opencode-setup
+    source_path: deploy.sh
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: superseded
+    destination: tools/workflowctl/
+    sensitivity: public
+  - id: opencode-repository-state
+    kind: repository-state
+    source: opencode-setup
+    source_path: README.md, AGENTS.md, MEMORY.md, TODO.md, status.yaml
+    source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    disposition: superseded
+    sensitivity: public
+    notes: Repository-specific coordination state is not reusable content.

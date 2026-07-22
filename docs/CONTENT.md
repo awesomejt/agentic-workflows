@@ -1,0 +1,60 @@
+# Common Content Model
+
+## Purpose
+
+The `common/` tree is the semantic source for behavior shared across agent
+tools. Tool adapters add only native metadata, permission syntax, destination
+paths, and justified exceptions.
+
+## Roles
+
+Roles are concise behavioral contracts rather than complete tool-native agent
+definitions. Current canonical roles are:
+
+- `planner`
+- `debater`
+- `implementer`
+- `validator`
+- `tester`
+- `reviewer`
+- `writer`
+- `git-committer`
+- `project-manager`
+
+Compatibility aliases live in `common/roles/aliases.yaml`. New content should
+use canonical names; adapters may emit aliases during migration when existing
+automation still refers to an old name.
+
+## Prompts and instructions
+
+Instructions describe always-on behavior. Prompts describe a reusable task or
+session workflow. The focused-task prompt deliberately avoids a specific CLI,
+task database, or model provider. Repository instructions decide which task
+system and documentation files are authoritative.
+
+## Skills
+
+Shared skills follow the portable Agent Skills directory shape:
+
+```text
+common/skills/<skill-name>/
+└── SKILL.md
+```
+
+Each `SKILL.md` has only `name` and `description` in frontmatter. Triggering
+conditions belong in the description; the body contains concise imperative
+procedures and guardrails. Add `scripts/`, `references/`, or `assets/` only
+when the skill genuinely needs them.
+
+A deterministic helper used by several skills belongs under top-level `tools/`.
+A helper exclusive to one skill belongs inside that skill's `scripts/` folder.
+
+## Provenance
+
+`manifests/content.yaml` records the source repository, path, exact source
+revision, sensitivity, chosen disposition, and destination. Normalized content
+is not expected to remain byte-identical to its source, so the source revision
+and migration notes are the durable audit trail.
+
+Supported dispositions are documented in `docs/MIGRATION.md`. A source artifact
+is not considered reviewed until it has one explicit disposition.

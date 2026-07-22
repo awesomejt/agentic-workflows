@@ -9,7 +9,7 @@ sources:
       - skills
       - workflow documentation
       - orchestrator pending extraction
-    status: inventory
+    status: migrating
   - id: ai-agents
     remote: git@github.com:awesomejt/ai-agents.git
     checkout_hint: ${PROJECTS_ROOT}/ai/agents

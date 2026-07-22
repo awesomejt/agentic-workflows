@@ -1,0 +1,7 @@
+schema_version: 1
+aliases:
+  implementor: implementer
+  documentor: writer
+  committer: git-committer
+  git-commiter: git-committer
+  task-manager: project-manager
