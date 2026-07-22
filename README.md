@@ -103,6 +103,7 @@ Ansible Hermes role installs it while resolving target-side secrets.
 - [AI service contracts](docs/SERVICES.md)
 - [Orchestrator extraction](docs/ORCHESTRATOR_EXTRACTION.md)
 - [Migration security findings](docs/SECURITY_FINDINGS.md)
+- [Migration readiness report](docs/READINESS.md)
 - [Open questions](docs/OPEN_QUESTIONS.md)
 - [Decision memory](MEMORY.md)
 - [Task roadmap](TODO.md)

@@ -80,7 +80,10 @@ def _emit(data: object, as_json: bool) -> None:
     elif isinstance(data, dict):
         for key, value in data.items():
             if isinstance(value, list):
-                print(f"{key}: {', '.join(str(item) for item in value) or '-'}")
+                if value and all(isinstance(item, dict) for item in value):
+                    print(f"{key}: {len(value)} entries")
+                else:
+                    print(f"{key}: {', '.join(str(item) for item in value) or '-'}")
             else:
                 print(f"{key}: {value}")
     else:

@@ -12,6 +12,8 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   catalog.
 - [x] Implement and test `workflowctl` validation, rendering, diff, deployment,
   audit, and diagnostics.
+- [x] Complete an isolated deployment, native CLI discovery checks, live
+  hash-only comparison, and migration readiness report.
 
 ## Content migration
 

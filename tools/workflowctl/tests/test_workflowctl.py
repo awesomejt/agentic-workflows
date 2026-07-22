@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+import io
 import json
 import shutil
 import sys
 import tempfile
 import unittest
 from pathlib import Path
+from unittest import mock
 
 SOURCE_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(SOURCE_ROOT / "tools" / "workflowctl" / "src"))
 
+from workflowctl.cli import _emit  # noqa: E402
 from workflowctl.config import WorkflowError, validate_repository  # noqa: E402
 from workflowctl.engine import (  # noqa: E402
     audit_target,
@@ -134,6 +137,12 @@ adapters:
         )
         state = json.loads(Path(result["state"]).read_text())
         self.assertNotIn("content", state["files"][0])
+
+    def test_human_output_summarizes_structured_lists(self) -> None:
+        output = io.StringIO()
+        with mock.patch("sys.stdout", output):
+            _emit({"files": [{"path": "one"}, {"path": "two"}]}, False)
+        self.assertEqual(output.getvalue(), "files: 2 entries\n")
 
 
 if __name__ == "__main__":

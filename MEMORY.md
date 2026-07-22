@@ -150,3 +150,20 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
   profiles while retaining only generic profile source mappings in the bundle.
 - Wrote a history-preserving orchestrator extraction and rollback plan. The
   repository name and Ansible bundle delivery mechanism remain owner decisions.
+
+### 2026-07-22: Readiness audit
+
+- Validated 23 documents and ran 12 passing tests plus Python and shell syntax
+  checks.
+- Rendered 87 workstation files and 30 Hermes bundle files. An isolated
+  deployment installed all 87 workstation files, and the audit reported all 87
+  clean.
+- Native discovery found 11 managed OpenCode agents, nine Grok agents, and six
+  Grok skills. Claude doctor succeeded against the fake home with expected
+  missing-install/auth warnings.
+- A read-only live comparison found 78 creates and nine updates: eight existing
+  OpenCode agents and VS Code `mcp.json`. No live files were changed and no
+  content diff was printed.
+- The repository is ready for per-tool dry-run review, not a one-shot cutover.
+  External security remediation, the Ollama model gap, owner decisions, and
+  collision review remain required.
