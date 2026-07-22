@@ -1,0 +1,85 @@
+schema_version: 1
+environment: home-lab
+services:
+  - id: litellm
+    kind: model-gateway
+    description: OpenAI-compatible model gateway and routing contract.
+    endpoint:
+      url: https://litellm.taylor.lan/v1
+      protocol: openai-compatible
+    healthcheck:
+      method: GET
+      path: /models
+      secret_ref: litellm-master-key
+    owner:
+      repository: taylor-ansible
+      path: roles/litellm
+    consumers: [claude, codex, grok, hermes, open-webui]
+    secret_refs: [litellm-master-key]
+  - id: ollama
+    kind: model-runtime
+    description: Local-network Ollama runtime and fallback model provider.
+    endpoint:
+      url: http://192.168.50.51:11434
+      protocol: ollama
+    healthcheck:
+      method: GET
+      path: /api/tags
+    owner:
+      repository: taylor-ansible
+      path: roles/ollama
+    consumers: [litellm, hermes, open-webui]
+    secret_refs: []
+  - id: open-webui
+    kind: user-interface
+    endpoint:
+      url: https://chat.taylor.lan
+      protocol: https
+    healthcheck:
+      method: GET
+      path: /health
+    owner:
+      repository: taylor-ansible
+      path: roles/open-webui
+    consumers: [human]
+    secret_refs: [openwebui-litellm-key]
+  - id: qdrant
+    kind: vector-database
+    endpoint:
+      url: https://qdrant.taylor.lan
+      protocol: qdrant-http
+    owner:
+      repository: taylor-ansible
+      path: roles/qdrant
+    consumers: [hermes, open-webui, qdrant-mcp]
+    secret_refs: []
+  - id: searxng
+    kind: search
+    endpoint:
+      url: https://search.taylor.lan
+      protocol: https
+    owner:
+      repository: taylor-ansible
+      path: roles/searxng
+    consumers: [hermes, open-webui, searxng-mcp]
+    secret_refs: []
+  - id: qdrant-mcp
+    kind: mcp-server
+    endpoint:
+      url: https://mcp-qdrant.taylor.lan/mcp
+      protocol: streamable-http
+    owner:
+      repository: taylor-ansible
+      path: roles/qdrant
+    consumers: [claude, codex, grok, opencode, copilot, hermes]
+    secret_refs: []
+  - id: searxng-mcp
+    kind: mcp-server
+    endpoint:
+      url: https://mcp-searxng.taylor.lan/mcp
+      protocol: streamable-http
+    owner:
+      repository: taylor-ansible
+      path: roles/searxng
+    consumers: [claude, codex, grok, opencode, copilot, hermes]
+    secret_refs: []

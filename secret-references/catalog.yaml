@@ -1,0 +1,87 @@
+schema_version: 1
+secrets:
+  - id: litellm-master-key
+    purpose: Authenticate OpenAI-compatible clients and health validation to LiteLLM.
+    consumers: [litellm, hermes, open-webui, ai-validation]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_litellm_master_key
+    owner: taylor-ansible
+    validation:
+      type: environment-present
+      variable: LITELLM_MASTER_KEY
+  - id: openwebui-litellm-key
+    purpose: Authenticate Open WebUI to the LiteLLM gateway.
+    consumers: [open-webui]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_openwebui_litellm_master_key
+    owner: taylor-ansible
+    validation:
+      type: external
+  - id: omlx-api-key
+    purpose: Authenticate clients to OpenAI-compatible oMLX endpoints.
+    consumers: [litellm, hermes, open-webui]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_omlx_api_key
+    owner: taylor-ansible
+    validation:
+      type: environment-present
+      variable: OMLX_API_KEY
+  - id: searxng-secret-key
+    purpose: Protect the SearXNG deployment's internal secret state.
+    consumers: [searxng]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_searxng_secret_key
+    owner: taylor-ansible
+    validation:
+      type: external
+  - id: ansible-vault-password
+    purpose: Decrypt Ansible Vault files on the Ansible control host.
+    consumers: [taylor-ansible]
+    source:
+      type: tool-native
+      host: ansible-control
+      locator: ~/avpass
+    owner: ansible-control
+    validation:
+      type: file-present
+      path: ~/avpass
+  - id: codex-auth
+    purpose: Codex CLI provider authentication managed by Codex.
+    consumers: [codex]
+    source:
+      type: tool-native
+      locator: ${CODEX_HOME:-${HOME}/.codex}/auth.json
+    owner: codex
+    validation:
+      type: file-present
+      path: ${CODEX_HOME:-${HOME}/.codex}/auth.json
+  - id: claude-auth
+    purpose: Claude Code authentication managed by Claude Code.
+    consumers: [claude]
+    source:
+      type: tool-native
+      locator: ${CLAUDE_HOME:-${HOME}/.claude}
+    owner: claude
+    validation:
+      type: external
+  - id: grok-auth
+    purpose: Grok Build authentication and OAuth state managed by Grok.
+    consumers: [grok]
+    source:
+      type: tool-native
+      locator: ${GROK_HOME:-${HOME}/.grok}
+    owner: grok
+    validation:
+      type: external

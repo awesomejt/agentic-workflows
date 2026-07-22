@@ -8,7 +8,7 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 
 - [x] Establish requirements, architecture, repository rules, memory, and open
   questions.
-- [ ] Add schemas, manifests, targets, service registry, and secret-reference
+- [x] Add schemas, manifests, targets, service registry, and secret-reference
   catalog.
 - [ ] Implement and test `workflowctl` validation, rendering, diff, deployment,
   audit, and diagnostics.

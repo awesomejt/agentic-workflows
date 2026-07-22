@@ -1,0 +1,22 @@
+schema_version: 1
+id: home-lab
+description: Private non-secret topology for AI service clients.
+sensitivity: private-network-metadata
+hosts:
+  ansible-control:
+    address: 192.168.50.11
+  vault:
+    address: 192.168.50.13
+    dns: vault.taylor.lan
+  postgres:
+    address: 192.168.50.15
+  ai-stack:
+    address: 192.168.50.50
+  ollama:
+    address: 192.168.50.51
+  hermes:
+    address: 192.168.50.52
+  omlx-primary:
+    address: 192.168.50.93
+  omlx-secondary:
+    address: 192.168.50.94

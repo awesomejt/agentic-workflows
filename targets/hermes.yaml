@@ -1,0 +1,15 @@
+schema_version: 1
+id: hermes
+description: Versioned Hermes configuration bundle installed by Ansible.
+kind: bundle
+environment: home-lab
+deployment:
+  mode: copy
+  backup_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows
+  bundle_output: .build/hermes-bundle
+adapters:
+  - id: hermes
+    enabled: true
+    destination: bundle://hermes
+    notes: Ansible resolves target paths and secret values.

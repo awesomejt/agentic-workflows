@@ -1,0 +1,26 @@
+schema_version: 1
+id: workstation
+description: Local workstation agent CLI and editor configuration.
+kind: local
+environment: home-lab
+deployment:
+  mode: copy
+  backup_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME:-${HOME}/.local/state}/agentic-workflows
+adapters:
+  - id: opencode
+    enabled: true
+    destination: ${XDG_CONFIG_HOME:-${HOME}/.config}/opencode
+  - id: codex
+    enabled: true
+    destination: ${CODEX_HOME:-${HOME}/.codex}
+  - id: claude
+    enabled: true
+    destination: ${CLAUDE_HOME:-${HOME}/.claude}
+  - id: grok
+    enabled: true
+    destination: ${GROK_HOME:-${HOME}/.grok}
+  - id: copilot
+    enabled: true
+    destination: ${XDG_CONFIG_HOME:-${HOME}/.config}/Code/User
+    notes: Authentication and extension runtime state are unmanaged.

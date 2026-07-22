@@ -1,0 +1,18 @@
+schema_version: 1
+environment: home-lab
+servers:
+  - id: qdrant
+    service_ref: qdrant-mcp
+    transport: streamable-http
+    enabled: true
+    capabilities: [vector-memory, semantic-search]
+    secret_refs: []
+  - id: searxng
+    service_ref: searxng-mcp
+    transport: streamable-http
+    enabled: true
+    capabilities: [web-search]
+    secret_refs: []
+notes:
+  - Local stdio servers will be added as separate records with command provenance.
+  - Tool adapters render native MCP syntax from these records.

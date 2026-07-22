@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/mcp-registry.schema.json",
+  "title": "MCP server registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "environment", "servers"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "environment": { "$ref": "#/$defs/id" },
+    "servers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "transport", "enabled", "capabilities", "secret_refs"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "service_ref": { "$ref": "#/$defs/id" },
+          "transport": { "enum": ["streamable-http", "http", "sse", "stdio"] },
+          "enabled": { "type": "boolean" },
+          "capabilities": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          },
+          "secret_refs": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          },
+          "command": { "type": "string" },
+          "args": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "transport": { "const": "stdio" } } },
+            "then": { "required": ["command"] },
+            "else": { "required": ["service_ref"] }
+          }
+        ]
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

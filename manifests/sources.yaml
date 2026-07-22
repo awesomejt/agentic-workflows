@@ -1,0 +1,59 @@
+schema_version: 1
+sources:
+  - id: opencode-setup
+    remote: git@github.com:awesomejt/opencode-setup.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/opencode-setup
+    content:
+      - agents
+      - prompts
+      - skills
+      - workflow documentation
+      - orchestrator pending extraction
+    status: inventory
+  - id: ai-agents
+    remote: git@github.com:awesomejt/ai-agents.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/agents
+    content:
+      - Hermes SOUL files
+      - personas
+      - custom skills
+    status: inventory
+  - id: hermes-setup
+    remote: git@github.com:awesomejt/hermes.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/hermes-setup
+    content:
+      - Hermes prompts
+      - helper tools
+      - cron definitions
+      - operational documentation
+    status: review
+    notes: Refresh or compare the checkout with origin before importing content.
+  - id: ai-ready-project
+    remote: git@github.com:awesomejt/ai-ready-project.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/ai-ready-project
+    content:
+      - project instructions
+      - documentation templates
+    status: inventory
+  - id: project-starter-kit
+    remote: git@github.com:awesomejt/project-starter-kit.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/project-starter-kit
+    content:
+      - project templates
+      - workflow documentation
+    status: inventory
+  - id: course-starter-kit
+    remote: git@github.com:awesomejt/course-starter-kit.git
+    checkout_hint: ${PROJECTS_ROOT}/ai/course-starter-kit
+    content:
+      - course templates
+      - workflow documentation
+    status: inventory
+  - id: taylor-ansible
+    remote: git@github.com:awesomejt/taylor-ansible.git
+    checkout_hint: ${PROJECTS_ROOT}/infra/ansible
+    content:
+      - AI service deployment ownership
+      - Hermes deployment ownership
+      - secret variable definitions
+    status: reference-only

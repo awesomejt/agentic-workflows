@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/target.schema.json",
+  "title": "Agentic workflow deployment target",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "kind", "environment", "deployment", "adapters"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "$ref": "#/$defs/id" },
+    "description": { "type": "string" },
+    "kind": { "enum": ["local", "bundle"] },
+    "environment": { "$ref": "#/$defs/id" },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "backup_root", "state_root"],
+      "properties": {
+        "mode": { "enum": ["copy", "symlink"] },
+        "backup_root": { "type": "string", "minLength": 1 },
+        "state_root": { "type": "string", "minLength": 1 },
+        "bundle_output": { "type": "string", "minLength": 1 }
+      }
+    },
+    "adapters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "enabled", "destination"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "enabled": { "type": "boolean" },
+          "destination": { "type": "string", "minLength": 1 },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

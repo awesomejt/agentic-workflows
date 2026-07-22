@@ -1,0 +1,16 @@
+schema_version: 1
+service_ref: ollama
+owner:
+  repository: taylor-ansible
+  path: roles/ollama
+expected_models:
+  - llama3.2:latest
+  - deepseek-coder-v2:latest
+  - qwen3.5:latest
+  - nomic-embed-text:latest
+consumers:
+  - litellm
+  - hermes
+  - open-webui
+notes:
+  - The Ansible Ollama role remains authoritative for actual model pulls.

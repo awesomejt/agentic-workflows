@@ -66,3 +66,15 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
   without reading authentication values.
 - Created the project requirements, design, migration, roadmap, memory, and
   open-question documents.
+
+### 2026-07-22: Schemas and registries
+
+- Added versioned JSON Schemas for source manifests, deployment targets,
+  environments, service registries, MCP registries, and secret catalogs.
+- Recorded the existing source repositories with portable checkout hints and
+  migration status.
+- Added workstation and Hermes bundle targets using copy-with-backup defaults.
+- Captured the non-secret home-lab topology, current LiteLLM aliases and model
+  routes, expected Ollama models, and Qdrant/SearXNG MCP endpoints.
+- Added secret locators for Ansible Vault and tool-native authentication without
+  reading or storing any secret value.

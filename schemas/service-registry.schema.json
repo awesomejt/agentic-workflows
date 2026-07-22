@@ -1,0 +1,65 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/service-registry.schema.json",
+  "title": "AI service registry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "environment", "services"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "environment": { "$ref": "#/$defs/id" },
+    "services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "endpoint", "owner", "consumers"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "kind": { "$ref": "#/$defs/id" },
+          "description": { "type": "string" },
+          "endpoint": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["url"],
+            "properties": {
+              "url": { "type": "string", "minLength": 1 },
+              "protocol": { "type": "string" }
+            }
+          },
+          "healthcheck": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["method", "path"],
+            "properties": {
+              "method": { "enum": ["GET", "HEAD"] },
+              "path": { "type": "string" },
+              "secret_ref": { "$ref": "#/$defs/id" }
+            }
+          },
+          "owner": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["repository", "path"],
+            "properties": {
+              "repository": { "$ref": "#/$defs/id" },
+              "path": { "type": "string", "minLength": 1 }
+            }
+          },
+          "consumers": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          },
+          "secret_refs": {
+            "type": "array",
+            "items": { "$ref": "#/$defs/id" }
+          },
+          "metadata": { "type": "object" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/environment.schema.json",
+  "title": "Agentic workflow environment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "description", "sensitivity", "hosts"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "$ref": "#/$defs/id" },
+    "description": { "type": "string" },
+    "sensitivity": { "enum": ["public", "private-network-metadata"] },
+    "hosts": {
+      "type": "object",
+      "propertyNames": { "$ref": "#/$defs/id" },
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "address": { "type": "string", "minLength": 1 },
+          "dns": { "type": "string", "minLength": 1 }
+        },
+        "anyOf": [
+          { "required": ["address"] },
+          { "required": ["dns"] }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

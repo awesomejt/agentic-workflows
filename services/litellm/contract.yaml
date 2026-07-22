@@ -1,0 +1,28 @@
+schema_version: 1
+service_ref: litellm
+owner:
+  repository: taylor-ansible
+  path: roles/litellm
+aliases:
+  chat: use-chat
+  coding: use-coding
+  thinking: use-thinking
+routes:
+  - provider: omlx-primary
+    purpose_models:
+      chat: Qwen3.6-27B-6bit
+      coding: Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-6bit
+      thinking: gpt-oss-20b-MXFP4-Q8
+  - provider: omlx-secondary
+    purpose_models:
+      chat: Qwen3.6-27B-6bit
+      coding: Qwen3.6-35B-A3B-6bit
+      thinking: gpt-oss-20b-MLX-8bit
+  - provider: ollama
+    purpose_models:
+      chat: llama3.2:latest
+      coding: deepseek-coder-v2:latest
+      thinking: qwen3.5:latest
+notes:
+  - This is an expected client contract used for validation.
+  - Ansible remains authoritative for deployed routing and fallback behavior.
