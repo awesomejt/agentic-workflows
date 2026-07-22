@@ -1,0 +1,4 @@
+name = "debater"
+description = "Challenge plans, alternatives, validation gaps, and unsafe assumptions."
+sandbox_mode = "read-only"
+developer_instructions = """

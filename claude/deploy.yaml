@@ -1,5 +1,36 @@
 schema_version: 1
 id: claude
-description: Claude Code configuration adapter.
-status: planned
-artifacts: []
+description: Claude Code global instructions, subagents, and Agent Skills.
+status: active
+artifacts:
+  - source: common/instructions/core.md
+    destination: CLAUDE.md
+  - source: common/skills
+    destination: skills
+  - source: common/roles/planner.md
+    destination: agents/planner.md
+    header: claude/frontmatter/planner.md
+  - source: common/roles/debater.md
+    destination: agents/debater.md
+    header: claude/frontmatter/debater.md
+  - source: common/roles/implementer.md
+    destination: agents/implementer.md
+    header: claude/frontmatter/implementer.md
+  - source: common/roles/validator.md
+    destination: agents/validator.md
+    header: claude/frontmatter/validator.md
+  - source: common/roles/tester.md
+    destination: agents/tester.md
+    header: claude/frontmatter/tester.md
+  - source: common/roles/reviewer.md
+    destination: agents/reviewer.md
+    header: claude/frontmatter/reviewer.md
+  - source: common/roles/writer.md
+    destination: agents/writer.md
+    header: claude/frontmatter/writer.md
+  - source: common/roles/git-committer.md
+    destination: agents/git-committer.md
+    header: claude/frontmatter/git-committer.md
+  - source: common/roles/project-manager.md
+    destination: agents/project-manager.md
+    header: claude/frontmatter/project-manager.md

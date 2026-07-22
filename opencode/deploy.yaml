@@ -1,5 +1,45 @@
 schema_version: 1
 id: opencode
-description: OpenCode configuration adapter.
-status: planned
-artifacts: []
+description: OpenCode global instructions, subagents, skills, prompt, and optional config overlay.
+status: active
+artifacts:
+  - source: common/instructions/core.md
+    destination: AGENTS.md
+  - source: common/prompts/focused-task.md
+    destination: prompts/focused-task.md
+  - source: common/skills
+    destination: skills
+  - source: common/roles/planner.md
+    destination: agents/planner.md
+    header: opencode/frontmatter/planner.md
+  - source: common/roles/debater.md
+    destination: agents/debater.md
+    header: opencode/frontmatter/debater.md
+  - source: common/roles/implementer.md
+    destination: agents/implementer.md
+    header: opencode/frontmatter/implementer.md
+  - source: common/roles/validator.md
+    destination: agents/validator.md
+    header: opencode/frontmatter/validator.md
+  - source: common/roles/tester.md
+    destination: agents/tester.md
+    header: opencode/frontmatter/tester.md
+  - source: common/roles/reviewer.md
+    destination: agents/reviewer.md
+    header: opencode/frontmatter/reviewer.md
+  - source: common/roles/writer.md
+    destination: agents/writer.md
+    header: opencode/frontmatter/writer.md
+  - source: common/roles/git-committer.md
+    destination: agents/git-committer.md
+    header: opencode/frontmatter/git-committer.md
+  - source: common/roles/project-manager.md
+    destination: agents/project-manager.md
+    header: opencode/frontmatter/project-manager.md
+  - source: opencode/agents/awb-orchestrator.md
+    destination: agents/awb-orchestrator.md
+  - source: opencode/agents/afk-build.md
+    destination: agents/afk-build.md
+  - source: opencode/opencode.workflows.json
+    destination: opencode.workflows.json
+    description: Optional merged config selected with OPENCODE_CONFIG.

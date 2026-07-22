@@ -1,0 +1,46 @@
+schema_version: 1
+profiles:
+  - id: default
+    purpose: General assistant profile.
+    soul:
+      source: ai-agents
+      path: main/SOUL.md
+      revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    model:
+      gateway: litellm
+      alias: use-chat
+    skills: shared
+  - id: coding
+    purpose: Software implementation and review profile.
+    soul:
+      source: ai-agents
+      path: coder/SOUL.md
+      revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    model:
+      gateway: litellm
+      alias: use-coding
+    skills: shared
+  - id: admin
+    purpose: Administrative and operational assistance profile.
+    soul:
+      source: ai-agents
+      path: admin/SOUL.md
+      revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    model:
+      gateway: litellm
+      alias: use-chat
+    skills: shared
+  - id: researcher
+    purpose: Research and synthesis profile.
+    soul:
+      source: ai-agents
+      path: researcher/SOUL.md
+      revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    model:
+      gateway: litellm
+      alias: use-thinking
+    skills: shared
+private_overlays:
+  - id: personal-profiles
+    required: false
+    notes: Personal identities and private workflows are resolved outside the public bundle.

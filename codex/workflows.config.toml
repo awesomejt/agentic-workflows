@@ -1,0 +1,13 @@
+[agents]
+enabled = true
+max_concurrent_threads_per_session = 4
+
+[mcp_servers.qdrant]
+url = "https://mcp-qdrant.taylor.lan/mcp"
+enabled = true
+default_tools_approval_mode = "prompt"
+
+[mcp_servers.searxng]
+url = "https://mcp-searxng.taylor.lan/mcp"
+enabled = true
+default_tools_approval_mode = "auto"

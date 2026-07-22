@@ -107,3 +107,25 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - Kept OpenCode permissions, model selection, unattended-run behavior, and the
   primary AWB orchestrator definition out of common content for adapter-specific
   migration.
+
+### 2026-07-22: Tool adapters
+
+- Activated workstation adapters for OpenCode, Codex, Claude Code, Grok Build,
+  and GitHub Copilot/VS Code plus the indirect Hermes bundle adapter.
+- Added render-time header and footer composition so one canonical role body can
+  become OpenCode, Claude, Grok, Copilot Markdown or Codex TOML without copied
+  prompt bodies.
+- Kept state-bearing base configuration files unmanaged. Tool-native merge
+  commands or explicit overlays carry MCP entries for OpenCode, Codex, Claude,
+  and Grok; Copilot's VS Code `mcp.json` is a reviewed, backed-up replacement.
+- Preserved the OpenCode AWB orchestrator and broad-permission `afk-build` as
+  tool-specific primary agents. `afk-build` remains explicitly opt-in.
+- Recorded Hermes profile source revisions and an Ansible handoff contract; no
+  direct Hermes host deployment or secret resolution occurs here.
+- Verified rendered JSON, TOML, YAML frontmatter, skills, and Hermes contracts.
+  Native smoke checks discovered all OpenCode agents and all nine Grok roles.
+- Grok Build 0.2.14 discovers user agents through `$HOME/.grok/agents`, even
+  when skills are found through `GROK_HOME`; isolated tests must model both.
+- Codex CLI 0.145.0 parses the separate `workflows` profile, but its `mcp list`
+  output reflects only the base configuration in this environment. The adapter
+  documents native CLI merge commands as a fallback.

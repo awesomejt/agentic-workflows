@@ -210,6 +210,19 @@ def validate_repository(root: Path) -> list[str]:
                 errors.append(f"adapter {adapter['id']} source escapes repository: {artifact['source']}")
             elif not source.exists():
                 errors.append(f"adapter {adapter['id']} source does not exist: {artifact['source']}")
+            if source.is_dir() and (artifact.get("header") or artifact.get("footer")):
+                errors.append(
+                    f"adapter {adapter['id']} cannot wrap directory source: {artifact['source']}"
+                )
+            for wrapper_key in ("header", "footer"):
+                wrapper_value = artifact.get(wrapper_key)
+                if not wrapper_value:
+                    continue
+                wrapper = (root / wrapper_value).resolve()
+                if root not in wrapper.parents or not wrapper.is_file():
+                    errors.append(
+                        f"adapter {adapter['id']} {wrapper_key} does not exist: {wrapper_value}"
+                    )
 
     for path in sorted((root / "targets").glob("*.yaml")):
         target = load_yaml(path)

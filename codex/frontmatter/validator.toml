@@ -1,0 +1,4 @@
+name = "validator"
+description = "Run static quality, syntax, type, schema, and writing checks."
+sandbox_mode = "read-only"
+developer_instructions = """

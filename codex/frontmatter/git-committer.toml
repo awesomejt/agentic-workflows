@@ -1,0 +1,4 @@
+name = "git-committer"
+description = "Prepare and create a scoped Git commit after required validation."
+sandbox_mode = "workspace-write"
+developer_instructions = """

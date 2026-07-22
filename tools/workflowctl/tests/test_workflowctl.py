@@ -29,6 +29,8 @@ class WorkflowctlTests(unittest.TestCase):
             ignore=shutil.ignore_patterns(".git", ".build", "__pycache__", ".pytest_cache"),
         )
         (self.repo / "opencode" / "fixture.txt").write_text("managed content\n", encoding="utf-8")
+        (self.repo / "opencode" / "header.txt").write_text("header\n", encoding="utf-8")
+        (self.repo / "opencode" / "footer.txt").write_text("footer\n", encoding="utf-8")
         (self.repo / "opencode" / "deploy.yaml").write_text(
             """schema_version: 1
 id: opencode
@@ -37,6 +39,27 @@ status: active
 artifacts:
   - source: opencode/fixture.txt
     destination: fixture.txt
+  - source: opencode/fixture.txt
+    destination: wrapped.txt
+    header: opencode/header.txt
+    footer: opencode/footer.txt
+""",
+            encoding="utf-8",
+        )
+        (self.repo / "targets" / "workstation.yaml").write_text(
+            """schema_version: 1
+id: workstation
+description: Isolated workflowctl test target.
+kind: local
+environment: home-lab
+deployment:
+  mode: copy
+  backup_root: ${XDG_STATE_HOME}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME}/agentic-workflows
+adapters:
+  - id: opencode
+    enabled: true
+    destination: ${XDG_CONFIG_HOME}/opencode
 """,
             encoding="utf-8",
         )
@@ -53,8 +76,12 @@ artifacts:
         output = self.temp / "rendered"
         manifest = render_target(self.repo, "workstation", output)
         self.assertEqual(manifest["target"], "workstation")
-        self.assertEqual(len(manifest["files"]), 1)
+        self.assertEqual(len(manifest["files"]), 2)
         self.assertEqual((output / "opencode" / "fixture.txt").read_text(), "managed content\n")
+        self.assertEqual(
+            (output / "opencode" / "wrapped.txt").read_text(),
+            "header\nmanaged content\nfooter\n",
+        )
         self.assertTrue((output / ".workflow-manifest.json").is_file())
 
     def test_dry_run_does_not_write_destination(self) -> None:
@@ -84,10 +111,13 @@ artifacts:
         backups = list((self.home / ".local" / "state" / "agentic-workflows" / "backups").rglob("fixture.txt"))
         self.assertEqual(len(backups), 1)
         self.assertEqual(backups[0].read_text(), "unmanaged content\n")
-        self.assertEqual(audit_target(self.repo, "workstation", self.home)[0]["status"], "clean")
+        self.assertTrue(
+            all(item["status"] == "clean" for item in audit_target(self.repo, "workstation", self.home))
+        )
 
         destination.write_text("drift\n", encoding="utf-8")
-        self.assertEqual(audit_target(self.repo, "workstation", self.home)[0]["status"], "drifted")
+        audit = audit_target(self.repo, "workstation", self.home)
+        self.assertEqual(next(item for item in audit if item["destination"] == str(destination))["status"], "drifted")
 
     def test_state_manifest_contains_no_file_content(self) -> None:
         result = deploy_target(

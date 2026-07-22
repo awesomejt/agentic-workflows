@@ -11,11 +11,11 @@ runtime state.
 
 ## Project status
 
-The repository has versioned schemas and registries plus a tested deployment
-utility. Tool adapters are currently being populated from reviewed source
-material. Each roadmap task is committed separately so architectural and
-migration decisions remain traceable. See [TODO.md](TODO.md) for current work
-and [MEMORY.md](MEMORY.md) for durable decisions.
+The repository has versioned schemas and registries, a tested deployment
+utility, and active adapters for OpenCode, Codex, Claude Code, Grok Build,
+GitHub Copilot/VS Code, and Hermes. Each roadmap task is committed separately so
+architectural and migration decisions remain traceable. See [TODO.md](TODO.md)
+for current work and [MEMORY.md](MEMORY.md) for durable decisions.
 
 ## Quick start
 
@@ -98,6 +98,7 @@ Ansible Hermes role installs it while resolving target-side secrets.
 - [Common content model](docs/CONTENT.md)
 - [Migration plan](docs/MIGRATION.md)
 - [Deployment guide](docs/DEPLOYMENT.md)
+- [Tool adapter guide](docs/ADAPTERS.md)
 - [Open questions](docs/OPEN_QUESTIONS.md)
 - [Decision memory](MEMORY.md)
 - [Task roadmap](TODO.md)

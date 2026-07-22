@@ -1,5 +1,23 @@
 schema_version: 1
 id: hermes
-description: Hermes bundle adapter.
-status: planned
-artifacts: []
+description: Versioned Hermes behavior and client-contract bundle consumed by Ansible.
+status: active
+artifacts:
+  - source: common/instructions
+    destination: common/instructions
+  - source: common/prompts
+    destination: common/prompts
+  - source: common/roles
+    destination: common/roles
+  - source: common/skills
+    destination: common/skills
+  - source: hermes/profiles.yaml
+    destination: hermes/profiles.yaml
+  - source: hermes/ansible-contract.yaml
+    destination: hermes/ansible-contract.yaml
+  - source: services/litellm/contract.yaml
+    destination: services/litellm.yaml
+  - source: services/ollama/contract.yaml
+    destination: services/ollama.yaml
+  - source: services/mcp/registry.yaml
+    destination: services/mcp.yaml

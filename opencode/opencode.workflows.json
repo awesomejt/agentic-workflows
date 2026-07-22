@@ -1,0 +1,20 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "qdrant": {
+      "type": "remote",
+      "url": "https://mcp-qdrant.taylor.lan/mcp",
+      "enabled": true
+    },
+    "searxng": {
+      "type": "remote",
+      "url": "https://mcp-searxng.taylor.lan/mcp",
+      "enabled": true
+    }
+  },
+  "permission": {
+    "skill": {
+      "*": "allow"
+    }
+  }
+}

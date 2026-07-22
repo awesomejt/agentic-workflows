@@ -1,0 +1,4 @@
+name = "planner"
+description = "Plan focused implementation work from repository evidence without editing files."
+sandbox_mode = "read-only"
+developer_instructions = """

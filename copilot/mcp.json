@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "qdrant": {
+      "type": "http",
+      "url": "https://mcp-qdrant.taylor.lan/mcp"
+    },
+    "searxng": {
+      "type": "http",
+      "url": "https://mcp-searxng.taylor.lan/mcp"
+    }
+  }
+}

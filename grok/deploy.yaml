@@ -1,5 +1,38 @@
 schema_version: 1
 id: grok
-description: Grok Build configuration adapter.
-status: planned
-artifacts: []
+description: Grok Build global instructions, agents, Agent Skills, and focused prompt.
+status: active
+artifacts:
+  - source: common/instructions/core.md
+    destination: AGENTS.md
+  - source: common/prompts/focused-task.md
+    destination: prompts/focused-task.md
+  - source: common/skills
+    destination: skills
+  - source: common/roles/planner.md
+    destination: agents/planner.md
+    header: grok/frontmatter/planner.md
+  - source: common/roles/debater.md
+    destination: agents/debater.md
+    header: grok/frontmatter/debater.md
+  - source: common/roles/implementer.md
+    destination: agents/implementer.md
+    header: grok/frontmatter/implementer.md
+  - source: common/roles/validator.md
+    destination: agents/validator.md
+    header: grok/frontmatter/validator.md
+  - source: common/roles/tester.md
+    destination: agents/tester.md
+    header: grok/frontmatter/tester.md
+  - source: common/roles/reviewer.md
+    destination: agents/reviewer.md
+    header: grok/frontmatter/reviewer.md
+  - source: common/roles/writer.md
+    destination: agents/writer.md
+    header: grok/frontmatter/writer.md
+  - source: common/roles/git-committer.md
+    destination: agents/git-committer.md
+    header: grok/frontmatter/git-committer.md
+  - source: common/roles/project-manager.md
+    destination: agents/project-manager.md
+    header: grok/frontmatter/project-manager.md

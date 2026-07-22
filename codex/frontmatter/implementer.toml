@@ -1,0 +1,4 @@
+name = "implementer"
+description = "Produce the focused code, content, or configuration change for a task."
+sandbox_mode = "workspace-write"
+developer_instructions = """

@@ -22,5 +22,5 @@ adapters:
     destination: ${GROK_HOME}
   - id: copilot
     enabled: true
-    destination: ${XDG_CONFIG_HOME}/Code/User
+    destination: ${HOME}
     notes: Authentication and extension runtime state are unmanaged.

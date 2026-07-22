@@ -1,5 +1,47 @@
 schema_version: 1
 id: codex
-description: Codex configuration adapter.
-status: planned
-artifacts: []
+description: Codex global instructions, custom agents, Agent Skills, and workflows profile.
+status: active
+artifacts:
+  - source: common/instructions/core.md
+    destination: AGENTS.md
+  - source: common/skills
+    destination: skills
+  - source: common/roles/planner.md
+    destination: agents/planner.toml
+    header: codex/frontmatter/planner.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/debater.md
+    destination: agents/debater.toml
+    header: codex/frontmatter/debater.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/implementer.md
+    destination: agents/implementer.toml
+    header: codex/frontmatter/implementer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/validator.md
+    destination: agents/validator.toml
+    header: codex/frontmatter/validator.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/tester.md
+    destination: agents/tester.toml
+    header: codex/frontmatter/tester.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/reviewer.md
+    destination: agents/reviewer.toml
+    header: codex/frontmatter/reviewer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/writer.md
+    destination: agents/writer.toml
+    header: codex/frontmatter/writer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/git-committer.md
+    destination: agents/git-committer.toml
+    header: codex/frontmatter/git-committer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/project-manager.md
+    destination: agents/project-manager.toml
+    header: codex/frontmatter/project-manager.toml
+    footer: codex/frontmatter/footer.toml
+  - source: codex/workflows.config.toml
+    destination: workflows.config.toml

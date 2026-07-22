@@ -15,7 +15,7 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 
 ## Content migration
 
-- [ ] Inventory reusable assets with provenance and sensitivity classifications.
+- [x] Inventory reusable assets with provenance and sensitivity classifications.
 - [x] Normalize common agent roles and prompts from `opencode-setup`.
 - [x] Import reusable skills after reviewing tool coupling and provenance.
 - [ ] Add project and course template bundles.
@@ -23,16 +23,16 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 
 ## Tool adapters
 
-- [ ] Add OpenCode adapter and migrate the existing deployment safely.
-- [ ] Add Codex adapter.
-- [ ] Add Claude Code adapter.
-- [ ] Add Grok Build adapter.
-- [ ] Add GitHub Copilot/VS Code adapter.
-- [ ] Add Hermes bundle adapter and Ansible handoff contract.
+- [x] Add OpenCode adapter and migrate the existing deployment safely.
+- [x] Add Codex adapter.
+- [x] Add Claude Code adapter.
+- [x] Add Grok Build adapter.
+- [x] Add GitHub Copilot/VS Code adapter.
+- [x] Add Hermes bundle adapter and Ansible handoff contract.
 
 ## Services and operations
 
-- [ ] Add canonical MCP server registry and per-tool renderers.
+- [x] Add canonical MCP server registry and per-tool renderers.
 - [ ] Add LiteLLM, Ollama, oMLX, Qdrant, SearXNG, and Open WebUI contracts.
 - [ ] Add non-secret home-lab topology and health checks.
 - [ ] Add end-to-end dry-run and drift/audit documentation.

@@ -85,6 +85,16 @@ def render_target(root: Path, target_id: str, output: Path | None = None) -> dic
         adapter = load_yaml(root / selected["id"] / "deploy.yaml")
         for artifact in adapter["artifacts"]:
             source = (root / artifact["source"]).resolve()
+            header = (
+                (root / artifact["header"]).resolve().read_bytes()
+                if artifact.get("header")
+                else b""
+            )
+            footer = (
+                (root / artifact["footer"]).resolve().read_bytes()
+                if artifact.get("footer")
+                else b""
+            )
             destination = safe_relative(
                 artifact["destination"], f"{adapter['id']} artifact destination"
             )
@@ -97,7 +107,10 @@ def render_target(root: Path, target_id: str, output: Path | None = None) -> dic
                     raise WorkflowError(f"render collision for {adapter['id']}/{relative}")
                 rendered_paths.add(staged)
                 staged.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copyfile(source_file, staged)
+                if header or footer:
+                    staged.write_bytes(header + source_file.read_bytes() + footer)
+                else:
+                    shutil.copyfile(source_file, staged)
                 entries.append(
                     {
                         "adapter": adapter["id"],

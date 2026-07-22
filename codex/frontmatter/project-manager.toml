@@ -1,0 +1,4 @@
+name = "project-manager"
+description = "Coordinate one task, role handoffs, durable state, and completion evidence."
+sandbox_mode = "workspace-write"
+developer_instructions = """

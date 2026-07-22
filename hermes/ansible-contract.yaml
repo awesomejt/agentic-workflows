@@ -1,0 +1,28 @@
+schema_version: 1
+owner:
+  repository: taylor-ansible
+  role: roles/hermes
+delivery:
+  type: generated-bundle
+  producer: workflowctl
+  target: hermes
+  install_root_variable: hermes_config_dir
+secret_resolution:
+  owner: taylor-ansible
+  allowed_sources:
+    - ansible-vault
+    - hashicorp-vault
+    - target-environment
+  forbidden_in_bundle: true
+required_service_contracts:
+  - litellm
+  - ollama
+  - qdrant-mcp
+  - searxng-mcp
+validation:
+  - workflowctl validate
+  - workflowctl render --target hermes
+  - ansible syntax check on the consuming playbook
+notes:
+  - Ansible chooses target paths and renders Hermes runtime config.
+  - The bundle never writes the Hermes host directly.

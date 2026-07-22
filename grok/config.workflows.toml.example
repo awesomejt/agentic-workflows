@@ -1,0 +1,10 @@
+[subagents]
+enabled = true
+
+[mcp_servers.qdrant]
+url = "https://mcp-qdrant.taylor.lan/mcp"
+enabled = true
+
+[mcp_servers.searxng]
+url = "https://mcp-searxng.taylor.lan/mcp"
+enabled = true
