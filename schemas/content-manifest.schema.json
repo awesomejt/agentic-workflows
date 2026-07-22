@@ -16,7 +16,7 @@
         "properties": {
           "id": { "$ref": "#/$defs/id" },
           "kind": {
-            "enum": ["agent", "prompt", "skill", "instruction", "script", "application", "repository-state"]
+            "enum": ["agent", "persona", "prompt", "skill", "instruction", "script", "tool", "template", "service-config", "application", "repository-state"]
           },
           "source": { "$ref": "#/$defs/id" },
           "source_path": { "type": "string", "minLength": 1 },

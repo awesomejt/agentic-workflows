@@ -19,7 +19,7 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 - [x] Normalize common agent roles and prompts from `opencode-setup`.
 - [x] Import reusable skills after reviewing tool coupling and provenance.
 - [ ] Add project and course template bundles.
-- [ ] Add private-overlay guidance for personal Hermes personas and workflows.
+- [x] Add private-overlay guidance for personal Hermes personas and workflows.
 
 ## Tool adapters
 
@@ -33,7 +33,19 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 ## Services and operations
 
 - [x] Add canonical MCP server registry and per-tool renderers.
-- [ ] Add LiteLLM, Ollama, oMLX, Qdrant, SearXNG, and Open WebUI contracts.
-- [ ] Add non-secret home-lab topology and health checks.
-- [ ] Add end-to-end dry-run and drift/audit documentation.
+- [x] Add LiteLLM, Ollama, oMLX, Qdrant, SearXNG, Open WebUI, AnythingLLM,
+  and n8n contracts.
+- [x] Add non-secret home-lab topology and health checks.
+- [x] Add end-to-end dry-run and drift/audit documentation.
 - [ ] Extract the current orchestrator into its own repository.
+
+## Discovered follow-up
+
+- [ ] Remove and rotate the plaintext oMLX credential found in
+  `hermes-setup/AGENTS.md`; retain only the Vault reference.
+- [ ] Add `nomic-embed-text:latest` to the Ansible Ollama pull list or remove
+  the stale AnythingLLM/Hermes consumer requirement.
+- [ ] Implement `workflowctl template render` and promote the revision-pinned
+  template catalog entries from `normalize` to `ready`.
+- [ ] Decide the orchestrator repository name and run the history-preserving
+  extraction plan.

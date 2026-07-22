@@ -30,6 +30,36 @@ services:
       path: roles/ollama
     consumers: [litellm, hermes, open-webui]
     secret_refs: []
+  - id: omlx-primary
+    kind: model-runtime
+    description: Primary OpenAI-compatible oMLX inference endpoint.
+    endpoint:
+      url: http://192.168.50.93:8000/v1
+      protocol: openai-compatible
+    healthcheck:
+      method: GET
+      path: /models
+      secret_ref: omlx-api-key
+    owner:
+      repository: taylor-ansible
+      path: roles/litellm
+    consumers: [litellm, hermes, open-webui]
+    secret_refs: [omlx-api-key]
+  - id: omlx-secondary
+    kind: model-runtime
+    description: Secondary OpenAI-compatible oMLX inference endpoint.
+    endpoint:
+      url: http://192.168.50.94:8000/v1
+      protocol: openai-compatible
+    healthcheck:
+      method: GET
+      path: /models
+      secret_ref: omlx-api-key
+    owner:
+      repository: taylor-ansible
+      path: roles/litellm
+    consumers: [litellm, hermes, open-webui]
+    secret_refs: [omlx-api-key]
   - id: open-webui
     kind: user-interface
     endpoint:
@@ -42,12 +72,43 @@ services:
       repository: taylor-ansible
       path: roles/open-webui
     consumers: [human]
-    secret_refs: [openwebui-litellm-key]
+    secret_refs: [openwebui-litellm-key, openwebui-ldap-password, omlx-api-key]
+  - id: anythingllm
+    kind: user-interface
+    description: Knowledge workspace using LiteLLM, Ollama embeddings, and Qdrant.
+    endpoint:
+      url: https://anythingllm.taylor.lan
+      protocol: https
+    healthcheck:
+      method: GET
+      path: /
+    owner:
+      repository: taylor-ansible
+      path: roles/anythingllm
+    consumers: [human, hermes]
+    secret_refs: [litellm-master-key]
+  - id: n8n
+    kind: automation
+    description: Network workflow automation service available to Hermes integrations.
+    endpoint:
+      url: https://n8n.taylor.lan
+      protocol: https
+    healthcheck:
+      method: GET
+      path: /
+    owner:
+      repository: taylor-ansible
+      path: roles/n8n
+    consumers: [human, hermes]
+    secret_refs: [n8n-encryption-key]
   - id: qdrant
     kind: vector-database
     endpoint:
       url: https://qdrant.taylor.lan
       protocol: qdrant-http
+    healthcheck:
+      method: GET
+      path: /
     owner:
       repository: taylor-ansible
       path: roles/qdrant
@@ -58,6 +119,9 @@ services:
     endpoint:
       url: https://search.taylor.lan
       protocol: https
+    healthcheck:
+      method: GET
+      path: /
     owner:
       repository: taylor-ansible
       path: roles/searxng

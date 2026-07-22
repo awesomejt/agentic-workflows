@@ -129,3 +129,24 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - Codex CLI 0.145.0 parses the separate `workflows` profile, but its `mcp list`
   output reflects only the base configuration in this environment. The adapter
   documents native CLI merge commands as a fallback.
+
+### 2026-07-22: Services, templates, and extraction boundary
+
+- Pinned all seven reviewed source checkouts and their clean worktree state in
+  the source manifest.
+- Expanded service coverage to LiteLLM, Ollama, both oMLX hosts, Open WebUI,
+  Qdrant, SearXNG, their MCP sidecars, AnythingLLM, and n8n at Ansible revision
+  `79944d7875ab1ff1673c16bac79c489d30a7e1a0`.
+- Added service contract validation and secret cross-reference checks. Hermes
+  now receives the full service contract tree rather than three selected files.
+- Identified a contract mismatch: AnythingLLM and Hermes require
+  `nomic-embed-text:latest`, while the reviewed Ollama role does not pull it.
+- Found a plaintext oMLX credential in `hermes-setup/AGENTS.md`. The value was
+  not migrated; removal and rotation are required before that source is safe.
+- Cataloged the AI-ready, coding-project, and course-project templates by exact
+  source revision. Full template rendering remains a separate implementation
+  task so repository task state is not copied accidentally.
+- Established an ignored private-overlay boundary for named/personal Hermes
+  profiles while retaining only generic profile source mappings in the bundle.
+- Wrote a history-preserving orchestrator extraction and rollback plan. The
+  repository name and Ansible bundle delivery mechanism remain owner decisions.

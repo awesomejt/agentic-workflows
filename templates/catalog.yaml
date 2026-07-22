@@ -1,0 +1,62 @@
+schema_version: 1
+templates:
+  - id: ai-ready
+    source: ai-ready-project
+    source_revision: 0ee3410e9a069a20b49f1fe1ee2f7c8435538033
+    purpose: Lightweight baseline for interactive, research, and documentation projects.
+    status: normalize
+    source_paths:
+      - AGENTS.md
+      - AGENT_WORKFLOW.md
+      - QUALITY_CHECKLIST.md
+      - MEMORY.md
+      - TODO.md
+      - status.yaml
+      - docs/
+      - agents/
+    shared_assets:
+      - common/instructions/core.md
+      - common/skills/awb-project-task-management
+      - common/skills/validation-and-test-evidence
+    notes: Normalize the root contract without importing repository-specific task state.
+  - id: coding-project
+    source: project-starter-kit
+    source_revision: 62020038ff6c253d4914ab63a7ecdb7560c3ec31
+    purpose: Agentic software project starter with engineering and validation guidance.
+    status: normalize
+    source_paths:
+      - AGENTS.md
+      - AGENT_WORKFLOW.md
+      - QUALITY_CHECKLIST.md
+      - PROJECT_BRIEF.md
+      - MEMORY.md
+      - TODO.md
+      - status.yaml
+      - docs/
+    shared_assets:
+      - common/instructions/core.md
+      - common/roles/
+      - common/skills/
+    notes: Keep product-specific placeholders in the template bundle, not common instructions.
+  - id: course-project
+    source: course-starter-kit
+    source_revision: 71dfde6e6822ab20f8170c25553ef8a532aec552
+    purpose: Course planning, outlining, scripting, and publishing-preparation starter.
+    status: normalize
+    source_paths:
+      - AGENTS.md
+      - AGENT_WORKFLOW.md
+      - QUALITY_CHECKLIST.md
+      - COURSE_BRIEF.md
+      - MEMORY.md
+      - TODO.md
+      - status.yaml
+      - Templates/
+      - Planning/
+      - Sections/
+    shared_assets:
+      - common/instructions/core.md
+      - common/roles/writer.md
+      - common/roles/reviewer.md
+      - common/skills/validation-and-test-evidence
+    notes: Preserve course-domain rules as template-specific behavior rather than global agent policy.

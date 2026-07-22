@@ -110,6 +110,22 @@ def _unique_ids(items: list[dict[str, Any]], label: str, errors: list[str]) -> s
     return ids
 
 
+def _find_embedded_secret_keys(value: Any, prefix: str = "") -> list[str]:
+    """Find credential-bearing keys that contracts must replace with secret refs."""
+    forbidden = {"api_key", "password", "token", "credential", "credentials", "secret"}
+    findings: list[str] = []
+    if isinstance(value, dict):
+        for key, child in value.items():
+            location = f"{prefix}.{key}" if prefix else str(key)
+            if str(key).lower().replace("-", "_") in forbidden:
+                findings.append(location)
+            findings.extend(_find_embedded_secret_keys(child, location))
+    elif isinstance(value, list):
+        for index, child in enumerate(value):
+            findings.extend(_find_embedded_secret_keys(child, f"{prefix}[{index}]"))
+    return findings
+
+
 def validate_repository(root: Path) -> list[str]:
     """Validate schemas and cross-document references. Raise on any error."""
     root = root.resolve()
@@ -120,6 +136,7 @@ def validate_repository(root: Path) -> list[str]:
         (schema_dir / "service-registry.schema.json", root / "services/registry.yaml"),
         (schema_dir / "mcp-registry.schema.json", root / "services/mcp/registry.yaml"),
         (schema_dir / "secret-catalog.schema.json", root / "secret-references/catalog.yaml"),
+        (schema_dir / "template-catalog.schema.json", root / "templates/catalog.yaml"),
     ]
     bindings.extend(
         (schema_dir / "environment.schema.json", path)
@@ -128,6 +145,11 @@ def validate_repository(root: Path) -> list[str]:
     bindings.extend(
         (schema_dir / "target.schema.json", path)
         for path in sorted((root / "targets").glob("*.yaml"))
+    )
+    service_contract_paths = sorted((root / "services").glob("*/contract.yaml"))
+    bindings.extend(
+        (schema_dir / "service-contract.schema.json", path)
+        for path in service_contract_paths
     )
     adapter_paths = [
         path for path in sorted(root.glob("*/deploy.yaml")) if path.parent.parent == root
@@ -164,6 +186,11 @@ def validate_repository(root: Path) -> list[str]:
                 errors.append(
                     f"content artifact {artifact['id']} destination does not exist: {destination}"
                 )
+    template_catalog = load_yaml(root / "templates/catalog.yaml")
+    _unique_ids(template_catalog["templates"], "template", errors)
+    for template in template_catalog["templates"]:
+        if template["source"] not in source_ids:
+            errors.append(f"template {template['id']} has unknown source: {template['source']}")
     environments = [load_yaml(path) for path in sorted((root / "environments").glob("*.yaml"))]
     environment_ids = _unique_ids(environments, "environment", errors)
     services = load_yaml(root / "services/registry.yaml")["services"]
@@ -184,6 +211,29 @@ def validate_repository(root: Path) -> list[str]:
         health_secret = service.get("healthcheck", {}).get("secret_ref")
         if health_secret and health_secret not in secret_ids:
             errors.append(f"service {service['id']} has unknown healthcheck secret_ref: {health_secret}")
+
+    for path in service_contract_paths:
+        contract = load_yaml(path)
+        if contract["service_ref"] not in service_ids:
+            errors.append(
+                f"service contract {path.relative_to(root)} has unknown service_ref: "
+                f"{contract['service_ref']}"
+            )
+        if contract["owner"]["repository"] not in source_ids:
+            errors.append(
+                f"service contract {path.relative_to(root)} has unknown owner repository: "
+                f"{contract['owner']['repository']}"
+            )
+        for secret_ref in contract.get("secret_refs", []):
+            if secret_ref not in secret_ids:
+                errors.append(
+                    f"service contract {path.relative_to(root)} has unknown secret_ref: {secret_ref}"
+                )
+        for location in _find_embedded_secret_keys(contract):
+            errors.append(
+                f"service contract {path.relative_to(root)} embeds forbidden credential key: "
+                f"{location}; use secret_ref"
+            )
 
     mcp_registry = load_yaml(root / "services/mcp/registry.yaml")
     if mcp_registry["environment"] not in environment_ids:

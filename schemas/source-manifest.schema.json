@@ -25,6 +25,8 @@
           "status": {
             "enum": ["inventory", "review", "migrating", "complete", "reference-only"]
           },
+          "observed_revision": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+          "worktree_state": { "enum": ["clean", "dirty", "unknown"] },
           "notes": { "type": "string" }
         }
       }

@@ -10,7 +10,7 @@ from pathlib import Path
 SOURCE_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(SOURCE_ROOT / "tools" / "workflowctl" / "src"))
 
-from workflowctl.config import validate_repository  # noqa: E402
+from workflowctl.config import WorkflowError, validate_repository  # noqa: E402
 from workflowctl.engine import (  # noqa: E402
     audit_target,
     deploy_target,
@@ -71,6 +71,12 @@ adapters:
     def test_repository_validates(self) -> None:
         messages = validate_repository(self.repo)
         self.assertTrue(any(message.startswith("validated ") for message in messages))
+
+    def test_service_contract_rejects_embedded_credential_key(self) -> None:
+        contract = self.repo / "services" / "litellm" / "contract.yaml"
+        contract.write_text(contract.read_text(encoding="utf-8") + "api_key: forbidden\n")
+        with self.assertRaisesRegex(WorkflowError, "forbidden credential key"):
+            validate_repository(self.repo)
 
     def test_render_creates_manifest_and_file(self) -> None:
         output = self.temp / "rendered"

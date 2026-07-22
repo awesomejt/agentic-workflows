@@ -1,0 +1,26 @@
+schema_version: 1
+service_ref: omlx-primary
+owner:
+  repository: taylor-ansible
+  path: roles/litellm
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: [omlx-api-key]
+protocol: openai-compatible
+instances:
+  - service_ref: omlx-primary
+    host_ref: omlx-primary
+    base_url: http://192.168.50.93:8000/v1
+    models:
+      chat: Qwen3.6-27B-6bit
+      coding: Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-6bit
+      thinking: gpt-oss-20b-MXFP4-Q8
+  - service_ref: omlx-secondary
+    host_ref: omlx-secondary
+    base_url: http://192.168.50.94:8000/v1
+    models:
+      chat: Qwen3.6-27B-6bit
+      coding: Qwen3.6-35B-A3B-6bit
+      thinking: gpt-oss-20b-MLX-8bit
+notes:
+  - The oMLX hosts are external providers consumed by Ansible-managed clients.
+  - Authentication resolves through the secret reference and is never rendered here.

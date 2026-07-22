@@ -3,14 +3,23 @@ service_ref: ollama
 owner:
   repository: taylor-ansible
   path: roles/ollama
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: []
 expected_models:
   - llama3.2:latest
+  - hermes3:latest
+  - qwen3:14b
   - deepseek-coder-v2:latest
   - qwen3.5:latest
-  - nomic-embed-text:latest
+  - gemma4:latest
+consumer_required_models:
+  - model: nomic-embed-text:latest
+    consumers: [anythingllm, hermes]
+    source_status: missing-from-ansible-pull-list
 consumers:
   - litellm
   - hermes
   - open-webui
 notes:
   - The Ansible Ollama role remains authoritative for actual model pulls.
+  - nomic-embed-text is configured by consumers but was not in the reviewed role pull list.

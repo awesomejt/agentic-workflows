@@ -1,0 +1,16 @@
+schema_version: 1
+service_ref: qdrant
+owner:
+  repository: taylor-ansible
+  path: roles/qdrant
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: []
+storage:
+  deployment_path: /opt/qdrant/storage
+mcp:
+  service_ref: qdrant-mcp
+  transport: streamable-http
+  collection: hermes-memory
+  embedding_model: sentence-transformers/all-MiniLM-L6-v2
+notes:
+  - Qdrant deployment and persistence remain Ansible-owned.

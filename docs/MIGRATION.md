@@ -12,6 +12,10 @@
 | local CLI configuration | adapter defaults and non-secret preferences | Recreate from reviewed keys; never bulk-copy auth-bearing files |
 | `infra/ansible` | service roles, endpoints, model aliases, secret variables | Reference as deployment owner; do not copy roles |
 
+Every reviewed checkout is pinned in `manifests/sources.yaml`. Service contracts
+pin the Ansible revision independently so client-visible drift can be reviewed
+without treating this repository as the deployment source.
+
 ## Phases
 
 1. Establish governance, requirements, design, memory, and task tracking.
@@ -23,6 +27,11 @@
 7. Extract the orchestrator with preserved history and a stable workflow-bundle
    interface.
 8. Cut over live configurations one tool at a time and verify drift detection.
+
+The first six phases now have concrete repository artifacts. Template bundle
+rendering, the externally named orchestrator repository, and live cutover remain
+future changes because each requires either an implementation task or an owner
+decision.
 
 ## Import classifications
 

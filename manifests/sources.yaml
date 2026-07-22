@@ -10,6 +10,8 @@ sources:
       - workflow documentation
       - orchestrator pending extraction
     status: migrating
+    observed_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
+    worktree_state: clean
   - id: ai-agents
     remote: git@github.com:awesomejt/ai-agents.git
     checkout_hint: ${PROJECTS_ROOT}/ai/agents
@@ -18,6 +20,8 @@ sources:
       - personas
       - custom skills
     status: inventory
+    observed_revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    worktree_state: clean
   - id: hermes-setup
     remote: git@github.com:awesomejt/hermes.git
     checkout_hint: ${PROJECTS_ROOT}/ai/hermes-setup
@@ -27,6 +31,8 @@ sources:
       - cron definitions
       - operational documentation
     status: review
+    observed_revision: 01676cae50ee67442350090622a6856e3fb2300a
+    worktree_state: clean
     notes: Refresh or compare the checkout with origin before importing content.
   - id: ai-ready-project
     remote: git@github.com:awesomejt/ai-ready-project.git
@@ -35,6 +41,8 @@ sources:
       - project instructions
       - documentation templates
     status: inventory
+    observed_revision: 0ee3410e9a069a20b49f1fe1ee2f7c8435538033
+    worktree_state: clean
   - id: project-starter-kit
     remote: git@github.com:awesomejt/project-starter-kit.git
     checkout_hint: ${PROJECTS_ROOT}/ai/project-starter-kit
@@ -42,6 +50,8 @@ sources:
       - project templates
       - workflow documentation
     status: inventory
+    observed_revision: 62020038ff6c253d4914ab63a7ecdb7560c3ec31
+    worktree_state: clean
   - id: course-starter-kit
     remote: git@github.com:awesomejt/course-starter-kit.git
     checkout_hint: ${PROJECTS_ROOT}/ai/course-starter-kit
@@ -49,6 +59,8 @@ sources:
       - course templates
       - workflow documentation
     status: inventory
+    observed_revision: 71dfde6e6822ab20f8170c25553ef8a532aec552
+    worktree_state: clean
   - id: taylor-ansible
     remote: git@github.com:awesomejt/taylor-ansible.git
     checkout_hint: ${PROJECTS_ROOT}/infra/ansible
@@ -57,3 +69,5 @@ sources:
       - Hermes deployment ownership
       - secret variable definitions
     status: reference-only
+    observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+    worktree_state: clean

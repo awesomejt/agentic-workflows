@@ -21,10 +21,7 @@ a reversible default.
 5. **Copilot scope:** Should deployment manage selected global VS Code settings,
    or only repository instructions, prompt files, agents, and MCP definitions?
    The provisional scope excludes general editor settings.
-6. **Grok scope:** Should Grok Build use the same MCP registry and common skills
-   as the other CLIs immediately, or first receive only instructions and agents?
-   The provisional design supports the full adapter.
-7. **Cross-repository contract:** Should Ansible consume a released workflows
+6. **Cross-repository contract:** Should Ansible consume a released workflows
    archive, a checked-out path, or a Git URL/revision when installing Hermes?
 
 ## Resolved
@@ -36,3 +33,5 @@ a reversible default.
   exclusive to one skill stay with that skill.
 - Secret locations and variable names may be documented, but secret values may
   not be committed.
+- Grok Build receives the common instructions, roles, skills, prompt, and MCP
+  registry rather than a reduced first-stage adapter.

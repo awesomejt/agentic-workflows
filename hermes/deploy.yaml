@@ -15,9 +15,5 @@ artifacts:
     destination: hermes/profiles.yaml
   - source: hermes/ansible-contract.yaml
     destination: hermes/ansible-contract.yaml
-  - source: services/litellm/contract.yaml
-    destination: services/litellm.yaml
-  - source: services/ollama/contract.yaml
-    destination: services/ollama.yaml
-  - source: services/mcp/registry.yaml
-    destination: services/mcp.yaml
+  - source: services
+    destination: services

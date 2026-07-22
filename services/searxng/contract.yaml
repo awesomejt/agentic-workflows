@@ -1,0 +1,15 @@
+schema_version: 1
+service_ref: searxng
+owner:
+  repository: taylor-ansible
+  path: roles/searxng
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: [searxng-secret-key]
+search_formats: [html, json]
+cache:
+  type: valkey
+mcp:
+  service_ref: searxng-mcp
+  transport: streamable-http
+notes:
+  - JSON output is required by Open WebUI and agent consumers.

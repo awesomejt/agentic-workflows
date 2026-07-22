@@ -3,6 +3,11 @@ service_ref: litellm
 owner:
   repository: taylor-ansible
   path: roles/litellm
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs:
+  - litellm-master-key
+  - litellm-postgres-password
+  - omlx-api-key
 aliases:
   chat: use-chat
   coding: use-coding
@@ -23,6 +28,26 @@ routes:
       chat: llama3.2:latest
       coding: deepseek-coder-v2:latest
       thinking: qwen3.5:latest
+required_public_models:
+  - use-chat
+  - use-coding
+  - use-thinking
+  - local-ollama
+  - ollama-chat
+  - ollama-coding
+  - ollama-thinking
+  - omlx-primary-chat
+  - omlx-secondary-chat
+fallback_policy:
+  use-chat: [omlx-secondary-chat, ollama-chat]
+  use-coding: [omlx-secondary-coding, ollama-coding]
+  use-thinking: [omlx-secondary-thinking, ollama-thinking]
+state_backend:
+  type: postgres
+  host_ref: postgres
+  database: litellm
+  username: litellm
+  secret_ref: litellm-postgres-password
 notes:
   - This is an expected client contract used for validation.
   - Ansible remains authoritative for deployed routing and fallback behavior.

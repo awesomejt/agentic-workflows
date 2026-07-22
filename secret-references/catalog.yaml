@@ -23,6 +23,28 @@ secrets:
     owner: taylor-ansible
     validation:
       type: external
+  - id: litellm-postgres-password
+    purpose: Authenticate LiteLLM to its PostgreSQL state database.
+    consumers: [litellm]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_litellm_postgres_password
+    owner: taylor-ansible
+    validation:
+      type: external
+  - id: openwebui-ldap-password
+    purpose: Bind Open WebUI to the LLDAP directory.
+    consumers: [open-webui]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_lldap_ldap_user_pass
+    owner: taylor-ansible
+    validation:
+      type: external
   - id: omlx-api-key
     purpose: Authenticate clients to OpenAI-compatible oMLX endpoints.
     consumers: [litellm, hermes, open-webui]
@@ -43,6 +65,17 @@ secrets:
       host: ansible-control
       locator: vars/common/secrets.yaml
       variable: vault_searxng_secret_key
+    owner: taylor-ansible
+    validation:
+      type: external
+  - id: n8n-encryption-key
+    purpose: Encrypt n8n credentials and sensitive workflow state at rest.
+    consumers: [n8n]
+    source:
+      type: ansible-vault
+      host: ansible-control
+      locator: vars/common/secrets.yaml
+      variable: vault_n8n_encryption_key
     owner: taylor-ansible
     validation:
       type: external

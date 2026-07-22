@@ -219,3 +219,100 @@ artifacts:
     disposition: superseded
     sensitivity: public
     notes: Repository-specific coordination state is not reusable content.
+  - id: ai-ready-template
+    kind: template
+    source: ai-ready-project
+    source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, docs/, agents/
+    source_revision: 0ee3410e9a069a20b49f1fe1ee2f7c8435538033
+    disposition: deferred
+    destination: templates/catalog.yaml
+    sensitivity: public
+    notes: Revision-pinned for later normalization; do not import repository task state.
+  - id: coding-project-template
+    kind: template
+    source: project-starter-kit
+    source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, PROJECT_BRIEF.md, docs/
+    source_revision: 62020038ff6c253d4914ab63a7ecdb7560c3ec31
+    disposition: deferred
+    destination: templates/catalog.yaml
+    sensitivity: public
+    notes: Engineering-specific policy remains template content, not global instructions.
+  - id: course-project-template
+    kind: template
+    source: course-starter-kit
+    source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, COURSE_BRIEF.md, Templates/
+    source_revision: 71dfde6e6822ab20f8170c25553ef8a532aec552
+    disposition: deferred
+    destination: templates/catalog.yaml
+    sensitivity: public
+    notes: Course writing and platform policy remains template-specific.
+  - id: hermes-generic-souls
+    kind: persona
+    source: ai-agents
+    source_path: main/SOUL.md, admin/SOUL.md, coder/SOUL.md, researcher/SOUL.md
+    source_revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    disposition: reference-upstream
+    destination: hermes/profiles.yaml
+    sensitivity: public
+    notes: Hermes bundle pins these files by source revision rather than duplicating them.
+  - id: hermes-personal-souls
+    kind: persona
+    source: ai-agents
+    source_path: jessica/SOUL.md and any future personally identifying profiles
+    source_revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    disposition: private-overlay
+    destination: overlays/private/
+    sensitivity: private
+    notes: Await repository-owner decision before migration.
+  - id: hermes-profile-media
+    kind: repository-state
+    source: ai-agents
+    source_path: "**/*.jpg, **/*.jpeg, **/*.png"
+    source_revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
+    disposition: runtime-excluded
+    sensitivity: private
+    notes: Images are not agent configuration and may contain identifying information.
+  - id: hermes-project-status-tool
+    kind: tool
+    source: hermes-setup
+    source_path: tools/project-status/
+    source_revision: 01676cae50ee67442350090622a6856e3fb2300a
+    disposition: deferred
+    destination: tools/
+    sensitivity: public
+    notes: Review portability and tests before deciding whether this is shared or Hermes-only.
+  - id: hermes-course-orchestrator-tool
+    kind: tool
+    source: hermes-setup
+    source_path: tools/course-orchestrator/
+    source_revision: 01676cae50ee67442350090622a6856e3fb2300a
+    disposition: deferred
+    destination: templates/
+    sensitivity: public
+    notes: Likely belongs with the course template or a separate orchestration application.
+  - id: hermes-service-ping-tool
+    kind: tool
+    source: hermes-setup
+    source_path: tools/ping_services.py, tools/ping_services.yaml.example
+    source_revision: 01676cae50ee67442350090622a6856e3fb2300a
+    disposition: superseded
+    destination: tools/workflowctl/
+    sensitivity: public
+    notes: workflowctl doctor owns service health diagnostics.
+  - id: hermes-runtime-crons
+    kind: script
+    source: hermes-setup
+    source_path: crontab/
+    source_revision: 01676cae50ee67442350090622a6856e3fb2300a
+    disposition: keep-ansible
+    sensitivity: review-required
+    notes: Runtime installation and scheduling should move under the Ansible Hermes role.
+  - id: ansible-ai-service-roles
+    kind: service-config
+    source: taylor-ansible
+    source_path: roles/litellm, roles/ollama, roles/open-webui, roles/qdrant, roles/searxng, roles/anythingllm, roles/n8n, roles/hermes
+    source_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+    disposition: keep-ansible
+    destination: services/
+    sensitivity: review-required
+    notes: Only client-visible contracts and secret locators are mirrored here.

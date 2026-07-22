@@ -66,7 +66,8 @@ environments/         non-secret environment topology
 targets/              deployment target definitions
 secret-references/    secret metadata; never secret values
 manifests/            provenance, versions, and migration sources
-templates/            reusable project templates
+templates/            revision-pinned reusable project template catalog
+overlays/             private-overlay rules; private content is ignored
 tools/workflowctl/     renderer, validator, deployer, and diagnostics
 docs/                  requirements, design, and operational documentation
 ```
@@ -99,6 +100,9 @@ Ansible Hermes role installs it while resolving target-side secrets.
 - [Migration plan](docs/MIGRATION.md)
 - [Deployment guide](docs/DEPLOYMENT.md)
 - [Tool adapter guide](docs/ADAPTERS.md)
+- [AI service contracts](docs/SERVICES.md)
+- [Orchestrator extraction](docs/ORCHESTRATOR_EXTRACTION.md)
+- [Migration security findings](docs/SECURITY_FINDINGS.md)
 - [Open questions](docs/OPEN_QUESTIONS.md)
 - [Decision memory](MEMORY.md)
 - [Task roadmap](TODO.md)

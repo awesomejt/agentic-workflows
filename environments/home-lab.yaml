@@ -5,18 +5,25 @@ sensitivity: private-network-metadata
 hosts:
   ansible-control:
     address: 192.168.50.11
+    dns: ansible.taylor.lan
   vault:
     address: 192.168.50.13
     dns: vault.taylor.lan
   postgres:
     address: 192.168.50.15
+    dns: postgres.taylor.lan
   ai-stack:
     address: 192.168.50.50
+    dns: docker.taylor.lan
   ollama:
     address: 192.168.50.51
+    dns: ollama.taylor.lan
   hermes:
     address: 192.168.50.52
+    dns: hermes.taylor.lan
   omlx-primary:
     address: 192.168.50.93
+    dns: omlx1.taylor.lan
   omlx-secondary:
     address: 192.168.50.94
+    dns: omlx2.taylor.lan

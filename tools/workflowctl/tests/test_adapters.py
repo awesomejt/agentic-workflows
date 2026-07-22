@@ -91,9 +91,11 @@ class AdapterRenderTests(unittest.TestCase):
         paths = (
             self.hermes / "hermes" / "hermes" / "profiles.yaml",
             self.hermes / "hermes" / "hermes" / "ansible-contract.yaml",
-            self.hermes / "hermes" / "services" / "litellm.yaml",
-            self.hermes / "hermes" / "services" / "ollama.yaml",
-            self.hermes / "hermes" / "services" / "mcp.yaml",
+            self.hermes / "hermes" / "services" / "litellm" / "contract.yaml",
+            self.hermes / "hermes" / "services" / "ollama" / "contract.yaml",
+            self.hermes / "hermes" / "services" / "mcp" / "registry.yaml",
+            self.hermes / "hermes" / "services" / "omlx" / "contract.yaml",
+            self.hermes / "hermes" / "services" / "open-webui" / "contract.yaml",
         )
         for path in paths:
             with self.subTest(path=path):

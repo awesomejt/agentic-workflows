@@ -1,0 +1,17 @@
+schema_version: 1
+service_ref: anythingllm
+owner:
+  repository: taylor-ansible
+  path: roles/anythingllm
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: [litellm-master-key]
+chat_provider:
+  service_ref: litellm
+  model: local-ollama
+embedding_provider:
+  service_ref: ollama
+  model: nomic-embed-text:latest
+vector_store:
+  service_ref: qdrant
+notes:
+  - The embedding model is a consumer requirement and should be added to the Ollama pull list.

@@ -1,0 +1,31 @@
+schema_version: 1
+service_ref: open-webui
+owner:
+  repository: taylor-ansible
+  path: roles/open-webui
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs:
+  - openwebui-litellm-key
+  - openwebui-ldap-password
+  - omlx-api-key
+providers:
+  openai_compatible:
+    - service_ref: litellm
+      default: true
+    - service_ref: omlx-primary
+    - service_ref: omlx-secondary
+  ollama: ollama
+task_model: use-chat
+web_search:
+  enabled: true
+  service_ref: searxng
+  use_snippets_without_loader: true
+vector_store:
+  service_ref: qdrant
+  collection_prefix: open-webui
+authentication:
+  type: ldap
+  server_label: LLDAP
+  tls: false
+notes:
+  - Provider ordering is part of the client contract; LiteLLM remains first.

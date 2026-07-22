@@ -8,6 +8,7 @@
 *.local.json
 *.local.jsonc
 *.local.toml
+overlays/private/
 
 # Secrets and environment
 .env

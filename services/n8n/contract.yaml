@@ -1,0 +1,14 @@
+schema_version: 1
+service_ref: n8n
+owner:
+  repository: taylor-ansible
+  path: roles/n8n
+  observed_revision: 79944d7875ab1ff1673c16bac79c489d30a7e1a0
+secret_refs: [n8n-encryption-key]
+runtime:
+  port: 5678
+  timezone: America/Chicago
+public:
+  hostname: n8n.taylor.lan
+notes:
+  - Workflow definitions and runtime credentials remain in n8n, not this repository.
