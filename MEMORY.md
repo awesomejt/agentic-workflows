@@ -223,3 +223,7 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - OpenCode native discovery loaded all 17 managed agents from an isolated
   render. A hash-only live comparison found 123 creates and nine updates; no
   live file was changed.
+- Finalized the remaining migration into seven gated waves: prerequisite
+  remediation, orchestrator extraction, one-system CLI pilot, workstation
+  expansion, Ansible-managed Hermes, a dedicated OpenCode worker, and deferred
+  template/personal content.
