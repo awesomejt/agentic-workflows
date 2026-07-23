@@ -1,36 +1,90 @@
 ---
 name: awb-project-task-management
-description: Read Agent Workbench project information and manage AWB task selection, claim, heartbeat, completion, blocking, and follow-up creation with the awb CLI. Use when a repository declares AWB as its authoritative project or task system.
+description: Inspect and manage Agent Workbench project, task, dependency, blocker, phase, and atomic agentic-loop pass state with the awb CLI. Use when a repository declares AWB authoritative, when an orchestrator starts or recovers a pass, or when a project-manager agent must create or triage durable follow-up work.
 ---
 
-# AWB Project and Task Management
+# Manage AWB Project State
 
-Run commands from the target repository so `.awb/config.yaml` is discovered.
-Use the inherited `AWB_AGENT` identity; subagents must not replace the primary
-agent's lease identity.
+Run commands from the target repository. Preserve the inherited `AWB_AGENT`;
+specialists must not replace the primary pass identity.
 
-## Commands
+## Inspect before acting
 
 ```bash
-awb project get
-awb status show
-awb task next --output json
-awb task list --available
-awb task claim <task-id>
-awb task heartbeat <task-id>
-awb task complete <task-id> --evidence "<summary>"
-awb task block <task-id> --reason "<reason>"
-awb task create --title "<title>" --phase <phase> --role <role>
+awb loop inspect --output json
+awb task triage <task-id> --output json
+awb task relationship list <task-id> --output json
+awb run list --all --output json
 ```
+
+Use the returned `state_version` for the next concurrency-sensitive mutation.
+Do not infer current work from `TODO.md`, chat history, or a paginated task list.
+
+## Primary runner lifecycle
+
+Only the primary runner or explicitly authorized primary agent performs these
+operations:
+
+```bash
+awb loop start \
+  --expected-version <state-version> \
+  --objective "<one focused objective>" \
+  --workflow-manager agent-orchestrator \
+  --tool <resolved-tool> \
+  --agent-profile <resolved-profile> \
+  --output json
+
+awb loop heartbeat <pass-id> \
+  --lease-version <lease-version> \
+  --output json
+
+awb loop finish <pass-id> \
+  --expected-version <latest-state-version> \
+  --outcome <completed|partial|blocked|failed|aborted> \
+  --summary "<result>" \
+  --evidence-json '<object>' \
+  --output json
+
+awb loop recover \
+  --expected-version <state-version> \
+  --output json
+```
+
+Inspect again before `finish`; other durable project changes may have advanced
+the state version. Require a handoff for `partial`, `failed`, or `aborted`.
+Require `--blocker-reason` for `blocked`.
+
+When `AGENT_ORCHESTRATOR_RESULT` is set, write the structured result requested
+by the orchestrator instead of finishing the pass directly. This lets the
+runner validate and atomically close the pass.
+
+## Planning and triage
+
+```bash
+awb task create \
+  --title "<title>" \
+  --phase <phase> \
+  --role <role> \
+  --priority <number> \
+  --validation "<observable completion checks>"
+
+awb task relationship add <predecessor-id> \
+  --to <successor-id> \
+  --type blocks
+
+awb task unblock <task-id> <blocker-id> \
+  --evidence "<resolution evidence>"
+```
+
+Create explicit dependencies during planning. The predecessor blocks the
+successor. Check existing tasks before creating follow-up work.
 
 ## Guardrails
 
-- Treat AWB as the source of truth when repository instructions say so.
-- Do not edit a historical `TODO.md` as a substitute for AWB task state.
-- Do not invent alternate flags or task state after a command fails.
-- Retry once only for a clearly transient error.
-- Use a file-based fallback only when repository instructions or the primary
-  agent explicitly authorize it.
-
-Report the project, selected task, status, dependencies, action taken, evidence
-or blocker, and any follow-up task IDs.
+- Keep one primary task and pass lease at a time when project concurrency is one.
+- Recover working/stale work before selecting a new pending task.
+- Do not claim, complete, block, or finish under a specialist identity.
+- Do not retry conflicts blindly; inspect and reassess.
+- Use explicit `--api-url` or `AWB_API_URL` for local validation so repository
+  config cannot redirect the command to production.
+- Never place credentials or secret values in evidence, handoffs, or fixtures.

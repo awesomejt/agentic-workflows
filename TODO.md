@@ -43,7 +43,7 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   and n8n contracts.
 - [x] Add non-secret home-lab topology and health checks.
 - [x] Add end-to-end dry-run and drift/audit documentation.
-- [ ] Extract the current orchestrator into its own repository.
+- [x] Extract the current orchestrator into its own repository.
 
 ## Discovered follow-up
 
@@ -53,11 +53,11 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   the stale AnythingLLM/Hermes consumer requirement.
 - [ ] Implement `workflowctl template render` and promote the revision-pinned
   template catalog entries from `normalize` to `ready`.
-- [ ] Populate the confirmed `agent-orchestrator` repository from
+- [x] Populate the confirmed `agent-orchestrator` repository from
   `opencode-setup/orchestrator` with preserved history and run its tests.
 - [ ] Choose the dedicated OpenCode worker's DNS name, Proxmox guest type, and
   Ansible inventory group; then add the consuming Ansible role/playbook.
 - [ ] Add an Ansible integration that pins a workflows revision, renders the
   Hermes bundle on the controller, and records the deployed revision.
-- [ ] Implement workflow pass leasing and state transitions in the extracted
+- [x] Implement workflow pass leasing and state transitions in the extracted
   `agent-orchestrator`; common workflow YAML remains declarative.

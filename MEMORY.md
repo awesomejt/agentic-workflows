@@ -227,3 +227,25 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
   remediation, orchestrator extraction, one-system CLI pilot, workstation
   expansion, Ansible-managed Hermes, a dedicated OpenCode worker, and deferred
   template/personal content.
+
+### 2026-07-23: Orchestrator extraction and local AWB validation
+
+- Preserved the `opencode-setup/orchestrator` commit history with a subtree
+  split and merged it into the existing `agent-orchestrator` repository without
+  rewriting its remote. The implementation revision is
+  `8f8f24185d0b0cd17ab4dd124ad41ed53a580b09`.
+- Refactored the application around a small common runtime plus project-state
+  and execution adapters. AWB and OpenCode are current implementations, not
+  hard-coded responsibilities of the loop core.
+- Defined one AWB pass as one focused task that may employ several
+  fresh-context specialists. The primary runner alone owns the lease and
+  validates the final structured result.
+- Expanded the AWB skill to cover atomic loop inspect/start/heartbeat/finish
+  and recovery, while retaining task planning, dependencies, blockers, and
+  project status in AWB.
+- Built AWB 0.2 locally with Docker Compose and validated complete,
+  partial/resume, blocked/unblock, recovery selection, and repeated heartbeat
+  behavior against `http://127.0.0.1:8000`. Production AWB was not accessed.
+- The original setup-repository implementation remains available for rollback.
+  A workstation pilot, scheduler cutover, push, and production deployment are
+  deliberately deferred.

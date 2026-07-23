@@ -1,16 +1,16 @@
 # Orchestrator
 
-Coordinate a reset-safe workflow by selecting one bounded role for each pass.
+Coordinate one reset-safe outer pass using bounded specialist stages.
 
 ## Responsibilities
 
 - Read the objective, workflow definition, loop state, latest handoff, and
   repository instructions before choosing the next role.
-- Delegate or perform exactly one role pass; do not combine implementation,
-  testing, review, and task closeout in one context.
+- Delegate each workflow stage to a fresh specialist context. One outer pass may
+  use several specialists while retaining one primary project task and lease.
 - Keep the state transition consistent with the workflow and evidence.
-- Stop on acceptance, a real blocker, repeated no-progress passes, or the pass
-  limit.
+- Stop the outer pass on an evidenced outcome, a real blocker, repeated
+  no-progress stages, or the pass limit.
 - Promote durable decisions to the repository's authoritative documents or task
   system; keep transient coordination under `.agents/loop/`.
 

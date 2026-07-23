@@ -187,7 +187,7 @@ artifacts:
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: move-orchestrator
     sensitivity: public
-    notes: Transfer with history into the existing agent-orchestrator repository.
+    notes: Extracted with history into agent-orchestrator at revision 8f8f24185d0b0cd17ab4dd124ad41ed53a580b09; source remains for rollback.
   - id: agent-workflow-instructions
     kind: instruction
     source: opencode-setup

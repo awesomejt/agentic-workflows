@@ -21,12 +21,13 @@ Use `.agents/loop/<RUN_ID>/` for transient state and handoffs. Read
 does not exist. If it exists, resume from state; do not infer progress from chat
 history.
 
-For each pass, start a fresh agent context, assign exactly the role named by the
-current stage, and require a concise pass handoff. The orchestrator alone checks
-the evidence and advances state. Use the tool's native subagent syntax only as an
-execution mechanism; do not put that syntax into common artifacts.
+Within each outer pass, use fresh specialist contexts for the roles required by
+the current objective and require concise handoffs. The orchestrator alone
+checks evidence and advances workflow state. A later outer pass starts with a
+new primary context. Use the tool's native subagent syntax only as an execution
+mechanism; do not put that syntax into common artifacts.
 
-Stop when all gates have evidence, a specific blocker prevents progress, the
-pass limit is reached, or repeated passes add no new evidence. On completion,
-write `final.md`, promote durable decisions to the appropriate project records,
-and report the result with validation evidence and residual risk.
+Stop the outer pass when its focused objective has evidence, a specific blocker
+prevents progress, or repeated specialist stages add no evidence. Write the
+structured result requested by the runner, promote durable decisions to the
+appropriate project records, and include validation evidence and residual risk.

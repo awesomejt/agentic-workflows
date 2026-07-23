@@ -1,81 +1,60 @@
 # Reset-safe loop protocol
 
-This protocol lets successive agents work on one objective without sharing a
-conversation context. Repository files and the authoritative task system are the
-only coordination channel.
+An outer pass is one context-bounded execution against one primary project
+task. It may employ several fresh-context specialist agents. AWB or another
+project-state backend owns the outer pass lease; repository files carry concise
+handoffs between specialists and across later outer passes.
 
-## Run layout
+## Runtime layout
 
-Create one runtime directory per run. It must be ignored by Git:
+Create one ignored directory per outer pass:
 
 ```text
-.agents/loop/<run-id>/
+.agents/loop/<pass-id>/
 ├── objective.md
 ├── state.yaml
-├── passes/
-│   ├── 0001-orchestrator.md
-│   └── 0002-planner.md
+├── handoffs/
+│   ├── 0001-project-manager.md
+│   ├── 0002-planner.md
+│   └── 0003-implementer.md
 ├── evidence/
-└── final.md
+├── result.template.json
+└── result.json
 ```
 
-- `objective.md` is immutable after the first specialist pass. It contains the
-  task reference, scope, acceptance criteria, constraints, and authorized side
-  effects.
-- `state.yaml` is the small machine-readable pointer to current workflow state.
-- `passes/` is an append-only sequence of concise handoffs, not transcripts.
-- `evidence/` may contain small generated summaries or references to durable
-  evidence. Avoid copying large logs when a path and command are enough.
-- `final.md` summarizes the result, evidence, unresolved risk, and durable
-  records updated.
+- `objective.md` is immutable and identifies the primary task, objective,
+  acceptance criteria, constraints, and authorized side effects.
+- `state.yaml` is owned by the primary orchestrator and points at the current
+  specialist stage and latest handoff.
+- `handoffs/` is append-only and contains concise specialist results, not
+  transcripts.
+- `evidence/` stores small summaries or references to durable evidence.
+- `result.json` is the validated outer-pass outcome consumed by the runner.
 
-## State contract
+## Specialist protocol
 
-```yaml
-schema_version: 1
-run_id: <stable-run-id>
-workflow: <workflow-id>
-task_ref: <task-id-or-path>
-status: active # active | complete | blocked | stopped
-pass: 2
-max_passes: 20
-current_stage: plan
-current_role: planner
-next_stage: design
-next_role: designer
-acceptance_criteria:
-  - <observable criterion>
-blocking_issue: null
-last_handoff: passes/0002-planner.md
-updated_at: <RFC-3339 timestamp>
-```
+For each workflow stage:
 
-Only the primary orchestrator or runner owns `state.yaml`. The orchestrator
-validates each specialist handoff and replaces state using an atomic write. If
-the tool cannot make an atomic replacement, write a temporary file in the run
-directory, validate it, then rename it.
+1. Start a fresh specialist context.
+2. Read repository instructions, `objective.md`, `state.yaml`, the selected
+   workflow, the latest relevant handoff, and only directly relevant evidence.
+3. Confirm the assigned role and scope.
+4. Perform exactly that bounded role. A specialist must not impersonate the
+   primary pass owner or close the outer pass.
+5. Write `handoffs/<sequence>-<role>.md` or return the same concise structure
+   for the primary orchestrator to record.
+6. Let the primary orchestrator validate evidence, update `state.yaml`
+   atomically, and choose the next stage.
 
-## Pass protocol
-
-Each fresh-context pass does the following:
-
-1. Read repository instructions, `objective.md`, `state.yaml`, the selected
-   workflow, and only the latest handoff plus directly relevant evidence.
-2. Confirm the assigned stage and role. Stop if state is not `active`, another
-   pass owns the same lease, or the requested action is outside authorization.
-3. Perform exactly one bounded role. A pass must not implement, validate, test,
-   review, and close the task itself.
-4. Produce `passes/<zero-padded-pass>-<role>.md` using the handoff contract
-   below. A specialist may write it directly when its native permissions allow;
-   otherwise the runner records the specialist's returned handoff verbatim.
-5. Return control. The orchestrator checks evidence, selects the configured
-   transition, updates state, and starts the next pass with fresh context.
+The primary may employ several specialists in one outer pass. A later outer
+pass starts with a new primary context and uses durable backend state plus the
+prior handoff/result; it does not rely on conversation memory.
 
 ## Handoff contract
 
 ```text
-Run and pass:
-Role and stage:
+Pass and stage:
+Role:
 Objective addressed:
 Inputs read:
 Work performed:
@@ -84,22 +63,42 @@ Decisions:
 Evidence and commands:
 Findings or failures:
 Blockers:
-Recommended transition:
-Completion recommendation:
+Recommended next stage:
+Outer-pass outcome recommendation:
 ```
 
-A handoff must be concise, secret-free, and sufficient for the next role to
-continue without the prior conversation. Put durable decisions in project docs,
-memory, or the authoritative task system instead of relying on a runtime note.
+Keep handoffs secret-free and sufficient for the next context. Promote durable
+decisions to project docs, memory, or the authoritative task system.
+
+## Structured result
+
+Before the executor returns, write the path named by
+`AGENT_ORCHESTRATOR_RESULT`:
+
+```json
+{
+  "schema_version": 1,
+  "outcome": "completed",
+  "summary": "What changed",
+  "validation_result": "Commands and results",
+  "evidence": {},
+  "participants": [
+    {"role": "planner", "result": "planned"},
+    {"role": "tester", "result": "passed"}
+  ],
+  "blocker": null
+}
+```
+
+Valid outcomes are `completed`, `partial`, `blocked`, `failed`, and `aborted`.
+Continuation outcomes require `handoff`. Blocked outcomes require
+`blocker.reason`. Never recommend completion without direct evidence for every
+required gate.
 
 ## Termination and recovery
 
-Complete only when every workflow gate has direct evidence. Mark blocked when a
-specific dependency or authority is missing. Stop for human review when the pass
-limit is reached, the same failure recurs without new evidence, state conflicts
-with the repository, or the next action would be unsafe or out of scope.
-
-After an interrupted pass, keep the incomplete note if it contains useful
-evidence, record the interruption in a new orchestrator handoff, and retry only
-with a new pass number. Never rewrite prior pass history to make the loop appear
-successful.
+Finish the outer pass when its focused objective has an evidenced outcome, a
+specific blocker prevents progress, the pass budget is exhausted, or repeated
+specialist stages add no evidence. Use `partial` when safe work should continue
+in the next outer pass. Preserve useful interrupted handoffs and never rewrite
+prior history to make the loop appear successful.

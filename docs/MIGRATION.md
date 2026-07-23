@@ -28,10 +28,10 @@ without treating this repository as the deployment source.
    interface.
 8. Cut over live configurations one tool at a time and verify drift detection.
 
-The first six phases now have concrete repository artifacts. Shared reset-safe
-workflows and native role-routing maps are also implemented. Orchestrator
-population, Ansible consumption, template rendering, and live cutover remain
-separate tasks.
+The first seven phases now have concrete repository artifacts. Shared reset-safe
+workflows and native role-routing maps are implemented, and the orchestrator is
+populated and locally validated. Ansible consumption, template rendering, and
+live cutover remain separate tasks.
 
 ## Remaining execution sequence
 
@@ -42,10 +42,12 @@ infrastructure change and rollback evidence.
    in `docs/SECURITY_FINDINGS.md`, resolve the Ollama embedding-model mismatch,
    and review the nine live-file collisions. Do not print secret or config
    content into migration logs.
-2. **Populate the orchestrator repository.** Extract
+2. **Populate the orchestrator repository — complete locally.** Extract
    `opencode-setup/orchestrator` with history, merge it into the existing initial
    `agent-orchestrator` repository, establish its workflow-bundle interface, and
-   pass its tests before changing any scheduler command.
+   pass its tests before changing any scheduler command. Completed at
+   `8f8f24185d0b0cd17ab4dd124ad41ed53a580b09`; no push or scheduler change was
+   performed.
 3. **Pilot local CLI deployment.** Tag or pin this repository, deploy with
    copy-with-backup to one development system, then audit and run native agent
    discovery. Start with OpenCode, followed by Codex, Claude, Grok, and Copilot;

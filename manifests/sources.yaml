@@ -16,11 +16,13 @@ sources:
     remote: git@github.com:awesomejt/agent-orchestrator.git
     checkout_hint: ${PROJECTS_ROOT}/dev/agent-orchestrator
     content:
-      - AWB-aware orchestration runtime target repository
-    status: migrating
-    observed_revision: 7337f2a81ce308d65b3c1090b221199345a28b88
+      - backend-neutral agentic-loop runtime
+      - AWB project-state adapter
+      - OpenCode execution adapter
+    status: complete
+    observed_revision: 8f8f24185d0b0cd17ab4dd124ad41ed53a580b09
     worktree_state: clean
-    notes: Repository exists with an initial README; application history still needs transfer from opencode-setup.
+    notes: Source history was merged without rewriting the existing remote; no push or live scheduler cutover was performed.
   - id: ai-agents
     remote: git@github.com:awesomejt/ai-agents.git
     checkout_hint: ${PROJECTS_ROOT}/ai/agents

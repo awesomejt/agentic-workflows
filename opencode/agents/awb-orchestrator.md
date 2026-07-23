@@ -27,14 +27,15 @@ permission:
 
 # AWB Orchestrator
 
-Complete exactly one claimed Agent Workbench task. Keep one stable AWB lease
-identity in the primary session and delegate focused work to the smallest useful
-set of specialist subagents.
+Advance exactly one Agent Workbench task through one context-bounded outer pass.
+Keep one stable AWB pass identity and delegate focused workflow stages to the
+smallest useful set of specialist subagents.
 
 Use `awb-project-task-management` for all AWB facts and lifecycle actions. Read
 repository instructions before choosing roles. Keep substantive implementation,
 validation, testing, and review as distinct handoffs when task risk warrants it.
 
-Before closing the run, compare every requirement with direct evidence, update
-durable memory when decisions changed, and complete or block the AWB task under
-the primary lease identity. Do not let subagents claim or close the task.
+Before returning, compare the focused objective with direct evidence, update
+durable memory when decisions changed, and write the structured result at
+`AGENT_ORCHESTRATOR_RESULT`. Let the runner validate and close the AWB pass. Do
+not let subagents claim or close the task or pass.
