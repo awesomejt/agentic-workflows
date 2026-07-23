@@ -40,7 +40,16 @@ profiles:
       gateway: litellm
       alias: use-thinking
     skills: shared
+existing_runtime_profiles:
+  - id: jessica
+    owner: existing-hermes-instance
+    bundle_policy: exclude
+    review_after: usage-is-established
+  - id: rachel
+    owner: existing-hermes-instance
+    bundle_policy: exclude
+    review_after: usage-is-established
 private_overlays:
   - id: personal-profiles
     required: false
-    notes: Personal identities and private workflows are resolved outside the public bundle.
+    notes: Jessica and Rachel remain isolated in the existing Hermes instance until their usage justifies a permanent placement decision.

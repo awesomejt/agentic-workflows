@@ -9,14 +9,14 @@ protocol: openai-compatible
 instances:
   - service_ref: omlx-primary
     host_ref: omlx-primary
-    base_url: http://192.168.50.93:8000/v1
+    base_url: http://omlx1.taylor.lan:8000/v1
     models:
       chat: Qwen3.6-27B-6bit
       coding: Qwen3.5-27B-Claude-4.6-Opus-Distilled-MLX-6bit
       thinking: gpt-oss-20b-MXFP4-Q8
   - service_ref: omlx-secondary
     host_ref: omlx-secondary
-    base_url: http://192.168.50.94:8000/v1
+    base_url: http://omlx2.taylor.lan:8000/v1
     models:
       chat: Qwen3.6-27B-6bit
       coding: Qwen3.6-35B-A3B-6bit

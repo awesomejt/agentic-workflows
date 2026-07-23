@@ -30,6 +30,10 @@ bin/workflowctl inventory
 bin/workflowctl diff --target workstation --content
 ./deploy.sh --dry-run
 
+# Render bundles for managed remote systems
+bin/workflowctl render --target hermes
+bin/workflowctl render --target opencode-server
+
 # Prove deployment behavior against an isolated home
 bin/workflowctl deploy --target workstation --home /tmp/workflows-test-home
 bin/workflowctl audit --target workstation --home /tmp/workflows-test-home

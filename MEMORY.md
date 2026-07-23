@@ -167,3 +167,22 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - The repository is ready for per-tool dry-run review, not a one-shot cutover.
   External security remediation, the Ollama model gap, owner decisions, and
   collision review remain required.
+
+### 2026-07-22: Owner deployment decisions
+
+- Confirmed `/shared/projects/dev/agent-orchestrator` as the extraction target;
+  it currently contains only initial commit
+  `7337f2a81ce308d65b3c1090b221199345a28b88`.
+- Local development systems use copy-with-backup into normal per-user tool
+  directories. Every system deploys from the same pinned workflows revision and
+  keeps independent state and backups.
+- Stable DNS names replace literal home-lab service addresses. Only the Ansible
+  controller at `192.168.50.11` and DNS server at `192.168.50.53` retain IPs.
+- Jessica and Rachel remain isolated in the existing Hermes instance and are
+  excluded from the common bundle until usage informs a permanent decision.
+- Ansible-first Hermes deployment is recommended: render a pinned workflows
+  revision on the controller, copy the bundle through the Hermes role, and
+  resolve secrets only from Vault.
+- Added an `opencode-server` bundle target for a future Proxmox worker. Ansible
+  should own the guest and install pinned workflow/orchestrator revisions; its
+  DNS name and inventory identity remain undecided.

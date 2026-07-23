@@ -8,10 +8,19 @@ sources:
       - prompts
       - skills
       - workflow documentation
-      - orchestrator pending extraction
+      - orchestrator pending transfer to agent-orchestrator
     status: migrating
     observed_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     worktree_state: clean
+  - id: agent-orchestrator
+    remote: git@github.com:awesomejt/agent-orchestrator.git
+    checkout_hint: ${PROJECTS_ROOT}/dev/agent-orchestrator
+    content:
+      - AWB-aware orchestration runtime target repository
+    status: migrating
+    observed_revision: 7337f2a81ce308d65b3c1090b221199345a28b88
+    worktree_state: clean
+    notes: Repository exists with an initial README; application history still needs transfer from opencode-setup.
   - id: ai-agents
     remote: git@github.com:awesomejt/ai-agents.git
     checkout_hint: ${PROJECTS_ROOT}/ai/agents

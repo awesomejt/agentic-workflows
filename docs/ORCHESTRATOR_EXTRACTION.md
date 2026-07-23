@@ -9,8 +9,11 @@ configuration after extraction.
 
 ## Target boundary
 
-The provisional repository name is `agent-orchestrator` until the owner answers
-the naming question. The extracted repository owns:
+The confirmed target is `/shared/projects/dev/agent-orchestrator` (user-facing
+path `~/projects/dev/agent-orchestrator`) with remote
+`git@github.com:awesomejt/agent-orchestrator.git`. At reviewed revision
+`7337f2a81ce308d65b3c1090b221199345a28b88`, it contains only its initial
+README commit. The extracted repository owns:
 
 - orchestration Python package, CLI, tests, lockfile, and installation;
 - AWB selection, claim, lease heartbeat, status gating, and loop scheduling;
@@ -24,12 +27,12 @@ through deployed tool configuration or a rendered workflow bundle.
 
 ## History-preserving extraction
 
-Perform this only after choosing the repository name and creating an empty
-private remote:
+Use a temporary filtered clone so the existing target repository and remote are
+not rewritten in place:
 
 ```bash
-git clone --no-local /shared/projects/ai/opencode-setup agent-orchestrator
-cd agent-orchestrator
+git clone --no-local /shared/projects/ai/opencode-setup /tmp/agent-orchestrator-extract
+cd /tmp/agent-orchestrator-extract
 git filter-repo \
   --path orchestrator/ \
   --path scripts/afk-run.sh \
@@ -37,9 +40,15 @@ git filter-repo \
   --path-rename orchestrator/: \
   --path-rename scripts/afk-run.sh:compat/afk-run.sh \
   --path-rename scripts/automated-run.sh:compat/automated-run.sh
+
+cd ~/projects/dev/agent-orchestrator
+git remote add extraction /tmp/agent-orchestrator-extract
+git fetch extraction
+git merge --allow-unrelated-histories extraction/main
 ```
 
-Inspect the rewritten history before adding or pushing a remote. Exclude local
+Resolve the expected README collision, then inspect and test before removing the
+temporary remote. Do not force-push or replace the existing remote. Exclude local
 `.venv`, cache, log, and transcript artifacts even if they exist in the source
 checkout. No push is part of this repository's migration task.
 

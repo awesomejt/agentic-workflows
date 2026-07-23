@@ -1,0 +1,15 @@
+schema_version: 1
+id: opencode-server
+description: OpenCode configuration bundle for a future dedicated Proxmox worker.
+kind: bundle
+environment: home-lab
+deployment:
+  mode: copy
+  backup_root: ${XDG_STATE_HOME}/agentic-workflows/backups
+  state_root: ${XDG_STATE_HOME}/agentic-workflows
+  bundle_output: .build/opencode-server-bundle
+adapters:
+  - id: opencode
+    enabled: true
+    destination: bundle://opencode
+    notes: Ansible installs the rendered bundle for a dedicated service account.

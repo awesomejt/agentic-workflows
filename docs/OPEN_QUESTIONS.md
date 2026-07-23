@@ -5,28 +5,28 @@ a reversible default.
 
 ## Awaiting input
 
-1. **Orchestrator repository name:** Should the extracted application be named
-   `agent-orchestrator`, `opencode-orchestrator`, or something else? Design
-   references use `agent-orchestrator` provisionally.
-2. **Deployment mode:** Should local targets ultimately default to copied files
-   with backups or managed symlinks? The provisional default is copy-with-backup
-   with symlinks available per target.
-3. **Topology sensitivity:** May the private repository track home-lab IP
-   addresses as well as DNS names, or should committed topology use DNS names
-   only? The provisional design prefers DNS and permits IPs in a tracked private
-   environment overlay.
-4. **Personal agents:** Should the Jessica and other personally identifying
-   Hermes profiles live in this private repository, or should they remain in a
-   separate ignored/private overlay?
-5. **Copilot scope:** Should deployment manage selected global VS Code settings,
-   or only repository instructions, prompt files, agents, and MCP definitions?
-   The provisional scope excludes general editor settings.
-6. **Cross-repository contract:** Should Ansible consume a released workflows
+1. **Personal agents:** After Jessica and Rachel have established usage, should
+   their profiles remain inside the existing Hermes setup or move to a separate
+   private overlay repository?
+2. **Cross-repository contract:** Should Ansible consume a released workflows
    archive, a checked-out path, or a Git URL/revision when installing Hermes?
+   The recommendation is a pinned Git tag or commit rendered on the Ansible
+   controller, with a checksummed release bundle as a future alternative.
+3. **OpenCode server identity:** What DNS name, Proxmox guest type, and Ansible
+   inventory group should own the future dedicated OpenCode worker?
 
 ## Resolved
 
 - The orchestrator application will live in its own repository.
+- The repository is `~/projects/dev/agent-orchestrator` with remote
+  `awesomejt/agent-orchestrator`.
+- Local CLI deployment uses copy-with-backup into each user's normal home and
+  XDG paths. Symlinks remain an opt-in development mode.
+- Committed topology uses stable DNS names. Only the Ansible controller
+  (`192.168.50.11`) and DNS server (`192.168.50.53`) use literal addresses.
+- Jessica and Rachel remain isolated in the existing Hermes instance for now.
+- Copilot scope is custom agents, subagents, loop prompts, shared skills, and MCP;
+  general editor configuration remains unmanaged.
 - Shared agentic content belongs in tool-agnostic directories with native
   exceptions in tool-specific directories.
 - General-purpose Python and other utilities belong under `tools/`; helpers

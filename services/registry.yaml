@@ -20,7 +20,7 @@ services:
     kind: model-runtime
     description: Local-network Ollama runtime and fallback model provider.
     endpoint:
-      url: http://192.168.50.51:11434
+      url: http://ollama.taylor.lan:11434
       protocol: ollama
     healthcheck:
       method: GET
@@ -34,7 +34,7 @@ services:
     kind: model-runtime
     description: Primary OpenAI-compatible oMLX inference endpoint.
     endpoint:
-      url: http://192.168.50.93:8000/v1
+      url: http://omlx1.taylor.lan:8000/v1
       protocol: openai-compatible
     healthcheck:
       method: GET
@@ -49,7 +49,7 @@ services:
     kind: model-runtime
     description: Secondary OpenAI-compatible oMLX inference endpoint.
     endpoint:
-      url: http://192.168.50.94:8000/v1
+      url: http://omlx2.taylor.lan:8000/v1
       protocol: openai-compatible
     healthcheck:
       method: GET
