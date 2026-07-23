@@ -16,7 +16,9 @@ invoked and which concrete model or permission profile it receives.
 
 `common/roles/catalog.yaml` is the cross-tool role inventory. A native adapter
 may inherit the active model or map an abstract class to a concrete model. Such
-a choice belongs in that adapter and must not be copied into a common role.
+a choice belongs in `<tool>/routing.yaml` and native frontmatter, and must not be
+copied into a common role. Routing maps are validated against the common role
+catalog so an exception cannot silently refer to a stale role.
 
 ## Reset-safe execution
 

@@ -1,0 +1,7 @@
+schema_version: 1
+id: grok
+common_role_catalog: common/roles/catalog.yaml
+defaults:
+  model: inherit-active-model
+  permission_strategy: native-agent-frontmatter
+overrides: []

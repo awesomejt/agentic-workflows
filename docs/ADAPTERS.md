@@ -8,17 +8,25 @@ so shared role bodies do not need to be duplicated.
 
 | Adapter | Managed content | Deliberately unmanaged |
 | --- | --- | --- |
-| OpenCode | `AGENTS.md`, roles, two primary agents, skills, prompt, optional config overlay | provider credentials, live model/provider config, sessions |
-| Codex | `AGENTS.md`, standalone agent TOML, skills, `workflows` profile | base `config.toml`, `auth.json`, history, trust and runtime state |
-| Claude Code | `CLAUDE.md`, Markdown subagents, skills | settings, plugins, `.claude.json`, OAuth and credentials |
-| Grok Build | `AGENTS.md`, Markdown agents, skills, prompt | base config, auth, MCP OAuth, sessions, memory and logs |
-| Copilot/VS Code | personal instructions, agents, skills, VS Code MCP file | extension auth/state, chat history, general editor settings |
-| Hermes | versioned behavior and client-contract bundle | host installation, services, secrets and runtime state |
+| OpenCode | `AGENTS.md`, roles, loop agents, workflows, skills, prompts, optional config overlay | provider credentials, live provider catalog, sessions |
+| Codex | `AGENTS.md`, standalone agent TOML, workflows, skills, `workflows` profile | base `config.toml`, `auth.json`, history, trust and runtime state |
+| Claude Code | `CLAUDE.md`, Markdown subagents, workflows, skills | settings, plugins, `.claude.json`, OAuth and credentials |
+| Grok Build | `AGENTS.md`, Markdown agents, workflows, skills, prompts | base config, auth, MCP OAuth, sessions, memory and logs |
+| Copilot/VS Code | personal instructions, agents, loop agents, workflows, skills, VS Code MCP file | extension auth/state, chat history, general editor settings |
+| Hermes | versioned behavior, workflows, and client-contract bundle | host installation, services, secrets and runtime state |
 
 The VS Code MCP file is the one intentionally managed monolithic file. Always
 review its dry-run diff because deployment replaces that JSON document after
 backing it up. Other state-bearing base configuration files are represented by
 tracked overlays, examples, or CLI merge commands instead of being overwritten.
+
+Each CLI adapter has a validated `routing.yaml`. Common roles contain behavioral
+content and an abstract workload class; routing files and native headers contain
+provider/model choices, sandbox or tool access, and delegation capabilities.
+OpenCode currently pins only the generic orchestrator, implementer, AWB
+orchestrator, and opt-in AFK build profiles to
+`ollama-direct/local-coding`. Other OpenCode roles and all other adapters inherit
+the active model unless a later reviewed override says otherwise.
 
 ## Validation
 

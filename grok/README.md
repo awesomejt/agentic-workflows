@@ -1,8 +1,8 @@
 # Grok Build Adapter
 
 This adapter targets the locally installed Grok Build CLI. It deploys global
-`AGENTS.md`, common Agent Skills, a focused-task prompt, and composed Markdown
-agent definitions beneath `GROK_HOME`.
+`AGENTS.md`, common Agent Skills and workflows, reusable loop prompts, and
+composed Markdown agent definitions beneath `GROK_HOME`.
 
 Grok Build 0.2.14 has a discovery distinction worth preserving in tests:
 skills honor `GROK_HOME`, while user agent lookup follows

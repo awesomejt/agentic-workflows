@@ -33,6 +33,8 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 - [x] Add Grok Build adapter.
 - [x] Add GitHub Copilot/VS Code adapter.
 - [x] Add Hermes bundle adapter and Ansible handoff contract.
+- [x] Add validated per-tool role routing, four additional common specialists,
+  and native Copilot/OpenCode loop agents.
 
 ## Services and operations
 

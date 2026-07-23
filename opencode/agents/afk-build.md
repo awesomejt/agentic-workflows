@@ -1,6 +1,7 @@
 ---
 description: Unattended local build agent for explicit AFK runs in trusted repositories.
 mode: primary
+model: ollama-direct/local-coding
 temperature: 0.2
 permission:
   edit: allow

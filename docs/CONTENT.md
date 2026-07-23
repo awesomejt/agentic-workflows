@@ -9,17 +9,16 @@ paths, and justified exceptions.
 ## Roles
 
 Roles are concise behavioral contracts rather than complete tool-native agent
-definitions. Current canonical roles are:
+definitions. `common/roles/catalog.yaml` is the machine-readable inventory:
 
-- `planner`
-- `debater`
-- `implementer`
-- `validator`
-- `tester`
-- `reviewer`
-- `writer`
-- `git-committer`
-- `project-manager`
+- coordination: `orchestrator`, `project-manager`
+- analysis: `planner`, `designer`, `debater`, `researcher`
+- production: `implementer`, `writer`, `editor`
+- assurance: `validator`, `tester`, `reviewer`
+- source control: `git-committer`
+
+The catalog's model classes are workload hints, not provider selections. Native
+models and permission profiles belong in adapter `routing.yaml` and frontmatter.
 
 Compatibility aliases live in `common/roles/aliases.yaml`. New content should
 use canonical names; adapters may emit aliases during migration when existing
@@ -30,7 +29,8 @@ automation still refers to an old name.
 Instructions describe always-on behavior. Prompts describe a reusable task or
 session workflow. The focused-task prompt deliberately avoids a specific CLI,
 task database, or model provider. Repository instructions decide which task
-system and documentation files are authoritative.
+system and documentation files are authoritative. Reset-safe stage graphs and
+the `.agents/loop/` handoff contract live in `common/workflows/`.
 
 ## Skills
 

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/role-routing.schema.json",
+  "title": "Tool-specific role routing overrides",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "id", "common_role_catalog", "defaults", "overrides"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "$ref": "#/$defs/id" },
+    "common_role_catalog": { "const": "common/roles/catalog.yaml" },
+    "defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model", "permission_strategy"],
+      "properties": {
+        "model": { "type": "string", "minLength": 1 },
+        "permission_strategy": { "type": "string", "minLength": 1 }
+      }
+    },
+    "overrides": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "reason"],
+        "properties": {
+          "role": { "$ref": "#/$defs/id" },
+          "model": { "type": "string", "minLength": 1 },
+          "permission_profile": { "type": "string", "minLength": 1 },
+          "reason": { "type": "string", "minLength": 1 }
+        },
+        "anyOf": [
+          { "required": ["model"] },
+          { "required": ["permission_profile"] }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

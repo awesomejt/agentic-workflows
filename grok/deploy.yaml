@@ -7,14 +7,31 @@ artifacts:
     destination: AGENTS.md
   - source: common/prompts/focused-task.md
     destination: prompts/focused-task.md
+  - source: common/prompts/ralph-loop.md
+    destination: prompts/ralph-loop.md
+  - source: common/prompts/software-development-loop.md
+    destination: prompts/software-development-loop.md
+  - source: common/prompts/content-creation-loop.md
+    destination: prompts/content-creation-loop.md
+  - source: common/workflows
+    destination: workflows
   - source: common/skills
     destination: skills
+  - source: common/roles/orchestrator.md
+    destination: agents/orchestrator.md
+    header: grok/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: agents/planner.md
     header: grok/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: agents/debater.md
     header: grok/frontmatter/debater.md
+  - source: common/roles/designer.md
+    destination: agents/designer.md
+    header: grok/frontmatter/designer.md
+  - source: common/roles/researcher.md
+    destination: agents/researcher.md
+    header: grok/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: agents/implementer.md
     header: grok/frontmatter/implementer.md
@@ -30,6 +47,9 @@ artifacts:
   - source: common/roles/writer.md
     destination: agents/writer.md
     header: grok/frontmatter/writer.md
+  - source: common/roles/editor.md
+    destination: agents/editor.md
+    header: grok/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: agents/git-committer.md
     header: grok/frontmatter/git-committer.md

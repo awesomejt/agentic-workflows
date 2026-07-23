@@ -7,6 +7,12 @@ artifacts:
     destination: AGENTS.md
   - source: common/skills
     destination: skills
+  - source: common/workflows
+    destination: workflows
+  - source: common/roles/orchestrator.md
+    destination: agents/orchestrator.toml
+    header: codex/frontmatter/orchestrator.toml
+    footer: codex/frontmatter/footer.toml
   - source: common/roles/planner.md
     destination: agents/planner.toml
     header: codex/frontmatter/planner.toml
@@ -14,6 +20,14 @@ artifacts:
   - source: common/roles/debater.md
     destination: agents/debater.toml
     header: codex/frontmatter/debater.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/designer.md
+    destination: agents/designer.toml
+    header: codex/frontmatter/designer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/researcher.md
+    destination: agents/researcher.toml
+    header: codex/frontmatter/researcher.toml
     footer: codex/frontmatter/footer.toml
   - source: common/roles/implementer.md
     destination: agents/implementer.toml
@@ -34,6 +48,10 @@ artifacts:
   - source: common/roles/writer.md
     destination: agents/writer.toml
     header: codex/frontmatter/writer.toml
+    footer: codex/frontmatter/footer.toml
+  - source: common/roles/editor.md
+    destination: agents/editor.toml
+    header: codex/frontmatter/editor.toml
     footer: codex/frontmatter/footer.toml
   - source: common/roles/git-committer.md
     destination: agents/git-committer.toml

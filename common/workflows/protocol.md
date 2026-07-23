@@ -50,10 +50,10 @@ last_handoff: passes/0002-planner.md
 updated_at: <RFC-3339 timestamp>
 ```
 
-Only the primary orchestrator or runner owns `state.yaml`. A specialist writes
-its pass handoff; the orchestrator validates it and replaces state using an
-atomic write. If the tool cannot make an atomic replacement, write a temporary
-file in the run directory, validate it, then rename it.
+Only the primary orchestrator or runner owns `state.yaml`. The orchestrator
+validates each specialist handoff and replaces state using an atomic write. If
+the tool cannot make an atomic replacement, write a temporary file in the run
+directory, validate it, then rename it.
 
 ## Pass protocol
 
@@ -65,7 +65,9 @@ Each fresh-context pass does the following:
    pass owns the same lease, or the requested action is outside authorization.
 3. Perform exactly one bounded role. A pass must not implement, validate, test,
    review, and close the task itself.
-4. Write `passes/<zero-padded-pass>-<role>.md` using the handoff contract below.
+4. Produce `passes/<zero-padded-pass>-<role>.md` using the handoff contract
+   below. A specialist may write it directly when its native permissions allow;
+   otherwise the runner records the specialist's returned handoff verbatim.
 5. Return control. The orchestrator checks evidence, selects the configured
    transition, updates state, and starts the next pass with fresh context.
 

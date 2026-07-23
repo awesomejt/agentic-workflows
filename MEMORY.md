@@ -203,3 +203,23 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - Expanded the loop handoff skill using the skill-authoring guidance: the skill
   stays concise and operational, while the detailed protocol and stage graphs
   remain canonical shared resources.
+
+### 2026-07-22: Native role routing and loop surfaces
+
+- Added validated routing maps for OpenCode, Claude Code, Codex, Grok Build, and
+  Copilot. Common role bodies remain provider-neutral; concrete model and
+  permission exceptions remain in native adapters.
+- Preserved `ollama-direct/local-coding` for the OpenCode orchestrator,
+  implementer, AWB orchestrator, and opt-in AFK build. Other roles inherit the
+  active model.
+- Added native variants for orchestrator, designer, researcher, and editor to
+  all five workstation adapters. Copilot and OpenCode also receive primary
+  software/content loop agents with bounded specialist catalogs.
+- Read-only specialists may return a handoff for the runner to record verbatim;
+  they do not need broad write access merely to participate in a loop.
+- Validation covered 32 schema-bound documents, 13 roles, two workflows, five
+  routing maps, and 18 passing tests. Rendered totals are 132 workstation files,
+  41 Hermes files, and 32 future OpenCode-server files.
+- OpenCode native discovery loaded all 17 managed agents from an isolated
+  render. A hash-only live comparison found 123 creates and nine updates; no
+  live file was changed.

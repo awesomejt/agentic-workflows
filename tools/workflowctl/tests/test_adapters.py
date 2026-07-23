@@ -52,7 +52,7 @@ class AdapterRenderTests(unittest.TestCase):
     def test_codex_configuration_is_valid_toml(self) -> None:
         paths = [self.workstation / "codex" / "workflows.config.toml"]
         paths.extend(sorted((self.workstation / "codex" / "agents").glob("*.toml")))
-        self.assertEqual(len(paths), 10)
+        self.assertEqual(len(paths), 14)
         for path in paths:
             with self.subTest(path=path):
                 parsed = tomllib.loads(path.read_text(encoding="utf-8"))
@@ -73,7 +73,37 @@ class AdapterRenderTests(unittest.TestCase):
                 with self.subTest(path=path):
                     metadata = frontmatter(path)
                     self.assertIsInstance(metadata.get("description"), str)
-        self.assertEqual(counts, [11, 9, 9, 9])
+        self.assertEqual(counts, [17, 13, 13, 15])
+
+    def test_opencode_concrete_model_overrides_are_rendered(self) -> None:
+        agents = self.workstation / "opencode" / "agents"
+        for name in ("orchestrator.md", "implementer.md", "awb-orchestrator.md", "afk-build.md"):
+            with self.subTest(name=name):
+                metadata = frontmatter(agents / name)
+                self.assertEqual(metadata.get("model"), "ollama-direct/local-coding")
+        self.assertNotIn("model", frontmatter(agents / "planner.md"))
+
+    def test_copilot_loop_agents_have_bounded_subagent_catalogs(self) -> None:
+        agents = self.workstation / "copilot" / ".copilot" / "agents"
+        for name in ("software-loop.agent.md", "content-loop.agent.md"):
+            with self.subTest(name=name):
+                metadata = frontmatter(agents / name)
+                self.assertIsInstance(metadata.get("agents"), list)
+                self.assertNotIn("*", metadata["agents"])
+
+    def test_reset_safe_workflows_are_deployed_to_each_cli(self) -> None:
+        roots = (
+            self.workstation / "opencode" / "workflows",
+            self.workstation / "codex" / "workflows",
+            self.workstation / "claude" / "workflows",
+            self.workstation / "grok" / "workflows",
+            self.workstation / "copilot" / ".copilot" / "workflows",
+        )
+        for root in roots:
+            with self.subTest(root=root):
+                self.assertTrue((root / "protocol.md").is_file())
+                self.assertTrue((root / "software-development.yaml").is_file())
+                self.assertTrue((root / "content-creation.yaml").is_file())
 
     def test_common_skills_are_present_for_each_cli(self) -> None:
         roots = (

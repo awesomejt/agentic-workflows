@@ -1,0 +1,15 @@
+schema_version: 1
+id: opencode
+common_role_catalog: common/roles/catalog.yaml
+defaults:
+  model: inherit-active-model
+  permission_strategy: native-role-frontmatter
+overrides:
+  - role: orchestrator
+    model: ollama-direct/local-coding
+    permission_profile: primary-loop-coordinator
+    reason: Preserve local model routing and allow native specialist delegation.
+  - role: implementer
+    model: ollama-direct/local-coding
+    permission_profile: scoped-workspace-write
+    reason: Preserve the current local coding route for implementation work.

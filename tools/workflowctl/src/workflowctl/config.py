@@ -156,6 +156,10 @@ def validate_repository(root: Path) -> list[str]:
         path for path in sorted(root.glob("*/deploy.yaml")) if path.parent.parent == root
     ]
     bindings.extend((schema_dir / "adapter.schema.json", path) for path in adapter_paths)
+    routing_paths = [
+        path for path in sorted(root.glob("*/routing.yaml")) if path.parent.parent == root
+    ]
+    bindings.extend((schema_dir / "role-routing.schema.json", path) for path in routing_paths)
     workflow_paths = sorted((root / "common" / "workflows").glob("*.yaml"))
     bindings.extend((schema_dir / "workflow.schema.json", path) for path in workflow_paths)
 
@@ -184,6 +188,22 @@ def validate_repository(root: Path) -> list[str]:
     for alias, role_id in aliases.items():
         if role_id not in role_ids:
             errors.append(f"role alias {alias} has unknown role: {role_id}")
+    routing_ids: set[str] = set()
+    for path in routing_paths:
+        routing = load_yaml(path)
+        routing_id = routing["id"]
+        if routing_id in routing_ids:
+            errors.append(f"duplicate role routing id: {routing_id}")
+        routing_ids.add(routing_id)
+        if path.parent.name != routing_id:
+            errors.append(
+                f"role routing id {routing_id} does not match directory {path.parent.name}"
+            )
+        for override in routing["overrides"]:
+            if override["role"] not in role_ids:
+                errors.append(
+                    f"role routing {routing_id} has unknown role: {override['role']}"
+                )
 
     workflow_ids: set[str] = set()
     for path in workflow_paths:
@@ -327,6 +347,7 @@ def validate_repository(root: Path) -> list[str]:
         f"resolved {len(source_ids)} sources, {len(service_ids)} services, "
         f"{len(mcp_ids)} MCP servers, and {len(secret_ids)} secret references",
         f"resolved {len(role_ids)} roles and {len(workflow_ids)} workflows",
+        f"resolved {len(routing_ids)} tool-specific role routing maps",
     ]
     if errors:
         raise WorkflowError("validation failed:\n- " + "\n- ".join(errors))

@@ -1,0 +1,4 @@
+name = "designer"
+description = "Define task-sized interfaces, boundaries, and consequential design decisions."
+sandbox_mode = "read-only"
+developer_instructions = """

@@ -8,12 +8,23 @@ artifacts:
     header: copilot/frontmatter/instructions.md
   - source: common/skills
     destination: .copilot/skills
+  - source: common/workflows
+    destination: .copilot/workflows
+  - source: common/roles/orchestrator.md
+    destination: .copilot/agents/orchestrator.agent.md
+    header: copilot/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: .copilot/agents/planner.agent.md
     header: copilot/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: .copilot/agents/debater.agent.md
     header: copilot/frontmatter/debater.md
+  - source: common/roles/designer.md
+    destination: .copilot/agents/designer.agent.md
+    header: copilot/frontmatter/designer.md
+  - source: common/roles/researcher.md
+    destination: .copilot/agents/researcher.agent.md
+    header: copilot/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: .copilot/agents/implementer.agent.md
     header: copilot/frontmatter/implementer.md
@@ -29,11 +40,20 @@ artifacts:
   - source: common/roles/writer.md
     destination: .copilot/agents/writer.agent.md
     header: copilot/frontmatter/writer.md
+  - source: common/roles/editor.md
+    destination: .copilot/agents/editor.agent.md
+    header: copilot/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: .copilot/agents/git-committer.agent.md
     header: copilot/frontmatter/git-committer.md
   - source: common/roles/project-manager.md
     destination: .copilot/agents/project-manager.agent.md
     header: copilot/frontmatter/project-manager.md
+  - source: common/prompts/software-development-loop.md
+    destination: .copilot/agents/software-loop.agent.md
+    header: copilot/frontmatter/software-loop.md
+  - source: common/prompts/content-creation-loop.md
+    destination: .copilot/agents/content-loop.agent.md
+    header: copilot/frontmatter/content-loop.md
   - source: copilot/mcp.json
     destination: .config/Code/User/mcp.json

@@ -15,7 +15,9 @@ when present. Otherwise apply this minimal procedure.
    completion.
 2. In a fresh context, read repository instructions, the objective, state, the
    latest handoff, and only directly relevant evidence.
-3. Perform exactly one assigned role and write one zero-padded pass handoff.
+3. Perform exactly one assigned role and produce one zero-padded pass handoff.
+   Write it directly only when native permissions allow; otherwise return it so
+   the runner can record it verbatim.
 4. Let the primary orchestrator validate the evidence and update state. A
    specialist must not claim or advance the next pass itself.
 5. Stop on evidenced completion, a specific blocker, the pass limit, repeated

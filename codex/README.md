@@ -3,6 +3,10 @@
 The adapter deploys global `AGENTS.md`, common Agent Skills, composed standalone
 custom-agent TOML files, and `workflows.config.toml`.
 
+The common workflow definitions are installed alongside the agents. Codex's
+primary session remains responsible for delegation; the custom orchestrator
+role is a focused coordinator and state writer, not a separate scheduler.
+
 The profile file is deliberately separate from the live `config.toml`, which
 may contain trusted-project state, provider configuration, hooks, plugins, or
 local permission decisions. Select the tracked profile explicitly:

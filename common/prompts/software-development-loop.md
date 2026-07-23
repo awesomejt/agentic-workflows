@@ -3,7 +3,8 @@
 Run the `software-development` workflow for `<TASK_REF>` with objective
 `<OBJECTIVE>` and acceptance criteria `<ACCEPTANCE_CRITERIA>`.
 
-Use the reset-safe protocol and `.agents/loop/<RUN_ID>/`. Start each stage in a
+Use the reset-safe protocol, the installed `workflows/software-development.yaml`
+stage graph when available, and `.agents/loop/<RUN_ID>/`. Start each stage in a
 fresh context. The expected progression is orchestration, task scoping, planning,
 design challenge, focused implementation, static validation, behavioral testing,
 independent review, documentation, optional authorized commit, and task closeout.

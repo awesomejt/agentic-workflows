@@ -1,6 +1,7 @@
 ---
 description: Primary AWB-aware agent that delegates one claimed task to focused subagents.
 mode: primary
+model: ollama-direct/local-coding
 temperature: 0.2
 permission:
   edit: allow
@@ -12,12 +13,15 @@ permission:
     "*": deny
     project-manager: allow
     planner: allow
+    designer: allow
     debater: allow
+    researcher: allow
     implementer: allow
     validator: allow
     tester: allow
     reviewer: allow
     writer: allow
+    editor: allow
     git-committer: allow
 ---
 

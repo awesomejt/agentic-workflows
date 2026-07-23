@@ -7,12 +7,23 @@ artifacts:
     destination: CLAUDE.md
   - source: common/skills
     destination: skills
+  - source: common/workflows
+    destination: workflows
+  - source: common/roles/orchestrator.md
+    destination: agents/orchestrator.md
+    header: claude/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: agents/planner.md
     header: claude/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: agents/debater.md
     header: claude/frontmatter/debater.md
+  - source: common/roles/designer.md
+    destination: agents/designer.md
+    header: claude/frontmatter/designer.md
+  - source: common/roles/researcher.md
+    destination: agents/researcher.md
+    header: claude/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: agents/implementer.md
     header: claude/frontmatter/implementer.md
@@ -28,6 +39,9 @@ artifacts:
   - source: common/roles/writer.md
     destination: agents/writer.md
     header: claude/frontmatter/writer.md
+  - source: common/roles/editor.md
+    destination: agents/editor.md
+    header: claude/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: agents/git-committer.md
     header: claude/frontmatter/git-committer.md

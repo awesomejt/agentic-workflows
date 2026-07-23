@@ -1,0 +1,4 @@
+name = "editor"
+description = "Improve content structure, clarity, consistency, and audience fit."
+sandbox_mode = "workspace-write"
+developer_instructions = """

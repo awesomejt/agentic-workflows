@@ -103,6 +103,17 @@ adapters:
         with self.assertRaisesRegex(WorkflowError, "unknown on_success: missing-stage"):
             validate_repository(self.repo)
 
+    def test_routing_rejects_unknown_role(self) -> None:
+        routing = self.repo / "opencode" / "routing.yaml"
+        routing.write_text(
+            routing.read_text(encoding="utf-8").replace(
+                "role: implementer", "role: imaginary-specialist", 1
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(WorkflowError, "role routing opencode has unknown role"):
+            validate_repository(self.repo)
+
     def test_render_creates_manifest_and_file(self) -> None:
         output = self.temp / "rendered"
         manifest = render_target(self.repo, "workstation", output)

@@ -14,9 +14,12 @@ Constraints and authorized side effects:
 
 - `<CONSTRAINT_OR_AUTHORIZATION>`
 
-Use `.agents/loop/<RUN_ID>/` for transient state and handoffs. Initialize
-`objective.md` and `state.yaml` from the canonical protocol if the run does not
-exist. If it exists, resume from state; do not infer progress from chat history.
+Use `.agents/loop/<RUN_ID>/` for transient state and handoffs. Read
+`common/workflows/protocol.md` in a source checkout or the adapter's installed
+`workflows/protocol.md` copy when available; otherwise use the
+`loop-handoff-notes` skill. Initialize `objective.md` and `state.yaml` if the run
+does not exist. If it exists, resume from state; do not infer progress from chat
+history.
 
 For each pass, start a fresh agent context, assign exactly the role named by the
 current stage, and require a concise pass handoff. The orchestrator alone checks

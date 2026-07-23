@@ -1,9 +1,13 @@
 # Claude Code Adapter
 
 The adapter safely deploys additive files beneath `~/.claude`: global
-`CLAUDE.md`, common Agent Skills, and composed custom subagents. It intentionally
+`CLAUDE.md`, common Agent Skills and workflows, and composed custom subagents. It intentionally
 does not deploy `settings.json`, `.claude.json`, credentials, OAuth state, or
 managed plugin state.
+
+The orchestrator agent may delegate and maintain `.agents/loop/` state. Read-only
+specialists return their handoff for the orchestrator to record rather than
+receiving broad workspace write access.
 
 `settings.base.json` records a reviewed non-secret baseline but is not deployed
 because replacing the live settings file could remove existing permissions,

@@ -1,0 +1,4 @@
+name = "orchestrator"
+description = "Coordinate reset-safe loops by selecting one bounded specialist pass at a time."
+sandbox_mode = "workspace-write"
+developer_instructions = """

@@ -1,0 +1,4 @@
+name = "researcher"
+description = "Gather authoritative repository and external evidence for a focused question."
+sandbox_mode = "read-only"
+developer_instructions = """

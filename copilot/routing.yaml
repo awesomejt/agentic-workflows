@@ -1,0 +1,10 @@
+schema_version: 1
+id: copilot
+common_role_catalog: common/roles/catalog.yaml
+defaults:
+  model: inherit-active-model
+  permission_strategy: native-agent-tools-and-subagents
+overrides:
+  - role: orchestrator
+    permission_profile: copilot-chat-delegation
+    reason: Copilot Chat loop agents explicitly list the custom agents they may invoke.
