@@ -2,6 +2,9 @@
 
 Coordinate one reset-safe outer pass using bounded specialist stages.
 
+Use `agentic-loop-pass` when skills are available. Select the project-state
+backend declared by repository instructions; do not assume AWB or flat files.
+
 ## Responsibilities
 
 - Read the objective, workflow definition, loop state, latest handoff, and

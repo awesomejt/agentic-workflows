@@ -1,14 +1,14 @@
 ---
 name: awb-project-task-management
-description: Inspect and manage Agent Workbench project, task, dependency, blocker, phase, and atomic agentic-loop pass state with the awb CLI. Use when a repository declares AWB authoritative, when an orchestrator starts or recovers a pass, or when a project-manager agent must create or triage durable follow-up work.
+description: Use the awb CLI as a project-state/v1 backend to inspect and manage Agent Workbench projects, phases, tasks, dependencies, structured blockers, and atomic agentic-loop passes. Use when a repository declares AWB authoritative, when the primary runner starts, heartbeats, finishes, or recovers a pass, or when a project-manager agent must triage durable work.
 ---
 
 # Manage AWB Project State
 
-Run commands from the target repository. Preserve the inherited `AWB_AGENT`;
-specialists must not replace the primary pass identity.
+Run commands from the target repository. Preserve the primary `AWB_AGENT`;
+specialists must not replace the pass identity.
 
-## Inspect before acting
+## Inspect before mutating
 
 ```bash
 awb loop inspect --output json
@@ -18,12 +18,12 @@ awb run list --all --output json
 ```
 
 Use the returned `state_version` for the next concurrency-sensitive mutation.
-Do not infer current work from `TODO.md`, chat history, or a paginated task list.
+Recover active, stale, or working state before selecting a pending task. Do not
+infer current work from `TODO.md`, conversation history, or a paginated list.
 
-## Primary runner lifecycle
+## Manage the primary pass
 
-Only the primary runner or explicitly authorized primary agent performs these
-operations:
+Only the primary runner or explicitly authorized primary agent may run:
 
 ```bash
 awb loop start \
@@ -50,15 +50,14 @@ awb loop recover \
   --output json
 ```
 
-Inspect again before `finish`; other durable project changes may have advanced
-the state version. Require a handoff for `partial`, `failed`, or `aborted`.
-Require `--blocker-reason` for `blocked`.
+Inspect again before `finish`. Replace cached state and lease versions with
+values returned by every successful mutation. Require a handoff for `partial`,
+`failed`, or `aborted`, and `--blocker-reason` for `blocked`.
 
-When `AGENT_ORCHESTRATOR_RESULT` is set, write the structured result requested
-by the orchestrator instead of finishing the pass directly. This lets the
-runner validate and atomically close the pass.
+When `AGENT_ORCHESTRATOR_RESULT` is set, write the requested result file instead
+of finishing AWB directly. The runner validates and closes the pass.
 
-## Planning and triage
+## Plan tasks and phases
 
 ```bash
 awb task create \
@@ -77,14 +76,25 @@ awb task unblock <task-id> <blocker-id> \
 ```
 
 Create explicit dependencies during planning. The predecessor blocks the
-successor. Check existing tasks before creating follow-up work.
+successor. Check existing tasks before creating follow-up work. Read phase
+instances from `awb loop inspect`. AWB 0.2 does not expose phase transitions
+through the CLI; do not invent a command or infer completion from a task's
+category. Leave the phase at `complete_phase` until an approved API client or a
+later matching CLI performs the explicit transition.
+
+## Conflicts and retries
+
+- Supply a stable idempotency key when the CLI operation supports one.
+- On `state_conflict` or `lease_conflict`, inspect again and reassess; never
+  retry a stale mutation blindly.
+- Treat `reconciliation_required` as a project-manager or human review stop.
+- Retry only transport failures known to be transient, using the same logical
+  request identity.
 
 ## Guardrails
 
-- Keep one primary task and pass lease at a time when project concurrency is one.
-- Recover working/stale work before selecting a new pending task.
+- Keep one primary task and pass lease when project concurrency is one.
 - Do not claim, complete, block, or finish under a specialist identity.
-- Do not retry conflicts blindly; inspect and reassess.
 - Use explicit `--api-url` or `AWB_API_URL` for local validation so repository
   config cannot redirect the command to production.
 - Never place credentials or secret values in evidence, handoffs, or fixtures.

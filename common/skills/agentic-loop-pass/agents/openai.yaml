@@ -1,0 +1,4 @@
+interface:
+  display_name: "Agentic Loop Pass"
+  short_description: "Coordinate one reset-safe agentic loop pass"
+  default_prompt: "Use $agentic-loop-pass to advance one focused project task through a validated pass."

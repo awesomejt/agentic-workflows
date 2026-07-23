@@ -3,6 +3,10 @@
 Run `<WORKFLOW_ID>` for `<TASK_REF>` using the repository's reset-safe loop
 protocol.
 
+Use `agentic-loop-pass` when available. Select the project-state backend named
+by repository instructions; do not switch between AWB and `project.yaml` within
+one pass.
+
 Objective: `<OBJECTIVE>`
 
 Acceptance criteria:
@@ -14,7 +18,7 @@ Constraints and authorized side effects:
 
 - `<CONSTRAINT_OR_AUTHORIZATION>`
 
-Use `.agents/loop/<RUN_ID>/` for transient state and handoffs. Read
+Use `.agents/loop/<PASS_ID>/` for transient state and handoffs. Read
 `common/workflows/protocol.md` in a source checkout or the adapter's installed
 `workflows/protocol.md` copy when available; otherwise use the
 `loop-handoff-notes` skill. Initialize `objective.md` and `state.yaml` if the run

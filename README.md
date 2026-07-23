@@ -51,7 +51,7 @@ and its dry-run diff has been reviewed.
 | MCP and AI-service client contracts | This repository |
 | Local rendering, validation, diff, and deployment | This repository |
 | Network service deployment | `infra/ansible` |
-| Agent scheduling, leasing, and execution | Future orchestrator repository |
+| Agent scheduling, leasing, and execution | `agent-orchestrator` repository |
 | Secret values | Ansible Vault, HashiCorp Vault, environment, or tool-native auth |
 | Runtime memory, sessions, logs, and transcripts | The relevant target system |
 

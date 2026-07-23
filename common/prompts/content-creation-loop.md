@@ -5,7 +5,7 @@ Run the `content-creation` workflow for `<TASK_REF>` with deliverable
 `<ACCEPTANCE_CRITERIA>`.
 
 Use the reset-safe protocol, the installed `workflows/content-creation.yaml`
-stage graph when available, and `.agents/loop/<RUN_ID>/`. Start each stage in a
+stage graph when available, and `.agents/loop/<PASS_ID>/`. Start each stage in a
 fresh context. The expected progression is orchestration, task scoping, content
 planning, authoritative research, drafting, editing, factual validation,
 independent review, and task closeout.

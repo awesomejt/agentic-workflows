@@ -249,3 +249,19 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - The original setup-repository implementation remains available for rollback.
   A workstation pilot, scheduler cutover, push, and production deployment are
   deliberately deferred.
+
+### 2026-07-23: Project-state and loop skills
+
+- Split loop participation into a backend-neutral `agentic-loop-pass` skill,
+  transient `loop-handoff-notes`, and backend-specific state skills. Native
+  delegation syntax and model routing remain adapter responsibilities.
+- Kept `awb-project-task-management` as the compatibility name and aligned its
+  inspect, pass, dependency, blocker, idempotency, and conflict guidance with
+  AWB 0.2. The skill records that AWB 0.2 has no phase-transition CLI command
+  rather than suggesting unsupported syntax.
+- Added `project-yaml-state-management` with a standard-library helper that
+  implements the shared `project-state/v1` operations using an exclusive file
+  lock, monotonic revision, stable request idempotency, cycle checks, structured
+  blockers, leases, and atomic replacement.
+- Added the portable project-state contract to the deployed workflow bundle.
+  All eight common skills validate and render to each supported CLI and Hermes.

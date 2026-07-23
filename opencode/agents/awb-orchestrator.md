@@ -31,9 +31,11 @@ Advance exactly one Agent Workbench task through one context-bounded outer pass.
 Keep one stable AWB pass identity and delegate focused workflow stages to the
 smallest useful set of specialist subagents.
 
-Use `awb-project-task-management` for all AWB facts and lifecycle actions. Read
-repository instructions before choosing roles. Keep substantive implementation,
-validation, testing, and review as distinct handoffs when task risk warrants it.
+Use `agentic-loop-pass` for outer-pass policy,
+`awb-project-task-management` for all AWB facts and lifecycle actions, and
+`loop-handoff-notes` for specialist exchanges. Read repository instructions
+before choosing roles. Keep substantive implementation, validation, testing,
+and review as distinct handoffs when task risk warrants it.
 
 Before returning, compare the focused objective with direct evidence, update
 durable memory when decisions changed, and write the structured result at

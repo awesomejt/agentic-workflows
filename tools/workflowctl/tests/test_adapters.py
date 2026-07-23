@@ -77,7 +77,12 @@ class AdapterRenderTests(unittest.TestCase):
 
     def test_opencode_concrete_model_overrides_are_rendered(self) -> None:
         agents = self.workstation / "opencode" / "agents"
-        for name in ("orchestrator.md", "implementer.md", "awb-orchestrator.md", "afk-build.md"):
+        for name in (
+            "orchestrator.md",
+            "implementer.md",
+            "awb-orchestrator.md",
+            "afk-build.md",
+        ):
             with self.subTest(name=name):
                 metadata = frontmatter(agents / name)
                 self.assertEqual(metadata.get("model"), "ollama-direct/local-coding")
@@ -102,6 +107,7 @@ class AdapterRenderTests(unittest.TestCase):
         for root in roots:
             with self.subTest(root=root):
                 self.assertTrue((root / "protocol.md").is_file())
+                self.assertTrue((root / "project-state-v1.md").is_file())
                 self.assertTrue((root / "software-development.yaml").is_file())
                 self.assertTrue((root / "content-creation.yaml").is_file())
 
@@ -115,7 +121,16 @@ class AdapterRenderTests(unittest.TestCase):
         )
         for root in roots:
             with self.subTest(root=root):
-                self.assertEqual(len(list(root.glob("*/SKILL.md"))), 6)
+                self.assertEqual(len(list(root.glob("*/SKILL.md"))), 8)
+                self.assertTrue(
+                    (
+                        root
+                        / "project-yaml-state-management"
+                        / "scripts"
+                        / "project_state.py"
+                    ).is_file()
+                )
+                self.assertFalse(any(root.rglob("__pycache__")))
 
     def test_hermes_bundle_contracts_are_valid_yaml(self) -> None:
         paths = (

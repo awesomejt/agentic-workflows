@@ -49,6 +49,14 @@ when the skill genuinely needs them.
 A deterministic helper used by several skills belongs under top-level `tools/`.
 A helper exclusive to one skill belongs inside that skill's `scripts/` folder.
 
+Loop capabilities are split by responsibility:
+
+- `agentic-loop-pass` owns backend-neutral pass policy and outcome rules.
+- `loop-handoff-notes` owns transient specialist exchanges and result files.
+- `awb-project-task-management` maps durable operations to AWB.
+- `project-yaml-state-management` provides the local flat-file alternative with
+  an exclusive helper script; agents must not hand-edit active state.
+
 ## Provenance
 
 `manifests/content.yaml` records the source repository, path, exact source

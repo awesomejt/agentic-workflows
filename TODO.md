@@ -61,3 +61,5 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   Hermes bundle on the controller, and records the deployed revision.
 - [x] Implement workflow pass leasing and state transitions in the extracted
   `agent-orchestrator`; common workflow YAML remains declarative.
+- [x] Add backend-neutral loop, AWB, handoff, and atomic `project.yaml` skills
+  implementing the shared project-state contract.

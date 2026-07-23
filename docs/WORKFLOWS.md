@@ -22,11 +22,13 @@ catalog so an exception cannot silently refer to a stale role.
 
 ## Reset-safe execution
 
-The canonical protocol is `common/workflows/protocol.md`. A run stores transient
-coordination under `.agents/loop/<run-id>/`, which this repository ignores. Each
-fresh-context specialist reads the immutable objective, current state, latest
-handoff, and only relevant evidence, then performs one bounded role and exits.
-The primary orchestrator owns transitions and the state file.
+The canonical protocol is `common/workflows/protocol.md`; the neutral durable
+state operations are in `common/workflows/project-state-v1.md`. One outer pass
+stores transient coordination under `.agents/loop/<pass-id>/`, which this
+repository ignores. Each fresh-context specialist reads the immutable
+objective, current state, latest handoff, and only relevant evidence, then
+performs one bounded role and exits. The primary orchestrator owns transitions
+and the state file.
 
 The initial workflows are:
 
@@ -36,10 +38,10 @@ The initial workflows are:
 - `content-creation`: orchestration, project scoping, planning, research,
   drafting, editing, factual validation, review, and closeout.
 
-These are reusable stage graphs rather than an executable scheduler. The future
+These are reusable stage graphs rather than an executable scheduler. The
 `agent-orchestrator` repository owns pass leasing, context creation, recovery,
 and actual agent execution. A CLI tool can also run the protocol interactively
-from the common prompts.
+through `agentic-loop-pass`.
 
 ## Runtime hygiene
 

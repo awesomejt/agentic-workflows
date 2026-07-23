@@ -1,0 +1,4 @@
+interface:
+  display_name: "Project YAML State"
+  short_description: "Manage atomic flat-file project state"
+  default_prompt: "Use $project-yaml-state-management to inspect or update the project.yaml state safely."

@@ -89,7 +89,7 @@ model pulls, MCP sidecars, Hermes services, Open WebUI, Qdrant, SearXNG, and
 health-check cron jobs. This repository may assert the client contract and
 detect drift but does not deploy those services.
 
-The future orchestrator repository owns runtime scheduling and consumes a
+The `agent-orchestrator` repository owns runtime scheduling and consumes a
 workflow root or released bundle through a stable interface.
 
 ## Security model

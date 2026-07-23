@@ -1,41 +1,45 @@
 ---
 name: loop-handoff-notes
-description: Run or resume reset-safe multi-agent loops using concise handoffs under a repository-approved `.agents/loop/` path. Use when agents or subagents must complete bounded passes with fresh contexts, preserve evidence between passes, or summarize a run without storing transcripts.
+description: Create and resume concise reset-safe handoffs under per-pass `.agents/loop/` directories for multi-agent outer passes. Use when fresh-context specialists must exchange scoped findings and evidence, when a later outer pass must continue without conversation memory, or when an executor must produce the structured result consumed by an agentic-loop runner.
 ---
 
-# Loop Handoff Notes
+# Maintain Loop Handoffs
 
-Use the repository's canonical reset-safe loop protocol and selected workflow
-when present. Otherwise apply this minimal procedure.
+Use the deployed workflow's `protocol.md` when present. Otherwise apply this
+minimal contract.
 
-## Procedure
-
-1. Create or resume `.agents/loop/<run-id>/` with immutable `objective.md`, small
-   `state.yaml`, append-only `passes/`, optional `evidence/`, and `final.md` at
-   completion.
-2. In a fresh context, read repository instructions, the objective, state, the
-   latest handoff, and only directly relevant evidence.
-3. Perform exactly one assigned role and produce one zero-padded pass handoff.
-   Write it directly only when native permissions allow; otherwise return it so
-   the runner can record it verbatim.
-4. Let the primary orchestrator validate the evidence and update state. A
-   specialist must not claim or advance the next pass itself.
-5. Stop on evidenced completion, a specific blocker, the pass limit, repeated
-   no-progress results, unsafe action, or missing authority.
-
-## Guardrails
-
-- Use only repository-approved ignored handoff or session paths.
-- Keep notes concise, actionable, and secret-free.
-- Put durable decisions in the authoritative task system, docs, or `MEMORY.md`.
-- Do not put raw transcripts, credentials, tokens, or private keys in notes.
-- Never rewrite earlier passes to hide an interruption or failed result.
-
-## Pass handoff
+## Runtime layout
 
 ```text
-Run and pass:
-Role and stage:
+.agents/loop/<pass-id>/
+├── objective.md
+├── state.yaml
+├── handoffs/
+├── evidence/
+├── result.template.json
+└── result.json
+```
+
+Keep `objective.md` immutable. Let only the primary orchestrator replace
+`state.yaml`. Append specialist notes under `handoffs/`; never rewrite prior
+history.
+
+## Specialist procedure
+
+1. Read repository instructions, the objective, current state, assigned
+   workflow stage, and only the latest relevant handoff and evidence.
+2. Perform exactly the assigned bounded role without claiming or finishing the
+   durable task or outer pass.
+3. Write `handoffs/<sequence>-<role>.md`, or return the same content for the
+   primary orchestrator to record.
+4. Include evidence, failures, blockers, and a recommended next stage. Do not
+   infer completion outside the assigned role.
+
+## Handoff format
+
+```text
+Pass and stage:
+Role:
 Objective addressed:
 Inputs read:
 Work performed:
@@ -44,9 +48,17 @@ Decisions:
 Evidence and commands:
 Findings or failures:
 Blockers:
-Recommended transition:
-Completion recommendation:
+Recommended next stage:
+Outer-pass outcome recommendation:
 ```
 
-At completion, make `final.md` point to durable task state and evidence. Remove
-runtime notes only when repository policy and user authorization allow it.
+## Structured result
+
+Before the executor returns, write `result.json` at
+`AGENT_ORCHESTRATOR_RESULT` when that variable is set. Follow
+`result.template.json` and use only `completed`, `partial`, `blocked`, `failed`,
+or `aborted`. Require a handoff for continuation outcomes and
+`blocker.reason` for `blocked`.
+
+Keep handoffs concise and secret-free. Promote durable decisions to project
+documentation or the authoritative task system.
