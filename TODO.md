@@ -22,6 +22,8 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 - [x] Import reusable skills after reviewing tool coupling and provenance.
 - [ ] Add project and course template bundles.
 - [x] Add private-overlay guidance for personal Hermes personas and workflows.
+- [x] Define common reset-safe software and content loops with `.agents`
+  handoffs and abstract role routing.
 
 ## Tool adapters
 
@@ -55,3 +57,5 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
   Ansible inventory group; then add the consuming Ansible role/playbook.
 - [ ] Add an Ansible integration that pins a workflows revision, renders the
   Hermes bundle on the controller, and records the deployed revision.
+- [ ] Implement workflow pass leasing and state transitions in the extracted
+  `agent-orchestrator`; common workflow YAML remains declarative.

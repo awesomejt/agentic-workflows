@@ -25,6 +25,7 @@ overlays/private/
 logs/
 sessions/
 transcripts/
+.agents/loop/
 memory.db
 *.log
 

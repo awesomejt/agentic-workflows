@@ -1,0 +1,60 @@
+schema_version: 1
+id: content-creation
+description: Research, draft, edit, verify, review, and close an evidence-based content deliverable.
+execution:
+  state_root: .agents/loop
+  context_policy: reset-after-pass
+  max_passes: 20
+entry_stage: orchestrate
+stages:
+  - id: orchestrate
+    role: orchestrator
+    purpose: Initialize the run, verify authority, and select the first bounded pass.
+    on_success: scope
+    on_failure: blocked
+  - id: scope
+    role: project-manager
+    purpose: Normalize the audience, deliverable, acceptance criteria, and lifecycle state.
+    on_success: plan
+    on_failure: blocked
+  - id: plan
+    role: planner
+    purpose: Define the content structure, research questions, and review plan.
+    on_success: research
+    on_failure: scope
+  - id: research
+    role: researcher
+    purpose: Gather current, authoritative evidence and clearly label inferences.
+    on_success: draft
+    on_failure: blocked
+  - id: draft
+    role: writer
+    purpose: Produce a complete draft grounded in the research handoff.
+    on_success: edit
+    on_failure: research
+  - id: edit
+    role: editor
+    purpose: Improve structure, clarity, consistency, voice, and audience fit.
+    on_success: verify
+    on_failure: draft
+  - id: verify
+    role: validator
+    purpose: Check claims, citations, links, terminology, and content requirements.
+    on_success: review
+    on_failure: research
+  - id: review
+    role: reviewer
+    purpose: Review the deliverable for accuracy, usefulness, risks, and omissions.
+    on_success: close
+    on_failure: edit
+  - id: close
+    role: project-manager
+    purpose: Confirm delivery evidence and update the authoritative task state.
+    on_success: complete
+    on_failure: blocked
+completion_gates:
+  - The deliverable meets the defined audience, format, scope, and acceptance criteria.
+  - Material factual claims are supported and time-sensitive evidence is current.
+  - Editing and independent review have no unresolved blocking finding.
+  - Links, citations, terminology, and requested calls to action are verified.
+  - Durable task state identifies the delivered artifact and any accepted limitations.

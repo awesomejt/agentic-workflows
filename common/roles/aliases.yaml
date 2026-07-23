@@ -4,4 +4,5 @@ aliases:
   documentor: writer
   committer: git-committer
   git-commiter: git-committer
+  scm-manager: git-committer
   task-manager: project-manager

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://awesomejt.github.io/agentic-workflows/schemas/role-catalog.schema.json",
+  "title": "Tool-agnostic agent role catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "roles"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "source", "purpose", "delegation", "mutation", "model_class"],
+        "properties": {
+          "id": { "$ref": "#/$defs/id" },
+          "source": { "type": "string", "pattern": "^common/roles/[a-z0-9-]+\\.md$" },
+          "purpose": { "type": "string", "minLength": 1 },
+          "delegation": { "enum": ["primary", "subagent", "either"] },
+          "mutation": { "enum": ["none", "handoff-only", "scoped"] },
+          "model_class": { "enum": ["inherit", "fast", "reasoning", "coding", "writing"] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9-]*$" }
+  }
+}

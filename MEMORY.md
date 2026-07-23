@@ -186,3 +186,20 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 - Added an `opencode-server` bundle target for a future Proxmox worker. Ansible
   should own the guest and install pinned workflow/orchestrator revisions; its
   DNS name and inventory identity remain undecided.
+
+### 2026-07-22: Reset-safe workflow model
+
+- Added a tool-agnostic catalog of 13 roles. Abstract model classes communicate
+  workload intent while concrete providers, models, permissions, and invocation
+  syntax remain adapter-owned.
+- Added software-development and content-creation stage graphs with explicit
+  success/failure transitions, completion gates, and bounded pass limits.
+- Standardized transient coordination under ignored
+  `.agents/loop/<run-id>/` directories. Each fresh-context specialist performs
+  one role and appends a concise handoff; the primary orchestrator alone updates
+  state and chooses the next transition.
+- The shared repository owns the protocol and examples. The extracted
+  `agent-orchestrator` will own leasing, context reset, recovery, and execution.
+- Expanded the loop handoff skill using the skill-authoring guidance: the skill
+  stays concise and operational, while the detailed protocol and stage graphs
+  remain canonical shared resources.

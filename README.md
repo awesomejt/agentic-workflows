@@ -58,7 +58,7 @@ and its dry-run diff has been reviewed.
 ## Planned structure
 
 ```text
-common/               tool-agnostic instructions, roles, prompts, and skills
+common/               tool-agnostic instructions, roles, prompts, skills, and workflows
 claude/               Claude Code adapter and exceptions
 codex/                Codex adapter and exceptions
 opencode/             OpenCode adapter and exceptions
@@ -101,6 +101,7 @@ Ansible Hermes role installs it while resolving target-side secrets.
 - [Requirements](docs/REQUIREMENTS.md)
 - [Design](docs/DESIGN.md)
 - [Common content model](docs/CONTENT.md)
+- [Agentic workflow model](docs/WORKFLOWS.md)
 - [Migration plan](docs/MIGRATION.md)
 - [Deployment guide](docs/DEPLOYMENT.md)
 - [Tool adapter guide](docs/ADAPTERS.md)

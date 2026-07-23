@@ -1,0 +1,78 @@
+schema_version: 1
+id: software-development
+description: Plan, design, implement, verify, review, document, and close a software change.
+execution:
+  state_root: .agents/loop
+  context_policy: reset-after-pass
+  max_passes: 24
+entry_stage: orchestrate
+stages:
+  - id: orchestrate
+    role: orchestrator
+    purpose: Initialize the run, verify authority, and select the first bounded pass.
+    on_success: scope
+    on_failure: blocked
+  - id: scope
+    role: project-manager
+    purpose: Normalize the task, acceptance criteria, lifecycle state, and evidence needs.
+    on_success: plan
+    on_failure: blocked
+  - id: plan
+    role: planner
+    purpose: Produce a focused implementation and validation plan.
+    on_success: design
+    on_failure: scope
+  - id: design
+    role: designer
+    purpose: Define the important interfaces, boundaries, and migration decisions.
+    on_success: challenge
+    on_failure: plan
+  - id: challenge
+    role: debater
+    purpose: Challenge material design risks before implementation.
+    optional: true
+    on_success: implement
+    on_failure: plan
+  - id: implement
+    role: implementer
+    purpose: Make one focused product, test, configuration, or migration change.
+    on_success: validate
+    on_failure: blocked
+  - id: validate
+    role: validator
+    purpose: Run static, schema, formatting, and lightweight quality checks.
+    on_success: test
+    on_failure: implement
+  - id: test
+    role: tester
+    purpose: Execute behavioral tests and capture reproducible results.
+    on_success: review
+    on_failure: implement
+  - id: review
+    role: reviewer
+    purpose: Review correctness, safety, maintainability, requirements, and evidence.
+    on_success: document
+    on_failure: implement
+  - id: document
+    role: writer
+    purpose: Update durable usage, design, migration, and memory documentation.
+    optional: true
+    on_success: commit
+    on_failure: implement
+  - id: commit
+    role: git-committer
+    purpose: Create a scoped commit when authorized and all required gates pass.
+    optional: true
+    on_success: close
+    on_failure: blocked
+  - id: close
+    role: project-manager
+    purpose: Confirm completion evidence and update the authoritative task state.
+    on_success: complete
+    on_failure: blocked
+completion_gates:
+  - Every acceptance criterion has direct implementation or behavior evidence.
+  - Required validation and tests pass, or an explicitly accepted exception is recorded.
+  - Review has no unresolved blocking finding.
+  - Durable documentation and task state reflect the verified result.
+  - A commit exists only when repository rules and user authorization permit it.

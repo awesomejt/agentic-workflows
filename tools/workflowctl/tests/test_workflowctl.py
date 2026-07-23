@@ -81,6 +81,28 @@ adapters:
         with self.assertRaisesRegex(WorkflowError, "forbidden credential key"):
             validate_repository(self.repo)
 
+    def test_workflow_rejects_unknown_role(self) -> None:
+        workflow = self.repo / "common" / "workflows" / "software-development.yaml"
+        workflow.write_text(
+            workflow.read_text(encoding="utf-8").replace(
+                "role: designer", "role: imaginary-specialist", 1
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(WorkflowError, "unknown role: imaginary-specialist"):
+            validate_repository(self.repo)
+
+    def test_workflow_rejects_unknown_transition(self) -> None:
+        workflow = self.repo / "common" / "workflows" / "content-creation.yaml"
+        workflow.write_text(
+            workflow.read_text(encoding="utf-8").replace(
+                "on_success: scope", "on_success: missing-stage", 1
+            ),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(WorkflowError, "unknown on_success: missing-stage"):
+            validate_repository(self.repo)
+
     def test_render_creates_manifest_and_file(self) -> None:
         output = self.temp / "rendered"
         manifest = render_target(self.repo, "workstation", output)

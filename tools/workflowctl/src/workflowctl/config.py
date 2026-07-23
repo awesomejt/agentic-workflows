@@ -133,6 +133,7 @@ def validate_repository(root: Path) -> list[str]:
     bindings: list[tuple[Path, Path]] = [
         (schema_dir / "source-manifest.schema.json", root / "manifests/sources.yaml"),
         (schema_dir / "content-manifest.schema.json", root / "manifests/content.yaml"),
+        (schema_dir / "role-catalog.schema.json", root / "common/roles/catalog.yaml"),
         (schema_dir / "service-registry.schema.json", root / "services/registry.yaml"),
         (schema_dir / "mcp-registry.schema.json", root / "services/mcp/registry.yaml"),
         (schema_dir / "secret-catalog.schema.json", root / "secret-references/catalog.yaml"),
@@ -155,6 +156,8 @@ def validate_repository(root: Path) -> list[str]:
         path for path in sorted(root.glob("*/deploy.yaml")) if path.parent.parent == root
     ]
     bindings.extend((schema_dir / "adapter.schema.json", path) for path in adapter_paths)
+    workflow_paths = sorted((root / "common" / "workflows").glob("*.yaml"))
+    bindings.extend((schema_dir / "workflow.schema.json", path) for path in workflow_paths)
 
     errors: list[str] = []
     for schema_path, data_path in bindings:
@@ -170,6 +173,43 @@ def validate_repository(root: Path) -> list[str]:
 
     sources = load_yaml(root / "manifests/sources.yaml")["sources"]
     source_ids = _unique_ids(sources, "source", errors)
+    role_catalog = load_yaml(root / "common/roles/catalog.yaml")
+    roles = role_catalog["roles"]
+    role_ids = _unique_ids(roles, "role", errors)
+    for role in roles:
+        source = (root / role["source"]).resolve()
+        if root not in source.parents or not source.is_file():
+            errors.append(f"role {role['id']} source does not exist: {role['source']}")
+    aliases = load_yaml(root / "common/roles/aliases.yaml").get("aliases", {})
+    for alias, role_id in aliases.items():
+        if role_id not in role_ids:
+            errors.append(f"role alias {alias} has unknown role: {role_id}")
+
+    workflow_ids: set[str] = set()
+    for path in workflow_paths:
+        workflow = load_yaml(path)
+        workflow_id = workflow["id"]
+        if workflow_id in workflow_ids:
+            errors.append(f"duplicate workflow id: {workflow_id}")
+        workflow_ids.add(workflow_id)
+        stage_ids = _unique_ids(workflow["stages"], f"{workflow_id} stage", errors)
+        if workflow["entry_stage"] not in stage_ids:
+            errors.append(
+                f"workflow {workflow_id} has unknown entry_stage: {workflow['entry_stage']}"
+            )
+        for stage in workflow["stages"]:
+            if stage["role"] not in role_ids:
+                errors.append(
+                    f"workflow {workflow_id} stage {stage['id']} has unknown role: "
+                    f"{stage['role']}"
+                )
+            for transition_key in ("on_success", "on_failure"):
+                transition = stage.get(transition_key)
+                if transition and transition not in stage_ids | {"complete", "blocked"}:
+                    errors.append(
+                        f"workflow {workflow_id} stage {stage['id']} has unknown "
+                        f"{transition_key}: {transition}"
+                    )
     artifacts = load_yaml(root / "manifests/content.yaml")["artifacts"]
     _unique_ids(artifacts, "content artifact", errors)
     for artifact in artifacts:
@@ -286,6 +326,7 @@ def validate_repository(root: Path) -> list[str]:
         f"validated {len(bindings)} documents",
         f"resolved {len(source_ids)} sources, {len(service_ids)} services, "
         f"{len(mcp_ids)} MCP servers, and {len(secret_ids)} secret references",
+        f"resolved {len(role_ids)} roles and {len(workflow_ids)} workflows",
     ]
     if errors:
         raise WorkflowError("validation failed:\n- " + "\n- ".join(errors))
