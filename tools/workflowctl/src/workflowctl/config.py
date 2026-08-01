@@ -17,6 +17,7 @@ class WorkflowError(RuntimeError):
 
 
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9-]*$")
+ADAPTERS_DIR = "adapters"
 
 
 def find_repository_root(start: Path | None = None) -> Path:
@@ -83,6 +84,21 @@ def safe_relative(value: str, label: str) -> Path:
     if path.is_absolute() or ".." in path.parts:
         raise WorkflowError(f"{label} must be a relative path without '..': {value}")
     return path
+
+
+def adapter_root(root: Path, adapter_id: str) -> Path:
+    """Return the canonical repository path for one adapter."""
+    return root / ADAPTERS_DIR / adapter_id
+
+
+def adapter_manifest_paths(root: Path) -> list[Path]:
+    """Return all adapter deploy manifests in stable order."""
+    return sorted((root / ADAPTERS_DIR).glob("*/deploy.yaml"))
+
+
+def adapter_routing_paths(root: Path) -> list[Path]:
+    """Return all adapter routing manifests in stable order."""
+    return sorted((root / ADAPTERS_DIR).glob("*/routing.yaml"))
 
 
 def _validate_document(schema_path: Path, data_path: Path) -> list[str]:
@@ -152,13 +168,9 @@ def validate_repository(root: Path) -> list[str]:
         (schema_dir / "service-contract.schema.json", path)
         for path in service_contract_paths
     )
-    adapter_paths = [
-        path for path in sorted(root.glob("*/deploy.yaml")) if path.parent.parent == root
-    ]
+    adapter_paths = adapter_manifest_paths(root)
     bindings.extend((schema_dir / "adapter.schema.json", path) for path in adapter_paths)
-    routing_paths = [
-        path for path in sorted(root.glob("*/routing.yaml")) if path.parent.parent == root
-    ]
+    routing_paths = adapter_routing_paths(root)
     bindings.extend((schema_dir / "role-routing.schema.json", path) for path in routing_paths)
     workflow_paths = sorted((root / "common" / "workflows").glob("*.yaml"))
     bindings.extend((schema_dir / "workflow.schema.json", path) for path in workflow_paths)

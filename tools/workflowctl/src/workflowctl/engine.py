@@ -15,6 +15,8 @@ from pathlib import Path
 from typing import Any
 
 from .config import (
+    adapter_manifest_paths,
+    adapter_root,
     WorkflowError,
     expand_path,
     load_target,
@@ -82,7 +84,7 @@ def render_target(root: Path, target_id: str, output: Path | None = None) -> dic
     for selected in target["adapters"]:
         if not selected["enabled"]:
             continue
-        adapter = load_yaml(root / selected["id"] / "deploy.yaml")
+        adapter = load_yaml(adapter_root(root, selected["id"]) / "deploy.yaml")
         for artifact in adapter["artifacts"]:
             source = (root / artifact["source"]).resolve()
             header = (
@@ -318,7 +320,7 @@ def inventory(root: Path) -> dict[str, list[str]]:
         "services": [item["id"] for item in load_yaml(root / "services/registry.yaml")["services"]],
         "mcp_servers": [item["id"] for item in load_yaml(root / "services/mcp/registry.yaml")["servers"]],
         "templates": [item["id"] for item in load_yaml(root / "templates/catalog.yaml")["templates"]],
-        "adapters": [load_yaml(path)["id"] for path in sorted(root.glob("*/deploy.yaml"))],
+        "adapters": [load_yaml(path)["id"] for path in adapter_manifest_paths(root)],
     }
 
 

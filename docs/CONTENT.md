@@ -3,8 +3,9 @@
 ## Purpose
 
 The `common/` tree is the semantic source for behavior shared across agent
-tools. Tool adapters add only native metadata, permission syntax, destination
-paths, and justified exceptions.
+tools. It is the default place to edit shared agent definitions and skills.
+Tool adapters under `adapters/` add only native metadata, permission syntax,
+destination paths, and justified exceptions.
 
 ## Roles
 
@@ -18,7 +19,8 @@ definitions. `common/roles/catalog.yaml` is the machine-readable inventory:
 - source control: `git-committer`
 
 The catalog's model classes are workload hints, not provider selections. Native
-models and permission profiles belong in adapter `routing.yaml` and frontmatter.
+models and permission profiles belong in `adapters/<tool>/routing.yaml` and
+frontmatter.
 
 Compatibility aliases live in `common/roles/aliases.yaml`. New content should
 use canonical names; adapters may emit aliases during migration when existing

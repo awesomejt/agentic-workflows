@@ -5,55 +5,55 @@ status: active
 artifacts:
   - source: common/instructions/core.md
     destination: .copilot/instructions/agentic-workflows.instructions.md
-    header: copilot/frontmatter/instructions.md
+    header: adapters/copilot/frontmatter/instructions.md
   - source: common/skills
     destination: .copilot/skills
   - source: common/workflows
     destination: .copilot/workflows
   - source: common/roles/orchestrator.md
     destination: .copilot/agents/orchestrator.agent.md
-    header: copilot/frontmatter/orchestrator.md
+    header: adapters/copilot/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: .copilot/agents/planner.agent.md
-    header: copilot/frontmatter/planner.md
+    header: adapters/copilot/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: .copilot/agents/debater.agent.md
-    header: copilot/frontmatter/debater.md
+    header: adapters/copilot/frontmatter/debater.md
   - source: common/roles/designer.md
     destination: .copilot/agents/designer.agent.md
-    header: copilot/frontmatter/designer.md
+    header: adapters/copilot/frontmatter/designer.md
   - source: common/roles/researcher.md
     destination: .copilot/agents/researcher.agent.md
-    header: copilot/frontmatter/researcher.md
+    header: adapters/copilot/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: .copilot/agents/implementer.agent.md
-    header: copilot/frontmatter/implementer.md
+    header: adapters/copilot/frontmatter/implementer.md
   - source: common/roles/validator.md
     destination: .copilot/agents/validator.agent.md
-    header: copilot/frontmatter/validator.md
+    header: adapters/copilot/frontmatter/validator.md
   - source: common/roles/tester.md
     destination: .copilot/agents/tester.agent.md
-    header: copilot/frontmatter/tester.md
+    header: adapters/copilot/frontmatter/tester.md
   - source: common/roles/reviewer.md
     destination: .copilot/agents/reviewer.agent.md
-    header: copilot/frontmatter/reviewer.md
+    header: adapters/copilot/frontmatter/reviewer.md
   - source: common/roles/writer.md
     destination: .copilot/agents/writer.agent.md
-    header: copilot/frontmatter/writer.md
+    header: adapters/copilot/frontmatter/writer.md
   - source: common/roles/editor.md
     destination: .copilot/agents/editor.agent.md
-    header: copilot/frontmatter/editor.md
+    header: adapters/copilot/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: .copilot/agents/git-committer.agent.md
-    header: copilot/frontmatter/git-committer.md
+    header: adapters/copilot/frontmatter/git-committer.md
   - source: common/roles/project-manager.md
     destination: .copilot/agents/project-manager.agent.md
-    header: copilot/frontmatter/project-manager.md
+    header: adapters/copilot/frontmatter/project-manager.md
   - source: common/prompts/software-development-loop.md
     destination: .copilot/agents/software-loop.agent.md
-    header: copilot/frontmatter/software-loop.md
+    header: adapters/copilot/frontmatter/software-loop.md
   - source: common/prompts/content-creation-loop.md
     destination: .copilot/agents/content-loop.agent.md
-    header: copilot/frontmatter/content-loop.md
-  - source: copilot/mcp.json
+    header: adapters/copilot/frontmatter/content-loop.md
+  - source: adapters/copilot/mcp.json
     destination: .config/Code/User/mcp.json

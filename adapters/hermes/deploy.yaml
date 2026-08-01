@@ -13,9 +13,9 @@ artifacts:
     destination: common/skills
   - source: common/workflows
     destination: common/workflows
-  - source: hermes/profiles.yaml
+  - source: adapters/hermes/profiles.yaml
     destination: hermes/profiles.yaml
-  - source: hermes/ansible-contract.yaml
+  - source: adapters/hermes/ansible-contract.yaml
     destination: hermes/ansible-contract.yaml
   - source: services
     destination: services

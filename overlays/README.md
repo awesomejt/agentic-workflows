@@ -8,7 +8,7 @@ repository or the ignored `overlays/private/` directory.
 A private overlay may mirror canonical paths such as:
 
 ```text
-hermes/profiles.yaml
+adapters/hermes/profiles.yaml
 common/personas/<name>.md
 targets/<private-target>.yaml
 environments/<private-environment>.yaml
@@ -19,6 +19,6 @@ should accept overlay paths explicitly, validate the merged result, and record
 overlay provenance without copying private content into its state manifest.
 
 The current public bundle records the unresolved `personal-profiles` overlay in
-`hermes/profiles.yaml`. Do not migrate personally identifying profiles until the
-repository owner chooses whether they belong here or in a separately controlled
-repository.
+`adapters/hermes/profiles.yaml`. Do not migrate personally identifying profiles
+until the repository owner chooses whether they belong here or in a separately
+controlled repository.

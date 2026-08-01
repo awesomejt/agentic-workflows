@@ -1,6 +1,6 @@
 schema_version: 1
-id: grok
-description: Grok Build global instructions, agents, Agent Skills, and focused prompt.
+id: opencode
+description: OpenCode global instructions, subagents, skills, prompt, and optional config overlay.
 status: active
 artifacts:
   - source: common/instructions/core.md
@@ -19,40 +19,53 @@ artifacts:
     destination: skills
   - source: common/roles/orchestrator.md
     destination: agents/orchestrator.md
-    header: grok/frontmatter/orchestrator.md
+    header: adapters/opencode/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: agents/planner.md
-    header: grok/frontmatter/planner.md
+    header: adapters/opencode/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: agents/debater.md
-    header: grok/frontmatter/debater.md
+    header: adapters/opencode/frontmatter/debater.md
   - source: common/roles/designer.md
     destination: agents/designer.md
-    header: grok/frontmatter/designer.md
+    header: adapters/opencode/frontmatter/designer.md
   - source: common/roles/researcher.md
     destination: agents/researcher.md
-    header: grok/frontmatter/researcher.md
+    header: adapters/opencode/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: agents/implementer.md
-    header: grok/frontmatter/implementer.md
+    header: adapters/opencode/frontmatter/implementer.md
   - source: common/roles/validator.md
     destination: agents/validator.md
-    header: grok/frontmatter/validator.md
+    header: adapters/opencode/frontmatter/validator.md
   - source: common/roles/tester.md
     destination: agents/tester.md
-    header: grok/frontmatter/tester.md
+    header: adapters/opencode/frontmatter/tester.md
   - source: common/roles/reviewer.md
     destination: agents/reviewer.md
-    header: grok/frontmatter/reviewer.md
+    header: adapters/opencode/frontmatter/reviewer.md
   - source: common/roles/writer.md
     destination: agents/writer.md
-    header: grok/frontmatter/writer.md
+    header: adapters/opencode/frontmatter/writer.md
   - source: common/roles/editor.md
     destination: agents/editor.md
-    header: grok/frontmatter/editor.md
+    header: adapters/opencode/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: agents/git-committer.md
-    header: grok/frontmatter/git-committer.md
+    header: adapters/opencode/frontmatter/git-committer.md
   - source: common/roles/project-manager.md
     destination: agents/project-manager.md
-    header: grok/frontmatter/project-manager.md
+    header: adapters/opencode/frontmatter/project-manager.md
+  - source: adapters/opencode/agents/awb-orchestrator.md
+    destination: agents/awb-orchestrator.md
+  - source: adapters/opencode/agents/afk-build.md
+    destination: agents/afk-build.md
+  - source: common/prompts/software-development-loop.md
+    destination: agents/software-loop.md
+    header: adapters/opencode/frontmatter/software-loop.md
+  - source: common/prompts/content-creation-loop.md
+    destination: agents/content-loop.md
+    header: adapters/opencode/frontmatter/content-loop.md
+  - source: adapters/opencode/opencode.workflows.json
+    destination: opencode.workflows.json
+    description: Optional merged config selected with OPENCODE_CONFIG.

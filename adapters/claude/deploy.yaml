@@ -11,40 +11,40 @@ artifacts:
     destination: workflows
   - source: common/roles/orchestrator.md
     destination: agents/orchestrator.md
-    header: claude/frontmatter/orchestrator.md
+    header: adapters/claude/frontmatter/orchestrator.md
   - source: common/roles/planner.md
     destination: agents/planner.md
-    header: claude/frontmatter/planner.md
+    header: adapters/claude/frontmatter/planner.md
   - source: common/roles/debater.md
     destination: agents/debater.md
-    header: claude/frontmatter/debater.md
+    header: adapters/claude/frontmatter/debater.md
   - source: common/roles/designer.md
     destination: agents/designer.md
-    header: claude/frontmatter/designer.md
+    header: adapters/claude/frontmatter/designer.md
   - source: common/roles/researcher.md
     destination: agents/researcher.md
-    header: claude/frontmatter/researcher.md
+    header: adapters/claude/frontmatter/researcher.md
   - source: common/roles/implementer.md
     destination: agents/implementer.md
-    header: claude/frontmatter/implementer.md
+    header: adapters/claude/frontmatter/implementer.md
   - source: common/roles/validator.md
     destination: agents/validator.md
-    header: claude/frontmatter/validator.md
+    header: adapters/claude/frontmatter/validator.md
   - source: common/roles/tester.md
     destination: agents/tester.md
-    header: claude/frontmatter/tester.md
+    header: adapters/claude/frontmatter/tester.md
   - source: common/roles/reviewer.md
     destination: agents/reviewer.md
-    header: claude/frontmatter/reviewer.md
+    header: adapters/claude/frontmatter/reviewer.md
   - source: common/roles/writer.md
     destination: agents/writer.md
-    header: claude/frontmatter/writer.md
+    header: adapters/claude/frontmatter/writer.md
   - source: common/roles/editor.md
     destination: agents/editor.md
-    header: claude/frontmatter/editor.md
+    header: adapters/claude/frontmatter/editor.md
   - source: common/roles/git-committer.md
     destination: agents/git-committer.md
-    header: claude/frontmatter/git-committer.md
+    header: adapters/claude/frontmatter/git-committer.md
   - source: common/roles/project-manager.md
     destination: agents/project-manager.md
-    header: claude/frontmatter/project-manager.md
+    header: adapters/claude/frontmatter/project-manager.md

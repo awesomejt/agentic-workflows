@@ -31,21 +31,27 @@ class WorkflowctlTests(unittest.TestCase):
             self.repo,
             ignore=shutil.ignore_patterns(".git", ".build", "__pycache__", ".pytest_cache"),
         )
-        (self.repo / "opencode" / "fixture.txt").write_text("managed content\n", encoding="utf-8")
-        (self.repo / "opencode" / "header.txt").write_text("header\n", encoding="utf-8")
-        (self.repo / "opencode" / "footer.txt").write_text("footer\n", encoding="utf-8")
-        (self.repo / "opencode" / "deploy.yaml").write_text(
+        (self.repo / "adapters" / "opencode" / "fixture.txt").write_text(
+            "managed content\n", encoding="utf-8"
+        )
+        (self.repo / "adapters" / "opencode" / "header.txt").write_text(
+            "header\n", encoding="utf-8"
+        )
+        (self.repo / "adapters" / "opencode" / "footer.txt").write_text(
+            "footer\n", encoding="utf-8"
+        )
+        (self.repo / "adapters" / "opencode" / "deploy.yaml").write_text(
             """schema_version: 1
 id: opencode
 description: Test adapter.
 status: active
 artifacts:
-  - source: opencode/fixture.txt
+  - source: adapters/opencode/fixture.txt
     destination: fixture.txt
-  - source: opencode/fixture.txt
+  - source: adapters/opencode/fixture.txt
     destination: wrapped.txt
-    header: opencode/header.txt
-    footer: opencode/footer.txt
+    header: adapters/opencode/header.txt
+    footer: adapters/opencode/footer.txt
 """,
             encoding="utf-8",
         )
@@ -104,7 +110,7 @@ adapters:
             validate_repository(self.repo)
 
     def test_routing_rejects_unknown_role(self) -> None:
-        routing = self.repo / "opencode" / "routing.yaml"
+        routing = self.repo / "adapters" / "opencode" / "routing.yaml"
         routing.write_text(
             routing.read_text(encoding="utf-8").replace(
                 "role: implementer", "role: imaginary-specialist", 1
