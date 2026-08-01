@@ -1,6 +1,6 @@
 schema_version: 1
 id: claude
-common_role_catalog: common/roles/catalog.yaml
+common_role_catalog: authoring/common/roles/catalog.yaml
 defaults:
   model: inherit-active-model
   permission_strategy: native-role-frontmatter

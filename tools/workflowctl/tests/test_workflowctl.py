@@ -31,31 +31,31 @@ class WorkflowctlTests(unittest.TestCase):
             self.repo,
             ignore=shutil.ignore_patterns(".git", ".build", "__pycache__", ".pytest_cache"),
         )
-        (self.repo / "adapters" / "opencode" / "fixture.txt").write_text(
+        (self.repo / "authoring" / "adapters" / "opencode" / "fixture.txt").write_text(
             "managed content\n", encoding="utf-8"
         )
-        (self.repo / "adapters" / "opencode" / "header.txt").write_text(
+        (self.repo / "authoring" / "adapters" / "opencode" / "header.txt").write_text(
             "header\n", encoding="utf-8"
         )
-        (self.repo / "adapters" / "opencode" / "footer.txt").write_text(
+        (self.repo / "authoring" / "adapters" / "opencode" / "footer.txt").write_text(
             "footer\n", encoding="utf-8"
         )
-        (self.repo / "adapters" / "opencode" / "deploy.yaml").write_text(
+        (self.repo / "authoring" / "adapters" / "opencode" / "deploy.yaml").write_text(
             """schema_version: 1
 id: opencode
 description: Test adapter.
 status: active
 artifacts:
-  - source: adapters/opencode/fixture.txt
+  - source: authoring/adapters/opencode/fixture.txt
     destination: fixture.txt
-  - source: adapters/opencode/fixture.txt
+  - source: authoring/adapters/opencode/fixture.txt
     destination: wrapped.txt
-    header: adapters/opencode/header.txt
-    footer: adapters/opencode/footer.txt
+    header: authoring/adapters/opencode/header.txt
+    footer: authoring/adapters/opencode/footer.txt
 """,
             encoding="utf-8",
         )
-        (self.repo / "targets" / "workstation.yaml").write_text(
+        (self.repo / "source" / "targets" / "workstation.yaml").write_text(
             """schema_version: 1
 id: workstation
 description: Isolated workflowctl test target.
@@ -82,13 +82,13 @@ adapters:
         self.assertTrue(any(message.startswith("validated ") for message in messages))
 
     def test_service_contract_rejects_embedded_credential_key(self) -> None:
-        contract = self.repo / "services" / "litellm" / "contract.yaml"
+        contract = self.repo / "source" / "services" / "litellm" / "contract.yaml"
         contract.write_text(contract.read_text(encoding="utf-8") + "api_key: forbidden\n")
         with self.assertRaisesRegex(WorkflowError, "forbidden credential key"):
             validate_repository(self.repo)
 
     def test_workflow_rejects_unknown_role(self) -> None:
-        workflow = self.repo / "common" / "workflows" / "software-development.yaml"
+        workflow = self.repo / "authoring" / "common" / "workflows" / "software-development.yaml"
         workflow.write_text(
             workflow.read_text(encoding="utf-8").replace(
                 "role: designer", "role: imaginary-specialist", 1
@@ -99,7 +99,7 @@ adapters:
             validate_repository(self.repo)
 
     def test_workflow_rejects_unknown_transition(self) -> None:
-        workflow = self.repo / "common" / "workflows" / "content-creation.yaml"
+        workflow = self.repo / "authoring" / "common" / "workflows" / "content-creation.yaml"
         workflow.write_text(
             workflow.read_text(encoding="utf-8").replace(
                 "on_success: scope", "on_success: missing-stage", 1
@@ -110,7 +110,7 @@ adapters:
             validate_repository(self.repo)
 
     def test_routing_rejects_unknown_role(self) -> None:
-        routing = self.repo / "adapters" / "opencode" / "routing.yaml"
+        routing = self.repo / "authoring" / "adapters" / "opencode" / "routing.yaml"
         routing.write_text(
             routing.read_text(encoding="utf-8").replace(
                 "role: implementer", "role: imaginary-specialist", 1

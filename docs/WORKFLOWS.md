@@ -6,7 +6,7 @@ invoked and which concrete model or permission profile it receives.
 
 ## Common versus tool-specific concerns
 
-| Shared in `common/` | Owned by each tool adapter |
+| Shared in `authoring/common/` | Owned by each tool adapter |
 | --- | --- |
 | Role purpose, responsibilities, and output contract | Native agent file and frontmatter |
 | Abstract model class (`reasoning`, `coding`, `writing`, `fast`) | Provider and model identifier |
@@ -14,18 +14,20 @@ invoked and which concrete model or permission profile it receives.
 | Workflow stages, transitions, and completion gates | Native tools and permission policy |
 | Example loop prompts | CLI discovery path and optional shortcuts |
 
-`common/roles/catalog.yaml` is the cross-tool role inventory. A native adapter
-may inherit the active model or map an abstract class to a concrete model. Such
-a choice belongs in `<tool>/routing.yaml` and native frontmatter, and must not be
-copied into a common role. Routing maps are validated against the common role
-catalog so an exception cannot silently refer to a stale role.
+`authoring/common/roles/catalog.yaml` is the cross-tool role inventory. A
+native adapter may inherit the active model or map an abstract class to a
+concrete model. Such a choice belongs in `authoring/adapters/<tool>/routing.yaml`
+and native frontmatter, and must not be copied into a common role. Routing maps
+are validated against the common role catalog so an exception cannot silently
+refer to a stale role.
 
 ## Reset-safe execution
 
-The canonical protocol is `common/workflows/protocol.md`; the neutral durable
-state operations are in `common/workflows/project-state-v1.md`. One outer pass
-stores transient coordination under `.agents/loop/<pass-id>/`, which this
-repository ignores. Each fresh-context specialist reads the immutable
+The canonical protocol is `authoring/common/workflows/protocol.md`; the neutral
+durable state operations are in
+`authoring/common/workflows/project-state-v1.md`. One outer pass stores
+transient coordination under `.agents/loop/<pass-id>/`, which this repository
+ignores. Each fresh-context specialist reads the immutable
 objective, current state, latest handoff, and only relevant evidence, then
 performs one bounded role and exits. The primary orchestrator owns transitions
 and the state file.

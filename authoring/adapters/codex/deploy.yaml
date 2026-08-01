@@ -1,0 +1,65 @@
+schema_version: 1
+id: codex
+description: Codex global instructions, custom agents, Agent Skills, and workflows profile.
+status: active
+artifacts:
+  - source: authoring/common/instructions/core.md
+    destination: AGENTS.md
+  - source: authoring/common/skills
+    destination: skills
+  - source: authoring/common/workflows
+    destination: workflows
+  - source: authoring/common/roles/orchestrator.md
+    destination: agents/orchestrator.toml
+    header: authoring/adapters/codex/frontmatter/orchestrator.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/planner.md
+    destination: agents/planner.toml
+    header: authoring/adapters/codex/frontmatter/planner.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/debater.md
+    destination: agents/debater.toml
+    header: authoring/adapters/codex/frontmatter/debater.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/designer.md
+    destination: agents/designer.toml
+    header: authoring/adapters/codex/frontmatter/designer.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/researcher.md
+    destination: agents/researcher.toml
+    header: authoring/adapters/codex/frontmatter/researcher.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/implementer.md
+    destination: agents/implementer.toml
+    header: authoring/adapters/codex/frontmatter/implementer.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/validator.md
+    destination: agents/validator.toml
+    header: authoring/adapters/codex/frontmatter/validator.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/tester.md
+    destination: agents/tester.toml
+    header: authoring/adapters/codex/frontmatter/tester.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/reviewer.md
+    destination: agents/reviewer.toml
+    header: authoring/adapters/codex/frontmatter/reviewer.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/writer.md
+    destination: agents/writer.toml
+    header: authoring/adapters/codex/frontmatter/writer.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/editor.md
+    destination: agents/editor.toml
+    header: authoring/adapters/codex/frontmatter/editor.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/git-committer.md
+    destination: agents/git-committer.toml
+    header: authoring/adapters/codex/frontmatter/git-committer.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/common/roles/project-manager.md
+    destination: agents/project-manager.toml
+    header: authoring/adapters/codex/frontmatter/project-manager.toml
+    footer: authoring/adapters/codex/frontmatter/footer.toml
+  - source: authoring/adapters/codex/workflows.config.toml
+    destination: workflows.config.toml

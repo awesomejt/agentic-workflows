@@ -1,8 +1,8 @@
 # Common Agentic Content
 
 If you want to change shared agent behavior, prompts, or skills, start here.
-The `adapters/` tree should only carry tool-specific wrappers, routing, and
-documented exceptions around this canonical content.
+The sibling `authoring/adapters/` tree should only carry tool-specific
+wrappers, routing, and documented exceptions around this canonical content.
 
 Files here express tool-agnostic behavior. They intentionally avoid provider
 names, model identifiers, native permission schemas, and installation paths.

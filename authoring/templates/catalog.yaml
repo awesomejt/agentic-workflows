@@ -15,9 +15,9 @@ templates:
       - docs/
       - agents/
     shared_assets:
-      - common/instructions/core.md
-      - common/skills/awb-project-task-management
-      - common/skills/validation-and-test-evidence
+      - authoring/common/instructions/core.md
+      - authoring/common/skills/awb-project-task-management
+      - authoring/common/skills/validation-and-test-evidence
     notes: Normalize the root contract without importing repository-specific task state.
   - id: coding-project
     source: project-starter-kit
@@ -34,9 +34,9 @@ templates:
       - status.yaml
       - docs/
     shared_assets:
-      - common/instructions/core.md
-      - common/roles/
-      - common/skills/
+      - authoring/common/instructions/core.md
+      - authoring/common/roles/
+      - authoring/common/skills/
     notes: Keep product-specific placeholders in the template bundle, not common instructions.
   - id: course-project
     source: course-starter-kit
@@ -55,8 +55,8 @@ templates:
       - Planning/
       - Sections/
     shared_assets:
-      - common/instructions/core.md
-      - common/roles/writer.md
-      - common/roles/reviewer.md
-      - common/skills/validation-and-test-evidence
+      - authoring/common/instructions/core.md
+      - authoring/common/roles/writer.md
+      - authoring/common/roles/reviewer.md
+      - authoring/common/skills/validation-and-test-evidence
     notes: Preserve course-domain rules as template-specific behavior rather than global agent policy.

@@ -17,7 +17,7 @@ secret catalog ───> reference validation only; values resolve outside Git
 
 Configuration is resolved from lowest to highest precedence:
 
-1. Shared defaults under `common/`.
+1. Shared defaults under `authoring/common/`.
 2. Tool adapter defaults.
 3. Tracked environment topology and service contracts.
 4. Tracked deployment target settings.

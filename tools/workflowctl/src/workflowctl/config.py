@@ -17,7 +17,11 @@ class WorkflowError(RuntimeError):
 
 
 ID_PATTERN = re.compile(r"^[a-z][a-z0-9-]*$")
+SOURCE_DIR = "source"
+AUTHORING_DIR = "authoring"
+COMMON_DIR = "common"
 ADAPTERS_DIR = "adapters"
+TEMPLATES_DIR = "templates"
 
 
 def find_repository_root(start: Path | None = None) -> Path:
@@ -86,19 +90,39 @@ def safe_relative(value: str, label: str) -> Path:
     return path
 
 
+def source_root(root: Path) -> Path:
+    """Return the canonical repository subtree for config source records."""
+    return root / SOURCE_DIR
+
+
+def source_path(root: Path, *parts: str) -> Path:
+    """Build a repository path under the source subtree."""
+    return source_root(root).joinpath(*parts)
+
+
+def authoring_root(root: Path) -> Path:
+    """Return the canonical repository subtree for authored reusable content."""
+    return root / AUTHORING_DIR
+
+
+def authoring_path(root: Path, *parts: str) -> Path:
+    """Build a repository path under the authoring subtree."""
+    return authoring_root(root).joinpath(*parts)
+
+
 def adapter_root(root: Path, adapter_id: str) -> Path:
     """Return the canonical repository path for one adapter."""
-    return root / ADAPTERS_DIR / adapter_id
+    return authoring_path(root, ADAPTERS_DIR, adapter_id)
 
 
 def adapter_manifest_paths(root: Path) -> list[Path]:
     """Return all adapter deploy manifests in stable order."""
-    return sorted((root / ADAPTERS_DIR).glob("*/deploy.yaml"))
+    return sorted(authoring_path(root, ADAPTERS_DIR).glob("*/deploy.yaml"))
 
 
 def adapter_routing_paths(root: Path) -> list[Path]:
     """Return all adapter routing manifests in stable order."""
-    return sorted((root / ADAPTERS_DIR).glob("*/routing.yaml"))
+    return sorted(authoring_path(root, ADAPTERS_DIR).glob("*/routing.yaml"))
 
 
 def _validate_document(schema_path: Path, data_path: Path) -> list[str]:
@@ -147,23 +171,23 @@ def validate_repository(root: Path) -> list[str]:
     root = root.resolve()
     schema_dir = root / "schemas"
     bindings: list[tuple[Path, Path]] = [
-        (schema_dir / "source-manifest.schema.json", root / "manifests/sources.yaml"),
-        (schema_dir / "content-manifest.schema.json", root / "manifests/content.yaml"),
-        (schema_dir / "role-catalog.schema.json", root / "common/roles/catalog.yaml"),
-        (schema_dir / "service-registry.schema.json", root / "services/registry.yaml"),
-        (schema_dir / "mcp-registry.schema.json", root / "services/mcp/registry.yaml"),
-        (schema_dir / "secret-catalog.schema.json", root / "secret-references/catalog.yaml"),
-        (schema_dir / "template-catalog.schema.json", root / "templates/catalog.yaml"),
+        (schema_dir / "source-manifest.schema.json", source_path(root, "manifests", "sources.yaml")),
+        (schema_dir / "content-manifest.schema.json", source_path(root, "manifests", "content.yaml")),
+        (schema_dir / "role-catalog.schema.json", authoring_path(root, "common", "roles", "catalog.yaml")),
+        (schema_dir / "service-registry.schema.json", source_path(root, "services", "registry.yaml")),
+        (schema_dir / "mcp-registry.schema.json", source_path(root, "services", "mcp", "registry.yaml")),
+        (schema_dir / "secret-catalog.schema.json", source_path(root, "secret-references", "catalog.yaml")),
+        (schema_dir / "template-catalog.schema.json", authoring_path(root, "templates", "catalog.yaml")),
     ]
     bindings.extend(
         (schema_dir / "environment.schema.json", path)
-        for path in sorted((root / "environments").glob("*.yaml"))
+        for path in sorted(source_path(root, "environments").glob("*.yaml"))
     )
     bindings.extend(
         (schema_dir / "target.schema.json", path)
-        for path in sorted((root / "targets").glob("*.yaml"))
+        for path in sorted(source_path(root, "targets").glob("*.yaml"))
     )
-    service_contract_paths = sorted((root / "services").glob("*/contract.yaml"))
+    service_contract_paths = sorted(source_path(root, "services").glob("*/contract.yaml"))
     bindings.extend(
         (schema_dir / "service-contract.schema.json", path)
         for path in service_contract_paths
@@ -172,7 +196,7 @@ def validate_repository(root: Path) -> list[str]:
     bindings.extend((schema_dir / "adapter.schema.json", path) for path in adapter_paths)
     routing_paths = adapter_routing_paths(root)
     bindings.extend((schema_dir / "role-routing.schema.json", path) for path in routing_paths)
-    workflow_paths = sorted((root / "common" / "workflows").glob("*.yaml"))
+    workflow_paths = sorted(authoring_path(root, "common", "workflows").glob("*.yaml"))
     bindings.extend((schema_dir / "workflow.schema.json", path) for path in workflow_paths)
 
     errors: list[str] = []
@@ -187,16 +211,16 @@ def validate_repository(root: Path) -> list[str]:
     if errors:
         raise WorkflowError("validation failed:\n- " + "\n- ".join(errors))
 
-    sources = load_yaml(root / "manifests/sources.yaml")["sources"]
+    sources = load_yaml(source_path(root, "manifests", "sources.yaml"))["sources"]
     source_ids = _unique_ids(sources, "source", errors)
-    role_catalog = load_yaml(root / "common/roles/catalog.yaml")
+    role_catalog = load_yaml(authoring_path(root, "common", "roles", "catalog.yaml"))
     roles = role_catalog["roles"]
     role_ids = _unique_ids(roles, "role", errors)
     for role in roles:
         source = (root / role["source"]).resolve()
         if root not in source.parents or not source.is_file():
             errors.append(f"role {role['id']} source does not exist: {role['source']}")
-    aliases = load_yaml(root / "common/roles/aliases.yaml").get("aliases", {})
+    aliases = load_yaml(authoring_path(root, "common", "roles", "aliases.yaml")).get("aliases", {})
     for alias, role_id in aliases.items():
         if role_id not in role_ids:
             errors.append(f"role alias {alias} has unknown role: {role_id}")
@@ -242,7 +266,7 @@ def validate_repository(root: Path) -> list[str]:
                         f"workflow {workflow_id} stage {stage['id']} has unknown "
                         f"{transition_key}: {transition}"
                     )
-    artifacts = load_yaml(root / "manifests/content.yaml")["artifacts"]
+    artifacts = load_yaml(source_path(root, "manifests", "content.yaml"))["artifacts"]
     _unique_ids(artifacts, "content artifact", errors)
     for artifact in artifacts:
         if artifact["source"] not in source_ids:
@@ -258,19 +282,19 @@ def validate_repository(root: Path) -> list[str]:
                 errors.append(
                     f"content artifact {artifact['id']} destination does not exist: {destination}"
                 )
-    template_catalog = load_yaml(root / "templates/catalog.yaml")
+    template_catalog = load_yaml(authoring_path(root, "templates", "catalog.yaml"))
     _unique_ids(template_catalog["templates"], "template", errors)
     for template in template_catalog["templates"]:
         if template["source"] not in source_ids:
             errors.append(f"template {template['id']} has unknown source: {template['source']}")
-    environments = [load_yaml(path) for path in sorted((root / "environments").glob("*.yaml"))]
+    environments = [load_yaml(path) for path in sorted(source_path(root, "environments").glob("*.yaml"))]
     environment_ids = _unique_ids(environments, "environment", errors)
-    services = load_yaml(root / "services/registry.yaml")["services"]
+    services = load_yaml(source_path(root, "services", "registry.yaml"))["services"]
     service_ids = _unique_ids(services, "service", errors)
-    secrets = load_yaml(root / "secret-references/catalog.yaml")["secrets"]
+    secrets = load_yaml(source_path(root, "secret-references", "catalog.yaml"))["secrets"]
     secret_ids = _unique_ids(secrets, "secret", errors)
 
-    service_registry = load_yaml(root / "services/registry.yaml")
+    service_registry = load_yaml(source_path(root, "services", "registry.yaml"))
     if service_registry["environment"] not in environment_ids:
         errors.append(f"unknown service environment: {service_registry['environment']}")
     for service in services:
@@ -307,7 +331,7 @@ def validate_repository(root: Path) -> list[str]:
                 f"{location}; use secret_ref"
             )
 
-    mcp_registry = load_yaml(root / "services/mcp/registry.yaml")
+    mcp_registry = load_yaml(source_path(root, "services", "mcp", "registry.yaml"))
     if mcp_registry["environment"] not in environment_ids:
         errors.append(f"unknown MCP environment: {mcp_registry['environment']}")
     mcp_ids = _unique_ids(mcp_registry["servers"], "MCP server", errors)
@@ -346,7 +370,7 @@ def validate_repository(root: Path) -> list[str]:
                         f"adapter {adapter['id']} {wrapper_key} does not exist: {wrapper_value}"
                     )
 
-    for path in sorted((root / "targets").glob("*.yaml")):
+    for path in sorted(source_path(root, "targets").glob("*.yaml")):
         target = load_yaml(path)
         if target["environment"] not in environment_ids:
             errors.append(f"target {target['id']} has unknown environment: {target['environment']}")
@@ -367,7 +391,7 @@ def validate_repository(root: Path) -> list[str]:
 
 
 def load_target(root: Path, target_id: str) -> dict[str, Any]:
-    path = root / "targets" / f"{target_id}.yaml"
+    path = source_path(root, "targets", f"{target_id}.yaml")
     if not path.is_file():
         raise WorkflowError(f"unknown target: {target_id}")
     return load_yaml(path)

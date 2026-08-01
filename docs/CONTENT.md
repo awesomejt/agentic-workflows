@@ -2,15 +2,16 @@
 
 ## Purpose
 
-The `common/` tree is the semantic source for behavior shared across agent
-tools. It is the default place to edit shared agent definitions and skills.
-Tool adapters under `adapters/` add only native metadata, permission syntax,
-destination paths, and justified exceptions.
+The `authoring/common/` tree is the semantic source for behavior shared across
+agent tools. It is the default place to edit shared agent definitions and
+skills. Tool adapters under `authoring/adapters/` add only native metadata,
+permission syntax, destination paths, and justified exceptions.
 
 ## Roles
 
 Roles are concise behavioral contracts rather than complete tool-native agent
-definitions. `common/roles/catalog.yaml` is the machine-readable inventory:
+definitions. `authoring/common/roles/catalog.yaml` is the machine-readable
+inventory:
 
 - coordination: `orchestrator`, `project-manager`
 - analysis: `planner`, `designer`, `debater`, `researcher`
@@ -19,12 +20,12 @@ definitions. `common/roles/catalog.yaml` is the machine-readable inventory:
 - source control: `git-committer`
 
 The catalog's model classes are workload hints, not provider selections. Native
-models and permission profiles belong in `adapters/<tool>/routing.yaml` and
-frontmatter.
+models and permission profiles belong in `authoring/adapters/<tool>/routing.yaml`
+and frontmatter.
 
-Compatibility aliases live in `common/roles/aliases.yaml`. New content should
-use canonical names; adapters may emit aliases during migration when existing
-automation still refers to an old name.
+Compatibility aliases live in `authoring/common/roles/aliases.yaml`. New
+content should use canonical names; adapters may emit aliases during migration
+when existing automation still refers to an old name.
 
 ## Prompts and instructions
 
@@ -32,14 +33,14 @@ Instructions describe always-on behavior. Prompts describe a reusable task or
 session workflow. The focused-task prompt deliberately avoids a specific CLI,
 task database, or model provider. Repository instructions decide which task
 system and documentation files are authoritative. Reset-safe stage graphs and
-the `.agents/loop/` handoff contract live in `common/workflows/`.
+the `.agents/loop/` handoff contract live in `authoring/common/workflows/`.
 
 ## Skills
 
 Shared skills follow the portable Agent Skills directory shape:
 
 ```text
-common/skills/<skill-name>/
+authoring/common/skills/<skill-name>/
 └── SKILL.md
 ```
 
@@ -61,10 +62,10 @@ Loop capabilities are split by responsibility:
 
 ## Provenance
 
-`manifests/content.yaml` records the source repository, path, exact source
-revision, sensitivity, chosen disposition, and destination. Normalized content
-is not expected to remain byte-identical to its source, so the source revision
-and migration notes are the durable audit trail.
+`source/manifests/content.yaml` records the source repository, path, exact
+source revision, sensitivity, chosen disposition, and destination. Normalized
+content is not expected to remain byte-identical to its source, so the source
+revision and migration notes are the durable audit trail.
 
 Supported dispositions are documented in `docs/MIGRATION.md`. A source artifact
 is not considered reviewed until it has one explicit disposition.

@@ -17,6 +17,8 @@ from typing import Any
 from .config import (
     adapter_manifest_paths,
     adapter_root,
+    authoring_path,
+    source_path,
     WorkflowError,
     expand_path,
     load_target,
@@ -314,12 +316,12 @@ def inventory(root: Path) -> dict[str, list[str]]:
     """Return stable IDs from the repository registries."""
     validate_repository(root)
     return {
-        "targets": [path.stem for path in sorted((root / "targets").glob("*.yaml"))],
-        "sources": [item["id"] for item in load_yaml(root / "manifests/sources.yaml")["sources"]],
-        "content": [item["id"] for item in load_yaml(root / "manifests/content.yaml")["artifacts"]],
-        "services": [item["id"] for item in load_yaml(root / "services/registry.yaml")["services"]],
-        "mcp_servers": [item["id"] for item in load_yaml(root / "services/mcp/registry.yaml")["servers"]],
-        "templates": [item["id"] for item in load_yaml(root / "templates/catalog.yaml")["templates"]],
+        "targets": [path.stem for path in sorted(source_path(root, "targets").glob("*.yaml"))],
+        "sources": [item["id"] for item in load_yaml(source_path(root, "manifests", "sources.yaml"))["sources"]],
+        "content": [item["id"] for item in load_yaml(source_path(root, "manifests", "content.yaml"))["artifacts"]],
+        "services": [item["id"] for item in load_yaml(source_path(root, "services", "registry.yaml"))["services"]],
+        "mcp_servers": [item["id"] for item in load_yaml(source_path(root, "services", "mcp", "registry.yaml"))["servers"]],
+        "templates": [item["id"] for item in load_yaml(authoring_path(root, "templates", "catalog.yaml"))["templates"]],
         "adapters": [load_yaml(path)["id"] for path in adapter_manifest_paths(root)],
     }
 
@@ -354,7 +356,7 @@ def doctor(root: Path, target_id: str, home: Path | None = None, network: bool =
             )
 
     if network:
-        for service in load_yaml(root / "services/registry.yaml")["services"]:
+        for service in load_yaml(source_path(root, "services", "registry.yaml"))["services"]:
             health = service.get("healthcheck")
             if not health:
                 continue

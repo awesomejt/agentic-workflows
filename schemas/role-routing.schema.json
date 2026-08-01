@@ -8,7 +8,7 @@
   "properties": {
     "schema_version": { "const": 1 },
     "id": { "$ref": "#/$defs/id" },
-    "common_role_catalog": { "const": "common/roles/catalog.yaml" },
+    "common_role_catalog": { "const": "authoring/common/roles/catalog.yaml" },
     "defaults": {
       "type": "object",
       "additionalProperties": false,

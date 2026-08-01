@@ -18,8 +18,8 @@ Ansible revision `79944d7875ab1ff1673c16bac79c489d30a7e1a0`.
 | n8n | public endpoint and runtime metadata | `roles/n8n` |
 
 Hermes consumes a generated subset of these contracts through its bundle. MCP
-server endpoints are canonical in `services/mcp/registry.yaml` and rendered in
-tool-native adapters.
+server endpoints are canonical in `source/services/mcp/registry.yaml` and
+rendered in tool-native adapters.
 
 ## Ownership rule
 
@@ -41,6 +41,6 @@ then update the contract status.
 
 ## Secrets
 
-`secret-references/catalog.yaml` names the owning Vault variables and validation
-mechanism. Contracts refer only to those IDs. Do not render, probe, or log a
-credential value from this repository.
+`source/secret-references/catalog.yaml` names the owning Vault variables and
+validation mechanism. Contracts refer only to those IDs. Do not render, probe,
+or log a credential value from this repository.

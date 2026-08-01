@@ -22,8 +22,9 @@ Before changing the repository, read:
 3. Update `TODO.md` as task state changes.
 4. Record durable decisions and meaningful sessions in `MEMORY.md`.
 5. Record questions requiring owner input in `docs/OPEN_QUESTIONS.md`.
-6. Prefer shared definitions under `common/`; adapters contain only rendering
-   logic, exceptions, and tool-native configuration.
+6. Prefer shared definitions under `authoring/common/`; adapter-specific files
+   live under `authoring/adapters/` and contain only rendering logic,
+   exceptions, and tool-native configuration.
 7. Put a helper used by multiple skills or agents under `tools/`. Keep a helper
    used by one skill inside that skill's `scripts/` directory.
 8. Do not copy orchestration runtime code or Ansible service roles here.

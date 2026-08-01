@@ -1,9 +1,9 @@
 # Tool Adapter Guide
 
-Every active adapter maps canonical files from `common/` into a tool's native
-layout. Adapter source files live under `adapters/<tool>/`. `workflowctl`
-composes tool-specific headers and footers during render, so shared role bodies
-do not need to be duplicated.
+Every active adapter maps canonical files from `authoring/common/` into a
+tool's native layout. Adapter source files live under
+`authoring/adapters/<tool>/`. `workflowctl` composes tool-specific headers and
+footers during render, so shared role bodies do not need to be duplicated.
 
 ## Managed surfaces
 
@@ -56,4 +56,5 @@ Codex validates the tracked profile when selected with `--profile workflows`.
    checks.
 
 Hermes stops after rendering. Hand the bundle to Ansible using
-`adapters/hermes/ansible-contract.yaml`; do not copy it directly to the host.
+`authoring/adapters/hermes/ansible-contract.yaml`; do not copy it directly to
+the host.

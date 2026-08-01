@@ -1,79 +1,79 @@
 schema_version: 1
 roles:
   - id: orchestrator
-    source: common/roles/orchestrator.md
+    source: authoring/common/roles/orchestrator.md
     purpose: Select the next bounded pass and enforce loop termination.
     delegation: primary
     mutation: handoff-only
     model_class: reasoning
   - id: project-manager
-    source: common/roles/project-manager.md
+    source: authoring/common/roles/project-manager.md
     purpose: Normalize scope, task state, evidence, and closeout.
     delegation: either
     mutation: handoff-only
     model_class: fast
   - id: planner
-    source: common/roles/planner.md
+    source: authoring/common/roles/planner.md
     purpose: Convert an objective into an implementable plan.
     delegation: subagent
     mutation: handoff-only
     model_class: reasoning
   - id: designer
-    source: common/roles/designer.md
+    source: authoring/common/roles/designer.md
     purpose: Define boundaries, contracts, and important design decisions.
     delegation: subagent
     mutation: handoff-only
     model_class: reasoning
   - id: debater
-    source: common/roles/debater.md
+    source: authoring/common/roles/debater.md
     purpose: Challenge plans and designs against requirements and constraints.
     delegation: subagent
     mutation: none
     model_class: reasoning
   - id: researcher
-    source: common/roles/researcher.md
+    source: authoring/common/roles/researcher.md
     purpose: Gather and assess evidence required by a task.
     delegation: subagent
     mutation: handoff-only
     model_class: reasoning
   - id: implementer
-    source: common/roles/implementer.md
+    source: authoring/common/roles/implementer.md
     purpose: Make the scoped product or configuration change.
     delegation: subagent
     mutation: scoped
     model_class: coding
   - id: validator
-    source: common/roles/validator.md
+    source: authoring/common/roles/validator.md
     purpose: Run static, schema, and content quality checks.
     delegation: subagent
     mutation: none
     model_class: fast
   - id: tester
-    source: common/roles/tester.md
+    source: authoring/common/roles/tester.md
     purpose: Execute behavioral tests and report reproducible evidence.
     delegation: subagent
     mutation: none
     model_class: coding
   - id: reviewer
-    source: common/roles/reviewer.md
+    source: authoring/common/roles/reviewer.md
     purpose: Find correctness, safety, and maintainability issues.
     delegation: subagent
     mutation: none
     model_class: reasoning
   - id: writer
-    source: common/roles/writer.md
+    source: authoring/common/roles/writer.md
     purpose: Create or update factual, durable content.
     delegation: subagent
     mutation: scoped
     model_class: writing
   - id: editor
-    source: common/roles/editor.md
+    source: authoring/common/roles/editor.md
     purpose: Improve structure, clarity, consistency, and audience fit.
     delegation: subagent
     mutation: scoped
     model_class: writing
   - id: git-committer
-    source: common/roles/git-committer.md
+    source: authoring/common/roles/git-committer.md
     purpose: Prepare a scoped commit after gates pass.
     delegation: subagent
     mutation: scoped

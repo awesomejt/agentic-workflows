@@ -12,9 +12,9 @@
 | local CLI configuration | adapter defaults and non-secret preferences | Recreate from reviewed keys; never bulk-copy auth-bearing files |
 | `infra/ansible` | service roles, endpoints, model aliases, secret variables | Reference as deployment owner; do not copy roles |
 
-Every reviewed checkout is pinned in `manifests/sources.yaml`. Service contracts
-pin the Ansible revision independently so client-visible drift can be reviewed
-without treating this repository as the deployment source.
+Every reviewed checkout is pinned in `source/manifests/sources.yaml`. Service
+contracts pin the Ansible revision independently so client-visible drift can be
+reviewed without treating this repository as the deployment source.
 
 ## Phases
 

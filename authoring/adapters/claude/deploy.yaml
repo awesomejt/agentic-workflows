@@ -1,0 +1,50 @@
+schema_version: 1
+id: claude
+description: Claude Code global instructions, subagents, and Agent Skills.
+status: active
+artifacts:
+  - source: authoring/common/instructions/core.md
+    destination: CLAUDE.md
+  - source: authoring/common/skills
+    destination: skills
+  - source: authoring/common/workflows
+    destination: workflows
+  - source: authoring/common/roles/orchestrator.md
+    destination: agents/orchestrator.md
+    header: authoring/adapters/claude/frontmatter/orchestrator.md
+  - source: authoring/common/roles/planner.md
+    destination: agents/planner.md
+    header: authoring/adapters/claude/frontmatter/planner.md
+  - source: authoring/common/roles/debater.md
+    destination: agents/debater.md
+    header: authoring/adapters/claude/frontmatter/debater.md
+  - source: authoring/common/roles/designer.md
+    destination: agents/designer.md
+    header: authoring/adapters/claude/frontmatter/designer.md
+  - source: authoring/common/roles/researcher.md
+    destination: agents/researcher.md
+    header: authoring/adapters/claude/frontmatter/researcher.md
+  - source: authoring/common/roles/implementer.md
+    destination: agents/implementer.md
+    header: authoring/adapters/claude/frontmatter/implementer.md
+  - source: authoring/common/roles/validator.md
+    destination: agents/validator.md
+    header: authoring/adapters/claude/frontmatter/validator.md
+  - source: authoring/common/roles/tester.md
+    destination: agents/tester.md
+    header: authoring/adapters/claude/frontmatter/tester.md
+  - source: authoring/common/roles/reviewer.md
+    destination: agents/reviewer.md
+    header: authoring/adapters/claude/frontmatter/reviewer.md
+  - source: authoring/common/roles/writer.md
+    destination: agents/writer.md
+    header: authoring/adapters/claude/frontmatter/writer.md
+  - source: authoring/common/roles/editor.md
+    destination: agents/editor.md
+    header: authoring/adapters/claude/frontmatter/editor.md
+  - source: authoring/common/roles/git-committer.md
+    destination: agents/git-committer.md
+    header: authoring/adapters/claude/frontmatter/git-committer.md
+  - source: authoring/common/roles/project-manager.md
+    destination: agents/project-manager.md
+    header: authoring/adapters/claude/frontmatter/project-manager.md

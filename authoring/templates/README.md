@@ -6,7 +6,7 @@ repository task state, chat logs, or machine-specific configuration.
 
 The normalization boundary is:
 
-- common behavior and skills come from `common/`;
+- common behavior and skills come from `authoring/common/`;
 - engineering, course, or project-domain instructions stay in their template;
 - generated projects receive fresh `MEMORY.md`, `TODO.md`, `status.yaml`, and AWB
   project configuration;

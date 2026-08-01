@@ -27,8 +27,8 @@ commit. Detailed discoveries and decisions belong in `MEMORY.md`.
 
 ## Tool adapters
 
-- [x] Group provider-specific adapters under `adapters/` and clarify shared
-  authoring surfaces versus generated output.
+- [x] Group provider-specific adapters under `authoring/adapters/` and clarify
+  shared authoring surfaces versus generated output.
 - [x] Add OpenCode adapter and migrate the existing deployment safely.
 - [x] Add Codex adapter.
 - [x] Add Claude Code adapter.

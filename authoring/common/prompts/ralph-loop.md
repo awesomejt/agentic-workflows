@@ -19,7 +19,7 @@ Constraints and authorized side effects:
 - `<CONSTRAINT_OR_AUTHORIZATION>`
 
 Use `.agents/loop/<PASS_ID>/` for transient state and handoffs. Read
-`common/workflows/protocol.md` in a source checkout or the adapter's installed
+`authoring/common/workflows/protocol.md` in a source checkout or the adapter's installed
 `workflows/protocol.md` copy when available; otherwise use the
 `loop-handoff-notes` skill. Initialize `objective.md` and `state.yaml` if the run
 does not exist. If it exists, resume from state; do not infer progress from chat

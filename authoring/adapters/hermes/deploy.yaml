@@ -3,19 +3,19 @@ id: hermes
 description: Versioned Hermes behavior and client-contract bundle consumed by Ansible.
 status: active
 artifacts:
-  - source: common/instructions
+  - source: authoring/common/instructions
     destination: common/instructions
-  - source: common/prompts
+  - source: authoring/common/prompts
     destination: common/prompts
-  - source: common/roles
+  - source: authoring/common/roles
     destination: common/roles
-  - source: common/skills
+  - source: authoring/common/skills
     destination: common/skills
-  - source: common/workflows
+  - source: authoring/common/workflows
     destination: common/workflows
-  - source: adapters/hermes/profiles.yaml
+  - source: authoring/adapters/hermes/profiles.yaml
     destination: hermes/profiles.yaml
-  - source: adapters/hermes/ansible-contract.yaml
+  - source: authoring/adapters/hermes/ansible-contract.yaml
     destination: hermes/ansible-contract.yaml
-  - source: services
+  - source: source/services
     destination: services

@@ -1,0 +1,71 @@
+schema_version: 1
+id: opencode
+description: OpenCode global instructions, subagents, skills, prompt, and optional config overlay.
+status: active
+artifacts:
+  - source: authoring/common/instructions/core.md
+    destination: AGENTS.md
+  - source: authoring/common/prompts/focused-task.md
+    destination: prompts/focused-task.md
+  - source: authoring/common/prompts/ralph-loop.md
+    destination: prompts/ralph-loop.md
+  - source: authoring/common/prompts/software-development-loop.md
+    destination: prompts/software-development-loop.md
+  - source: authoring/common/prompts/content-creation-loop.md
+    destination: prompts/content-creation-loop.md
+  - source: authoring/common/workflows
+    destination: workflows
+  - source: authoring/common/skills
+    destination: skills
+  - source: authoring/common/roles/orchestrator.md
+    destination: agents/orchestrator.md
+    header: authoring/adapters/opencode/frontmatter/orchestrator.md
+  - source: authoring/common/roles/planner.md
+    destination: agents/planner.md
+    header: authoring/adapters/opencode/frontmatter/planner.md
+  - source: authoring/common/roles/debater.md
+    destination: agents/debater.md
+    header: authoring/adapters/opencode/frontmatter/debater.md
+  - source: authoring/common/roles/designer.md
+    destination: agents/designer.md
+    header: authoring/adapters/opencode/frontmatter/designer.md
+  - source: authoring/common/roles/researcher.md
+    destination: agents/researcher.md
+    header: authoring/adapters/opencode/frontmatter/researcher.md
+  - source: authoring/common/roles/implementer.md
+    destination: agents/implementer.md
+    header: authoring/adapters/opencode/frontmatter/implementer.md
+  - source: authoring/common/roles/validator.md
+    destination: agents/validator.md
+    header: authoring/adapters/opencode/frontmatter/validator.md
+  - source: authoring/common/roles/tester.md
+    destination: agents/tester.md
+    header: authoring/adapters/opencode/frontmatter/tester.md
+  - source: authoring/common/roles/reviewer.md
+    destination: agents/reviewer.md
+    header: authoring/adapters/opencode/frontmatter/reviewer.md
+  - source: authoring/common/roles/writer.md
+    destination: agents/writer.md
+    header: authoring/adapters/opencode/frontmatter/writer.md
+  - source: authoring/common/roles/editor.md
+    destination: agents/editor.md
+    header: authoring/adapters/opencode/frontmatter/editor.md
+  - source: authoring/common/roles/git-committer.md
+    destination: agents/git-committer.md
+    header: authoring/adapters/opencode/frontmatter/git-committer.md
+  - source: authoring/common/roles/project-manager.md
+    destination: agents/project-manager.md
+    header: authoring/adapters/opencode/frontmatter/project-manager.md
+  - source: authoring/adapters/opencode/agents/awb-orchestrator.md
+    destination: agents/awb-orchestrator.md
+  - source: authoring/adapters/opencode/agents/afk-build.md
+    destination: agents/afk-build.md
+  - source: authoring/common/prompts/software-development-loop.md
+    destination: agents/software-loop.md
+    header: authoring/adapters/opencode/frontmatter/software-loop.md
+  - source: authoring/common/prompts/content-creation-loop.md
+    destination: agents/content-loop.md
+    header: authoring/adapters/opencode/frontmatter/content-loop.md
+  - source: authoring/adapters/opencode/opencode.workflows.json
+    destination: opencode.workflows.json
+    description: Optional merged config selected with OPENCODE_CONFIG.

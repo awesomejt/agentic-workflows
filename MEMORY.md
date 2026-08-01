@@ -19,8 +19,8 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 ### 2026-07-22: Common versus tool-specific assets
 
 - Tool-agnostic instructions, roles, prompts, personas, and Agent Skills belong
-  under `common/`.
-- Tool-specific adapter content lives under `adapters/<tool>/` and contains
+  under `authoring/common/`.
+- Tool-specific adapter content lives under `authoring/adapters/<tool>/` and contains
   native configuration, render mappings, and genuine behavioral exceptions.
 - Reusable utilities belong under `tools/`; skill-specific scripts remain with
   their skill.
@@ -29,9 +29,11 @@ belongs in `TODO.md`; detailed runtime transcripts do not belong in Git.
 
 ### 2026-08-01: Repository edit surfaces
 
-- `common/` is the canonical place to edit shared agent behavior and skills.
-- `adapters/` groups provider-specific wrappers so the repository root is
-  reserved for shared content, services, targets, manifests, and docs.
+- `authoring/common/` is the canonical place to edit shared agent behavior and
+  skills.
+- `authoring/adapters/` groups provider-specific wrappers and exceptions.
+- `source/` groups manifests, services, environments, targets, and
+  secret-reference metadata away from the authoring surface.
 - `.build/` remains generated output and should not be hand-edited.
 
 ### 2026-07-22: Deployment safety

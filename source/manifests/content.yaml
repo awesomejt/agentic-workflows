@@ -6,7 +6,7 @@ artifacts:
     source_path: prompts/Default.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/prompts/focused-task.md
+    destination: authoring/common/prompts/focused-task.md
     sensitivity: public
     notes: Normalized to remove OpenCode and AWB coupling.
   - id: duplicate-scheduled-prompt
@@ -15,7 +15,7 @@ artifacts:
     source_path: prompts/Prompt.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: superseded
-    destination: common/prompts/focused-task.md
+    destination: authoring/common/prompts/focused-task.md
     sensitivity: public
     notes: Byte-identical to prompts/Default.md at the recorded revision.
   - id: planner-agent
@@ -24,7 +24,7 @@ artifacts:
     source_path: agents/planner.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/planner.md
+    destination: authoring/common/roles/planner.md
     sensitivity: public
   - id: debater-agent
     kind: agent
@@ -32,7 +32,7 @@ artifacts:
     source_path: agents/debater.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/debater.md
+    destination: authoring/common/roles/debater.md
     sensitivity: public
   - id: implementor-agent
     kind: agent
@@ -40,7 +40,7 @@ artifacts:
     source_path: agents/implementor.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/implementer.md
+    destination: authoring/common/roles/implementer.md
     sensitivity: public
   - id: validator-agent
     kind: agent
@@ -48,7 +48,7 @@ artifacts:
     source_path: agents/validator.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/validator.md
+    destination: authoring/common/roles/validator.md
     sensitivity: public
   - id: tester-agent
     kind: agent
@@ -56,7 +56,7 @@ artifacts:
     source_path: agents/tester.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/tester.md
+    destination: authoring/common/roles/tester.md
     sensitivity: public
   - id: reviewer-agent
     kind: agent
@@ -64,7 +64,7 @@ artifacts:
     source_path: agents/reviewer.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/reviewer.md
+    destination: authoring/common/roles/reviewer.md
     sensitivity: public
   - id: documentor-agent
     kind: agent
@@ -72,7 +72,7 @@ artifacts:
     source_path: agents/documentor.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/writer.md
+    destination: authoring/common/roles/writer.md
     sensitivity: public
   - id: committer-agent
     kind: agent
@@ -80,7 +80,7 @@ artifacts:
     source_path: agents/committer.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/git-committer.md
+    destination: authoring/common/roles/git-committer.md
     sensitivity: public
   - id: project-manager-agent
     kind: agent
@@ -88,7 +88,7 @@ artifacts:
     source_path: agents/project-manager.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/roles/project-manager.md
+    destination: authoring/common/roles/project-manager.md
     sensitivity: public
     notes: AWB-specific command details live in the AWB skill.
   - id: task-manager-agent
@@ -97,7 +97,7 @@ artifacts:
     source_path: agents/task-manager.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: superseded
-    destination: common/roles/aliases.yaml
+    destination: authoring/common/roles/aliases.yaml
     sensitivity: public
     notes: Compatibility alias for project-manager.
   - id: awb-orchestrator-agent
@@ -106,7 +106,7 @@ artifacts:
     source_path: agents/awb-orchestrator.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-adapter
-    destination: adapters/opencode/agents/awb-orchestrator.md
+    destination: authoring/adapters/opencode/agents/awb-orchestrator.md
     sensitivity: public
   - id: afk-build-agent
     kind: agent
@@ -114,7 +114,7 @@ artifacts:
     source_path: agents/afk-build.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-adapter
-    destination: adapters/opencode/agents/afk-build.md
+    destination: authoring/adapters/opencode/agents/afk-build.md
     sensitivity: review-required
     notes: Remove personal paths and retain only the trusted unattended-run policy.
   - id: validation-evidence-skill
@@ -123,7 +123,7 @@ artifacts:
     source_path: skills/validation-and-test-evidence/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/validation-and-test-evidence/SKILL.md
+    destination: authoring/common/skills/validation-and-test-evidence/SKILL.md
     sensitivity: public
   - id: loop-handoff-skill
     kind: skill
@@ -131,7 +131,7 @@ artifacts:
     source_path: skills/loop-handoff-notes/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/loop-handoff-notes/SKILL.md
+    destination: authoring/common/skills/loop-handoff-notes/SKILL.md
     sensitivity: public
   - id: awb-management-skill
     kind: skill
@@ -139,7 +139,7 @@ artifacts:
     source_path: skills/awb-project-task-management/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/awb-project-task-management/SKILL.md
+    destination: authoring/common/skills/awb-project-task-management/SKILL.md
     sensitivity: public
   - id: git-commiter-skill
     kind: skill
@@ -147,7 +147,7 @@ artifacts:
     source_path: skills/git-commiter/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/git-committer/SKILL.md
+    destination: authoring/common/skills/git-committer/SKILL.md
     sensitivity: public
     notes: Corrected the source misspelling in the canonical skill name.
   - id: codex-cli-driver-skill
@@ -156,7 +156,7 @@ artifacts:
     source_path: skills/codex-cli-driver/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/codex-cli-driver/SKILL.md
+    destination: authoring/common/skills/codex-cli-driver/SKILL.md
     sensitivity: public
   - id: claude-cli-driver-skill
     kind: skill
@@ -164,7 +164,7 @@ artifacts:
     source_path: skills/claude-code-cli-driver/SKILL.md
     source_revision: cc5b212c0dad8e6ff6f9d940044458c36db842fb
     disposition: migrate-common
-    destination: common/skills/claude-code-cli-driver/SKILL.md
+    destination: authoring/common/skills/claude-code-cli-driver/SKILL.md
     sensitivity: public
   - id: afk-run-script
     kind: script
@@ -226,7 +226,7 @@ artifacts:
     source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, docs/, agents/
     source_revision: 0ee3410e9a069a20b49f1fe1ee2f7c8435538033
     disposition: deferred
-    destination: templates/catalog.yaml
+    destination: authoring/templates/catalog.yaml
     sensitivity: public
     notes: Revision-pinned for later normalization; do not import repository task state.
   - id: coding-project-template
@@ -235,7 +235,7 @@ artifacts:
     source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, PROJECT_BRIEF.md, docs/
     source_revision: 62020038ff6c253d4914ab63a7ecdb7560c3ec31
     disposition: deferred
-    destination: templates/catalog.yaml
+    destination: authoring/templates/catalog.yaml
     sensitivity: public
     notes: Engineering-specific policy remains template content, not global instructions.
   - id: course-project-template
@@ -244,7 +244,7 @@ artifacts:
     source_path: AGENTS.md, AGENT_WORKFLOW.md, QUALITY_CHECKLIST.md, COURSE_BRIEF.md, Templates/
     source_revision: 71dfde6e6822ab20f8170c25553ef8a532aec552
     disposition: deferred
-    destination: templates/catalog.yaml
+    destination: authoring/templates/catalog.yaml
     sensitivity: public
     notes: Course writing and platform policy remains template-specific.
   - id: hermes-generic-souls
@@ -253,7 +253,7 @@ artifacts:
     source_path: main/SOUL.md, admin/SOUL.md, coder/SOUL.md, researcher/SOUL.md
     source_revision: 06c5174322ff93ca76d21fb0c17ffa1c37f94d2f
     disposition: reference-upstream
-    destination: adapters/hermes/profiles.yaml
+    destination: authoring/adapters/hermes/profiles.yaml
     sensitivity: public
     notes: Hermes bundle pins these files by source revision rather than duplicating them.
   - id: hermes-personal-souls
@@ -288,7 +288,7 @@ artifacts:
     source_path: tools/course-orchestrator/
     source_revision: 01676cae50ee67442350090622a6856e3fb2300a
     disposition: deferred
-    destination: templates/
+    destination: authoring/templates/
     sensitivity: public
     notes: Likely belongs with the course template or a separate orchestration application.
   - id: hermes-service-ping-tool

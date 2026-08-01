@@ -1,0 +1,59 @@
+schema_version: 1
+id: copilot
+description: GitHub Copilot and VS Code instructions, custom agents, Agent Skills, and MCP.
+status: active
+artifacts:
+  - source: authoring/common/instructions/core.md
+    destination: .copilot/instructions/agentic-workflows.instructions.md
+    header: authoring/adapters/copilot/frontmatter/instructions.md
+  - source: authoring/common/skills
+    destination: .copilot/skills
+  - source: authoring/common/workflows
+    destination: .copilot/workflows
+  - source: authoring/common/roles/orchestrator.md
+    destination: .copilot/agents/orchestrator.agent.md
+    header: authoring/adapters/copilot/frontmatter/orchestrator.md
+  - source: authoring/common/roles/planner.md
+    destination: .copilot/agents/planner.agent.md
+    header: authoring/adapters/copilot/frontmatter/planner.md
+  - source: authoring/common/roles/debater.md
+    destination: .copilot/agents/debater.agent.md
+    header: authoring/adapters/copilot/frontmatter/debater.md
+  - source: authoring/common/roles/designer.md
+    destination: .copilot/agents/designer.agent.md
+    header: authoring/adapters/copilot/frontmatter/designer.md
+  - source: authoring/common/roles/researcher.md
+    destination: .copilot/agents/researcher.agent.md
+    header: authoring/adapters/copilot/frontmatter/researcher.md
+  - source: authoring/common/roles/implementer.md
+    destination: .copilot/agents/implementer.agent.md
+    header: authoring/adapters/copilot/frontmatter/implementer.md
+  - source: authoring/common/roles/validator.md
+    destination: .copilot/agents/validator.agent.md
+    header: authoring/adapters/copilot/frontmatter/validator.md
+  - source: authoring/common/roles/tester.md
+    destination: .copilot/agents/tester.agent.md
+    header: authoring/adapters/copilot/frontmatter/tester.md
+  - source: authoring/common/roles/reviewer.md
+    destination: .copilot/agents/reviewer.agent.md
+    header: authoring/adapters/copilot/frontmatter/reviewer.md
+  - source: authoring/common/roles/writer.md
+    destination: .copilot/agents/writer.agent.md
+    header: authoring/adapters/copilot/frontmatter/writer.md
+  - source: authoring/common/roles/editor.md
+    destination: .copilot/agents/editor.agent.md
+    header: authoring/adapters/copilot/frontmatter/editor.md
+  - source: authoring/common/roles/git-committer.md
+    destination: .copilot/agents/git-committer.agent.md
+    header: authoring/adapters/copilot/frontmatter/git-committer.md
+  - source: authoring/common/roles/project-manager.md
+    destination: .copilot/agents/project-manager.agent.md
+    header: authoring/adapters/copilot/frontmatter/project-manager.md
+  - source: authoring/common/prompts/software-development-loop.md
+    destination: .copilot/agents/software-loop.agent.md
+    header: authoring/adapters/copilot/frontmatter/software-loop.md
+  - source: authoring/common/prompts/content-creation-loop.md
+    destination: .copilot/agents/content-loop.agent.md
+    header: authoring/adapters/copilot/frontmatter/content-loop.md
+  - source: authoring/adapters/copilot/mcp.json
+    destination: .config/Code/User/mcp.json

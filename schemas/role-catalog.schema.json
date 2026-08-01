@@ -16,7 +16,7 @@
         "required": ["id", "source", "purpose", "delegation", "mutation", "model_class"],
         "properties": {
           "id": { "$ref": "#/$defs/id" },
-          "source": { "type": "string", "pattern": "^common/roles/[a-z0-9-]+\\.md$" },
+          "source": { "type": "string", "pattern": "^authoring/common/roles/[a-z0-9-]+\\.md$" },
           "purpose": { "type": "string", "minLength": 1 },
           "delegation": { "enum": ["primary", "subagent", "either"] },
           "mutation": { "enum": ["none", "handoff-only", "scoped"] },

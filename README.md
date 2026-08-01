@@ -19,11 +19,14 @@ for current work and [MEMORY.md](MEMORY.md) for durable decisions.
 
 ## What to edit
 
-- `common/` is the primary authoring surface for shared instructions, prompts,
-  roles, skills, and workflows.
-- `adapters/` contains provider-specific wrappers, routing, frontmatter,
-  config overlays, and justified exceptions.
-- `templates/` is the revision-pinned catalog for reusable project templates.
+- `authoring/common/` is the primary authoring surface for shared
+  instructions, prompts, roles, skills, and workflows.
+- `authoring/adapters/` contains provider-specific wrappers, routing,
+  frontmatter, config overlays, and justified exceptions.
+- `authoring/templates/` is the revision-pinned catalog for reusable project
+  templates.
+- `source/` contains the machine-consumed registries, targets, manifests,
+  service contracts, and secret-reference metadata that drive rendering.
 - `.build/` is generated render output; do not edit files there.
 
 ## Quick start
@@ -67,20 +70,16 @@ and its dry-run diff has been reviewed.
 ## Planned structure
 
 ```text
-common/               tool-agnostic instructions, roles, prompts, skills, and workflows
-adapters/             tool-specific adapters and config overlays
-adapters/claude/      Claude Code adapter and exceptions
-adapters/codex/       Codex adapter and exceptions
-adapters/opencode/    OpenCode adapter and exceptions
-adapters/grok/        Grok Build adapter and exceptions
-adapters/copilot/     GitHub Copilot/VS Code adapter and exceptions
-adapters/hermes/      Hermes profiles, mappings, and bundle definition
-services/             MCP and AI-service client contracts
-environments/         non-secret environment topology
-targets/              deployment target definitions
-secret-references/    secret metadata; never secret values
-manifests/            provenance, versions, and migration sources
-templates/            revision-pinned reusable project template catalog
+authoring/            human-edited reusable behavior and tool wrappers
+authoring/common/     tool-agnostic instructions, roles, prompts, skills, and workflows
+authoring/adapters/   tool-specific adapters and config overlays
+authoring/templates/  revision-pinned reusable project template catalog
+source/               machine-consumed repository inputs for workflowctl
+source/services/      MCP and AI-service client contracts
+source/environments/  non-secret environment topology
+source/targets/       deployment target definitions
+source/secret-references/ secret metadata; never secret values
+source/manifests/     provenance, versions, and migration sources
 overlays/             private-overlay rules; private content is ignored
 tools/workflowctl/    renderer, validator, deployer, and diagnostics
 docs/                 requirements, design, and operational documentation
